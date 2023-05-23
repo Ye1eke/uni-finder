@@ -1,0 +1,34 @@
+.badge > img {
+    max-width: 100px;
+}
+
+/* UniAbout.css */
+.favorites__slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  .slider-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 10px;
+    overflow: hidden;
+    outline: none;
+    
+  }
+  
+  .slider-item img {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    object-fit: cover;
+  }
+  
+  .slider-item p {
+    margin-top: 10px;
+  }
+  

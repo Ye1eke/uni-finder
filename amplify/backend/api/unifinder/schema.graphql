@@ -1,0 +1,61 @@
+type FavoriteUni @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  uniId: ID
+  userSub: String
+}
+
+type ContactUs @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Name: String
+  Email: AWSEmail
+  Text: String
+}
+
+type Article @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  description: String
+  date: AWSDate
+  author: String
+  image: AWSURL
+}
+
+type BadgeUser @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  badgeID: ID
+  userEmail: String
+  Badges: [Badge] @manyToMany(relationName: "BadgeUserBadge")
+}
+
+type Badge @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  description: String
+  image: AWSURL
+  badgeusers: [BadgeUser] @manyToMany(relationName: "BadgeUserBadge")
+}
+
+type UniItem @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  photo: AWSURL
+  location: String
+  price: Int
+  weather: String
+  description: String
+  address: String
+  website: AWSURL
+  phone: AWSPhone
+  email: AWSEmail
+  type: String
+  accreditation: String
+  ranking: Int
+  programs: [String]
+  departments: [String]
+  requirements: [String]
+  enrollment: Int
+  scholarships: [String]
+  facilities: [String]
+  stuff: Int
+}
+ 

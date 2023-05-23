@@ -1,0 +1,27 @@
+.uni__text {
+  width: 80%;  
+  font-size: 22px;
+  line-height: 33px;
+  margin-bottom: 20px;
+  padding-top: 95px;
+}
+
+.banner__button {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  /* A litttttle slower on the way in */
+  transition: all 0.3s ease;
+}
+
+.banner__button:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
+}
+.banner__button:active {
+  transform: scale(0.9);
+}
+.banner__button > img {
+  padding-right: 10px;
+}
+

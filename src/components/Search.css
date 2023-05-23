@@ -1,0 +1,73 @@
+.search {
+    background-color: #5bccf6;
+    margin-top: -114px;
+    padding: 59px 100px 100px;
+    position: relative;
+    z-index: 1;
+}
+
+.search__title {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.search__title h2 {
+    font-size: 40px;
+    line-height: 48px;
+    margin-bottom: 40px;
+    max-width: 100%;
+}
+
+.search__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 50px;
+}
+
+.search__wrap input{
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAAXNSR0IArs4c6QAAArJJREFUSA21lU2IUlEUx/ONQ4YQFUUTFa6KNjWbGkIjhhbjSloEQ0XQYqJNIaWObSIskFBUQqhwOTAVGS2iD5oGSpI0oU0tbZNE30EjYqT50e+Ib3Dsyjyn6cJ9575z/+f+7j333ftMK3oUn8+3q9FouOgepg6ZTKbf2E/NZvMF9kEsFnuPNVRM3Sq/3z9Sr9dDDDYqfQxepP2R5iB1M3UVvga+adrnjcAWQLxe71kCw9QK9SqD3YhEIm9ot0ogEDCXy2UHkzhJ32FAc2Kj0eisrlHZeQjpmSQ9YYIyFotlPBgMflAF6D5WvBfYHUAbzWazMxwOP9P7um0LAmAUwFMAaZvNNuZ2u2UlixaPx7OVmJcIJYU7WPVXVZBGCjQAVxDNIThkFCCDtffjCKtZyxiXVADxaZJj7DCQELn93kvYy0/Mc2LvU4+TEatKJ6s4KB3YmyqBER+AaVZjQTum0ms4tyH6bORTVA0gPjb+Vbtvu0ojkA3UvtPUORhZ+NZ+X9/p19sCEYGyUxctZjVNk4lKUU5WIG/J55B8ji3ZEh61Wm13OyyvCmcS2j3pwB5VCYz4mOQx9vUX2icqvWa1WuXCe43wHNdK32kjZj+xLuoUh7GshHAYG6ziDKI1CO7G4/GVKqHK107xLVbxgzEuqDTiG5BHJpN553A4fgI6USwWD1Bm0ul0Sfp6Fbm70M9QNwGRg/yol3b+ghTBEm/hEqAtgCYATalACyAi6Pd/QpoqQGapOwk/xaG+3g36C6IL+vkzsq/rSqXSY0B7iJ8EFNHHEdsT0iky0ga0GtBDQPvQBwBd1ONaG6+//ItNpVIVp9N5u1qtjjDOhN1ut2az2dYfc9lWok9QjkChUJA/pouP4Rpn5/SyQwSWSCQG8/m8XP/jvIb+C0RAyWRyIJfLXab55Q+AeVg+DzmnsAAAAABJRU5ErkJggg==);
+    background-position: 20px 30px;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 30px;
+    font-size: 24px;
+    padding: 30px 30px 30px 60px;
+    width: 100%;
+    outline: none;
+}
+
+.search__filter{
+    margin-bottom: 50px;
+}
+
+button {
+    align-items: center;
+    background-color: rgba(0,0,0,.15);
+    border-radius: 40px;
+    display: inline-flex;
+    height: 40px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    position: relative;
+    transition: all 1s ease;
+    border: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+}
+
+button.selected {
+    background-color: #fcde67;
+}
+
+.search__goBtn {
+    background-color: #030e12;
+    color: #fff!important;
+    font-size: 16px;
+    line-height: 20px;
+    transition: all .3s ease-in-out;
+    font-weight: 600;
+    padding: 2.03rem 2.08rem;
+}

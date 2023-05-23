@@ -1,0 +1,17 @@
+#article__text {
+    font-size: 21px;
+    margin-bottom: 0;
+    width: 70%;
+    padding-bottom: 10px;
+}
+
+.article__info {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+
+.article__info > p {
+    display: flex;
+    align-items: center;
+}

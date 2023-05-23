@@ -1,0 +1,23 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-unifinder-staging-101651-authRole",
+      "UnauthRoleArn": "arn:aws:iam::951897302544:role/amplify-unifinder-staging-101651-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::951897302544:role/amplify-unifinder-staging-101651-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-unifinder-staging-101651-deployment",
+      "UnauthRoleName": "amplify-unifinder-staging-101651-unauthRole",
+      "StackName": "amplify-unifinder-staging-101651",
+      "StackId": "arn:aws:cloudformation:us-east-1:951897302544:stack/amplify-unifinder-staging-101651/9d9fadd0-ee52-11ed-8427-12b88195933f",
+      "AmplifyAppId": "d1fk9qmn3o2lvb"
+    },
+    "categories": {
+      "auth": {
+        "unifinder": {}
+      },
+      "function": {
+        "awardNewUserBadge": {}
+      }
+    }
+  }
+}

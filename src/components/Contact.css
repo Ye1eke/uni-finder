@@ -1,0 +1,37 @@
+.contact__wrap {
+    display: flex;
+    background: #2a77c7;
+    background: linear-gradient(90deg,#2a77c7 0,#5ec7df);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$color-1",endColorstr="$color-2",GradientType=1);
+    margin-bottom: 100px;
+    margin-top: 100px;
+    padding: 14px;
+}
+
+.contact__same {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 60px;
+}
+
+.contact__same > img {
+    width: 100%;
+    width: 330px;
+    height: 330px;
+    object-fit: cover;
+}
+
+.contact__same > h2 {
+    color: #fff;
+    font-size: 48px;
+    line-height: 58px;
+    margin-bottom: 48px;
+}
+
+.contact__same > a {
+    background-color: #fff;
+    color: #030e12;
+    padding: 1.03rem 2.08rem;
+    border-radius: 40px;
+    font-weight: 600;
+}

@@ -1,5 +1,4 @@
 import './App.css';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
@@ -17,7 +16,6 @@ import Article from './components/Article';
 Auth.configure(awsconfig);
 
 function App() {
-
   
   return (
     <div>
@@ -25,6 +23,7 @@ function App() {
       <div>
         <Header />
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/uni" element={<Unis />} />
           <Route path="/uni/:id" element={<UniAbout />} />
@@ -40,4 +39,4 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
+export default App;

@@ -1,3 +1,59 @@
+enum Departments {
+  BIOLOGY
+  COMPUTER_SCIENCE
+  CHEMISTRY
+  PHYSICS
+  MATHEMATICS
+  PSYCHOLOGY
+  ENGLISH
+  ECONOMICS
+  HISTORY
+  POLITICAL_SCIENCE
+  SOCIOLOGY
+  ANTHROPOLOGY
+  BUSINESS_ADMINISTRATION
+  EDUCATION
+  ENGINEERING
+  FINE_ARTS
+  MUSIC
+  ARCHITECTURE
+  HEALTH_SCIENCES
+  LINGUISTICS
+  COMMUNICATION
+  SOCIAL_WORK
+  PUBLIC_HEALTH
+  INTERNATIONAL_RELATIONS
+  CULTURAL_STUDIES
+  RELIGIOUS_STUDIES
+  FILM_STUDIES
+  PHILOSOPHY
+}
+
+type Point @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userSub: String
+  points: Int
+}
+
+enum Region {
+  EUROPE
+  ASIA
+  AFRICA
+  OCEANIA
+  SOUTHAMERICA
+  NORTHAMERICA
+}
+
+type RecommendUni @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  weather: String
+  region: Region
+  country: String
+  degree: String
+  interest: String
+  userSub: String
+}
+
 type FavoriteUni @model @auth(rules: [{allow: public}]) {
   id: ID!
   uniId: ID
@@ -37,11 +93,12 @@ type Badge @model @auth(rules: [{allow: public}]) {
 
 type UniItem @model @auth(rules: [{allow: public}]) {
   id: ID!
+  ranking: Int
   name: String
+  region: String
+  city: String
+  country: String
   photo: AWSURL
-  location: String
-  price: Int
-  weather: String
   description: String
   address: String
   website: AWSURL
@@ -49,13 +106,16 @@ type UniItem @model @auth(rules: [{allow: public}]) {
   email: AWSEmail
   type: String
   accreditation: String
-  ranking: Int
-  programs: [String]
-  departments: [String]
-  requirements: [String]
+  weather: String
+  departments: [Departments]
+  price: Int
   enrollment: Int
   scholarships: [String]
-  facilities: [String]
+  requirements: [String]
   stuff: Int
+  facilities: [String]
+  programs: [String]
+  acceptance_rate: Float
+  graduation_rate: Float
 }
  

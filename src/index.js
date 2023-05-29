@@ -27,7 +27,7 @@ const components = {
     );
   },
 }
-
+ 
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={studioTheme}>

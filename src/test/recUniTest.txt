@@ -1,0 +1,92 @@
+{showForm ? (
+            <div>
+              <h1>Find Universities based on your Preferences</h1>
+            <RecUni userSub={user.attributes.sub}/>
+            
+            </div>
+          ) : ( 
+          <> 
+            <h1>Recommended Universities</h1>
+            {recommendedUniversities.length > 0 ? (
+              <div className='rec__uni'>
+                {recommendedUniversities.map((university) => (
+                  <Link to={'/uni/'+university.id}>
+                  <div key={university.id} className='rec__uni__item'>
+                    <img src={university.photo} alt="university" />
+                    <p>{university.name}</p>
+                  </div>
+                  </Link>
+                ))}
+              </div>
+              
+            ) : (
+              <p>No recommended universities found.</p>
+            )}
+          </>
+          )} 
+
+
+          const [recommendedUniversities, setRecommendedUniversities] = useState([]);
+  const [showForm, setShowForm] = useState(true);
+  
+
+  useEffect(() => {
+    async function fetchRecommendedUniversities() {
+      // Query the RecUni models associated with the current user's sub
+      const userRecUnis = await DataStore.query(RecommendUni, (c) =>
+        c.userSub.eq(user.attributes.sub)
+      );
+
+      if (userRecUnis.length === 0) {
+        setRecommendedUniversities([]); // No recommendations available
+        return;
+      }
+
+      const userWishes = userRecUnis[0]; // Assuming only one RecUni model per user
+      console.log(userRecUnis)
+      const recommendedUnis = await DataStore.query(UniItem, (c) => {
+        let query = c;
+        
+        // Compare user's chosen wishes and UniItem fields
+        if (userWishes.weather) {
+          query = query.weather.eq(userWishes.weather);
+        }
+
+        // Add more conditions to compare other wishes and UniItem fields
+
+        // Limit the number of recommended universities using .limit(N)
+        // For example, query = query.limit(5);
+        
+
+        return query;
+      });
+
+      setRecommendedUniversities(recommendedUnis);
+      setShowForm(false);
+    }
+    fetchRecommendedUniversities();
+
+  }, [user]);
+
+
+  //   const regions = favoriteUniversities.map((favoriteUni) => favoriteUni.region);
+    // const countries = favoriteUniversities.map((favoriteUni) => favoriteUni.country);
+    // const cities = favoriteUniversities.map((favoriteUni) => favoriteUni.city);
+
+  
+      // Query the database or use an algorithm to find universities with similar region, country, and city
+      //c => [
+      //   c.region.contains(regions),
+      //   c.country.contains(countries),
+      //   c.city.contains(cities)
+      // ]
+      // 5 university more 
+      // level of importance  
+      // const recommendedUnis = await DataStore.query(UniItem, (c) =>
+      //   c.and((u) =>
+      //   regions.map((region) => u.region.eq(region)).concat(
+      //     countries.map((country) => u.country.eq(country))
+      //   ))
+      // );
+  
+      // setRecommendedUniversities(recommendedUnis);

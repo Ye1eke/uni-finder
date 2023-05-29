@@ -16,5 +16,11 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
+  },
+  "storage": {
+    "s3unifinderstorage6dc44a46images": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

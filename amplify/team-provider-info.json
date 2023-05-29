@@ -17,6 +17,9 @@
       },
       "function": {
         "awardNewUserBadge": {}
+      },
+      "storage": {
+        "s3unifinderstorage6dc44a46images": {}
       }
     }
   }

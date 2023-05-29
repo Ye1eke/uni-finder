@@ -31,6 +31,7 @@ function Header() {
             </div> */}
         
             <div className='header__btns'>
+              
                 <button className='btn' onClick={signOut}>Sign out</button>
             </div>
         </div>

@@ -14,6 +14,7 @@ import {
   Grid,
   Icon,
   ScrollView,
+  SelectField,
   Text,
   TextField,
   useTheme,
@@ -192,11 +193,12 @@ export default function UniItemCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
+    ranking: "",
     name: "",
+    region: "",
+    city: "",
+    country: "",
     photo: "",
-    location: "",
-    price: "",
-    weather: "",
     description: "",
     address: "",
     website: "",
@@ -204,20 +206,24 @@ export default function UniItemCreateForm(props) {
     email: "",
     type: "",
     accreditation: "",
-    ranking: "",
-    programs: [],
+    weather: "",
     departments: [],
-    requirements: [],
+    price: "",
     enrollment: "",
     scholarships: [],
-    facilities: [],
+    requirements: [],
     stuff: "",
+    facilities: [],
+    programs: [],
+    acceptance_rate: "",
+    graduation_rate: "",
   };
+  const [ranking, setRanking] = React.useState(initialValues.ranking);
   const [name, setName] = React.useState(initialValues.name);
+  const [region, setRegion] = React.useState(initialValues.region);
+  const [city, setCity] = React.useState(initialValues.city);
+  const [country, setCountry] = React.useState(initialValues.country);
   const [photo, setPhoto] = React.useState(initialValues.photo);
-  const [location, setLocation] = React.useState(initialValues.location);
-  const [price, setPrice] = React.useState(initialValues.price);
-  const [weather, setWeather] = React.useState(initialValues.weather);
   const [description, setDescription] = React.useState(
     initialValues.description
   );
@@ -229,27 +235,35 @@ export default function UniItemCreateForm(props) {
   const [accreditation, setAccreditation] = React.useState(
     initialValues.accreditation
   );
-  const [ranking, setRanking] = React.useState(initialValues.ranking);
-  const [programs, setPrograms] = React.useState(initialValues.programs);
+  const [weather, setWeather] = React.useState(initialValues.weather);
   const [departments, setDepartments] = React.useState(
     initialValues.departments
   );
-  const [requirements, setRequirements] = React.useState(
-    initialValues.requirements
-  );
+  const [price, setPrice] = React.useState(initialValues.price);
   const [enrollment, setEnrollment] = React.useState(initialValues.enrollment);
   const [scholarships, setScholarships] = React.useState(
     initialValues.scholarships
   );
-  const [facilities, setFacilities] = React.useState(initialValues.facilities);
+  const [requirements, setRequirements] = React.useState(
+    initialValues.requirements
+  );
   const [stuff, setStuff] = React.useState(initialValues.stuff);
+  const [facilities, setFacilities] = React.useState(initialValues.facilities);
+  const [programs, setPrograms] = React.useState(initialValues.programs);
+  const [acceptance_rate, setAcceptance_rate] = React.useState(
+    initialValues.acceptance_rate
+  );
+  const [graduation_rate, setGraduation_rate] = React.useState(
+    initialValues.graduation_rate
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
+    setRanking(initialValues.ranking);
     setName(initialValues.name);
+    setRegion(initialValues.region);
+    setCity(initialValues.city);
+    setCountry(initialValues.country);
     setPhoto(initialValues.photo);
-    setLocation(initialValues.location);
-    setPrice(initialValues.price);
-    setWeather(initialValues.weather);
     setDescription(initialValues.description);
     setAddress(initialValues.address);
     setWebsite(initialValues.website);
@@ -257,41 +271,80 @@ export default function UniItemCreateForm(props) {
     setEmail(initialValues.email);
     setType(initialValues.type);
     setAccreditation(initialValues.accreditation);
-    setRanking(initialValues.ranking);
-    setPrograms(initialValues.programs);
-    setCurrentProgramsValue("");
+    setWeather(initialValues.weather);
     setDepartments(initialValues.departments);
     setCurrentDepartmentsValue("");
-    setRequirements(initialValues.requirements);
-    setCurrentRequirementsValue("");
+    setPrice(initialValues.price);
     setEnrollment(initialValues.enrollment);
     setScholarships(initialValues.scholarships);
     setCurrentScholarshipsValue("");
+    setRequirements(initialValues.requirements);
+    setCurrentRequirementsValue("");
+    setStuff(initialValues.stuff);
     setFacilities(initialValues.facilities);
     setCurrentFacilitiesValue("");
-    setStuff(initialValues.stuff);
+    setPrograms(initialValues.programs);
+    setCurrentProgramsValue("");
+    setAcceptance_rate(initialValues.acceptance_rate);
+    setGraduation_rate(initialValues.graduation_rate);
     setErrors({});
   };
-  const [currentProgramsValue, setCurrentProgramsValue] = React.useState("");
-  const programsRef = React.createRef();
   const [currentDepartmentsValue, setCurrentDepartmentsValue] =
     React.useState("");
   const departmentsRef = React.createRef();
-  const [currentRequirementsValue, setCurrentRequirementsValue] =
-    React.useState("");
-  const requirementsRef = React.createRef();
   const [currentScholarshipsValue, setCurrentScholarshipsValue] =
     React.useState("");
   const scholarshipsRef = React.createRef();
+  const [currentRequirementsValue, setCurrentRequirementsValue] =
+    React.useState("");
+  const requirementsRef = React.createRef();
   const [currentFacilitiesValue, setCurrentFacilitiesValue] =
     React.useState("");
   const facilitiesRef = React.createRef();
+  const [currentProgramsValue, setCurrentProgramsValue] = React.useState("");
+  const programsRef = React.createRef();
+  const getDisplayValue = {
+    departments: (r) => {
+      const enumDisplayValueMap = {
+        BIOLOGY: "Biology",
+        COMPUTER_SCIENCE: "Computer science",
+        CHEMISTRY: "Chemistry",
+        PHYSICS: "Physics",
+        MATHEMATICS: "Mathematics",
+        PSYCHOLOGY: "Psychology",
+        ENGLISH: "English",
+        ECONOMICS: "Economics",
+        HISTORY: "History",
+        POLITICAL_SCIENCE: "Political science",
+        SOCIOLOGY: "Sociology",
+        ANTHROPOLOGY: "Anthropology",
+        BUSINESS_ADMINISTRATION: "Business administration",
+        EDUCATION: "Education",
+        ENGINEERING: "Engineering",
+        FINE_ARTS: "Fine arts",
+        MUSIC: "Music",
+        ARCHITECTURE: "Architecture",
+        HEALTH_SCIENCES: "Health sciences",
+        LINGUISTICS: "Linguistics",
+        COMMUNICATION: "Communication",
+        SOCIAL_WORK: "Social work",
+        PUBLIC_HEALTH: "Public health",
+        INTERNATIONAL_RELATIONS: "International relations",
+        CULTURAL_STUDIES: "Cultural studies",
+        RELIGIOUS_STUDIES: "Religious studies",
+        FILM_STUDIES: "Film studies",
+        PHILOSOPHY: "Philosophy",
+      };
+      return enumDisplayValueMap[r];
+    },
+  };
   const validations = {
+    ranking: [],
     name: [],
+    region: [],
+    city: [],
+    country: [],
     photo: [{ type: "URL" }],
-    location: [],
-    price: [],
-    weather: [],
     description: [],
     address: [],
     website: [{ type: "URL" }],
@@ -299,14 +352,17 @@ export default function UniItemCreateForm(props) {
     email: [{ type: "Email" }],
     type: [],
     accreditation: [],
-    ranking: [],
-    programs: [],
+    weather: [],
     departments: [],
-    requirements: [],
+    price: [],
     enrollment: [],
     scholarships: [],
-    facilities: [],
+    requirements: [],
     stuff: [],
+    facilities: [],
+    programs: [],
+    acceptance_rate: [],
+    graduation_rate: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -334,11 +390,12 @@ export default function UniItemCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
+          ranking,
           name,
+          region,
+          city,
+          country,
           photo,
-          location,
-          price,
-          weather,
           description,
           address,
           website,
@@ -346,14 +403,17 @@ export default function UniItemCreateForm(props) {
           email,
           type,
           accreditation,
-          ranking,
-          programs,
+          weather,
           departments,
-          requirements,
+          price,
           enrollment,
           scholarships,
-          facilities,
+          requirements,
           stuff,
+          facilities,
+          programs,
+          acceptance_rate,
+          graduation_rate,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -400,6 +460,57 @@ export default function UniItemCreateForm(props) {
       {...rest}
     >
       <TextField
+        label="Ranking"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={ranking}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              ranking: value,
+              name,
+              region,
+              city,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
+            };
+            const result = onChange(modelFields);
+            value = result?.ranking ?? value;
+          }
+          if (errors.ranking?.hasError) {
+            runValidationTasks("ranking", value);
+          }
+          setRanking(value);
+        }}
+        onBlur={() => runValidationTasks("ranking", ranking)}
+        errorMessage={errors.ranking?.errorMessage}
+        hasError={errors.ranking?.hasError}
+        {...getOverrideProps(overrides, "ranking")}
+      ></TextField>
+      <TextField
         label="Name"
         isRequired={false}
         isReadOnly={false}
@@ -408,11 +519,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name: value,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -420,14 +532,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -443,6 +558,147 @@ export default function UniItemCreateForm(props) {
         {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
+        label="Region"
+        isRequired={false}
+        isReadOnly={false}
+        value={region}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region: value,
+              city,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
+            };
+            const result = onChange(modelFields);
+            value = result?.region ?? value;
+          }
+          if (errors.region?.hasError) {
+            runValidationTasks("region", value);
+          }
+          setRegion(value);
+        }}
+        onBlur={() => runValidationTasks("region", region)}
+        errorMessage={errors.region?.errorMessage}
+        hasError={errors.region?.hasError}
+        {...getOverrideProps(overrides, "region")}
+      ></TextField>
+      <TextField
+        label="City"
+        isRequired={false}
+        isReadOnly={false}
+        value={city}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region,
+              city: value,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
+            };
+            const result = onChange(modelFields);
+            value = result?.city ?? value;
+          }
+          if (errors.city?.hasError) {
+            runValidationTasks("city", value);
+          }
+          setCity(value);
+        }}
+        onBlur={() => runValidationTasks("city", city)}
+        errorMessage={errors.city?.errorMessage}
+        hasError={errors.city?.hasError}
+        {...getOverrideProps(overrides, "city")}
+      ></TextField>
+      <TextField
+        label="Country"
+        isRequired={false}
+        isReadOnly={false}
+        value={country}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region,
+              city,
+              country: value,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
+            };
+            const result = onChange(modelFields);
+            value = result?.country ?? value;
+          }
+          if (errors.country?.hasError) {
+            runValidationTasks("country", value);
+          }
+          setCountry(value);
+        }}
+        onBlur={() => runValidationTasks("country", country)}
+        errorMessage={errors.country?.errorMessage}
+        hasError={errors.country?.hasError}
+        {...getOverrideProps(overrides, "country")}
+      ></TextField>
+      <TextField
         label="Photo"
         isRequired={false}
         isReadOnly={false}
@@ -451,11 +707,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo: value,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -463,14 +720,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.photo ?? value;
@@ -486,139 +746,6 @@ export default function UniItemCreateForm(props) {
         {...getOverrideProps(overrides, "photo")}
       ></TextField>
       <TextField
-        label="Location"
-        isRequired={false}
-        isReadOnly={false}
-        value={location}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              photo,
-              location: value,
-              price,
-              weather,
-              description,
-              address,
-              website,
-              phone,
-              email,
-              type,
-              accreditation,
-              ranking,
-              programs,
-              departments,
-              requirements,
-              enrollment,
-              scholarships,
-              facilities,
-              stuff,
-            };
-            const result = onChange(modelFields);
-            value = result?.location ?? value;
-          }
-          if (errors.location?.hasError) {
-            runValidationTasks("location", value);
-          }
-          setLocation(value);
-        }}
-        onBlur={() => runValidationTasks("location", location)}
-        errorMessage={errors.location?.errorMessage}
-        hasError={errors.location?.hasError}
-        {...getOverrideProps(overrides, "location")}
-      ></TextField>
-      <TextField
-        label="Price"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={price}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              name,
-              photo,
-              location,
-              price: value,
-              weather,
-              description,
-              address,
-              website,
-              phone,
-              email,
-              type,
-              accreditation,
-              ranking,
-              programs,
-              departments,
-              requirements,
-              enrollment,
-              scholarships,
-              facilities,
-              stuff,
-            };
-            const result = onChange(modelFields);
-            value = result?.price ?? value;
-          }
-          if (errors.price?.hasError) {
-            runValidationTasks("price", value);
-          }
-          setPrice(value);
-        }}
-        onBlur={() => runValidationTasks("price", price)}
-        errorMessage={errors.price?.errorMessage}
-        hasError={errors.price?.hasError}
-        {...getOverrideProps(overrides, "price")}
-      ></TextField>
-      <TextField
-        label="Weather"
-        isRequired={false}
-        isReadOnly={false}
-        value={weather}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              photo,
-              location,
-              price,
-              weather: value,
-              description,
-              address,
-              website,
-              phone,
-              email,
-              type,
-              accreditation,
-              ranking,
-              programs,
-              departments,
-              requirements,
-              enrollment,
-              scholarships,
-              facilities,
-              stuff,
-            };
-            const result = onChange(modelFields);
-            value = result?.weather ?? value;
-          }
-          if (errors.weather?.hasError) {
-            runValidationTasks("weather", value);
-          }
-          setWeather(value);
-        }}
-        onBlur={() => runValidationTasks("weather", weather)}
-        errorMessage={errors.weather?.errorMessage}
-        hasError={errors.weather?.hasError}
-        {...getOverrideProps(overrides, "weather")}
-      ></TextField>
-      <TextField
         label="Description"
         isRequired={false}
         isReadOnly={false}
@@ -627,11 +754,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description: value,
               address,
               website,
@@ -639,14 +767,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -670,11 +801,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address: value,
               website,
@@ -682,14 +814,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.address ?? value;
@@ -713,11 +848,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website: value,
@@ -725,14 +861,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.website ?? value;
@@ -757,11 +896,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -769,14 +909,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
@@ -800,11 +943,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -812,14 +956,17 @@ export default function UniItemCreateForm(props) {
               email: value,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -843,11 +990,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -855,14 +1003,17 @@ export default function UniItemCreateForm(props) {
               email,
               type: value,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.type ?? value;
@@ -886,11 +1037,12 @@ export default function UniItemCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -898,14 +1050,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation: value,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.accreditation ?? value;
@@ -921,23 +1076,20 @@ export default function UniItemCreateForm(props) {
         {...getOverrideProps(overrides, "accreditation")}
       ></TextField>
       <TextField
-        label="Ranking"
+        label="Weather"
         isRequired={false}
         isReadOnly={false}
-        type="number"
-        step="any"
-        value={ranking}
+        value={weather}
         onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -945,38 +1097,42 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking: value,
-              programs,
+              weather: value,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
-            value = result?.ranking ?? value;
+            value = result?.weather ?? value;
           }
-          if (errors.ranking?.hasError) {
-            runValidationTasks("ranking", value);
+          if (errors.weather?.hasError) {
+            runValidationTasks("weather", value);
           }
-          setRanking(value);
+          setWeather(value);
         }}
-        onBlur={() => runValidationTasks("ranking", ranking)}
-        errorMessage={errors.ranking?.errorMessage}
-        hasError={errors.ranking?.hasError}
-        {...getOverrideProps(overrides, "ranking")}
+        onBlur={() => runValidationTasks("weather", weather)}
+        errorMessage={errors.weather?.errorMessage}
+        hasError={errors.weather?.hasError}
+        {...getOverrideProps(overrides, "weather")}
       ></TextField>
       <ArrayField
         onChange={async (items) => {
           let values = items;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -984,75 +1140,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs: values,
-              departments,
-              requirements,
-              enrollment,
-              scholarships,
-              facilities,
-              stuff,
-            };
-            const result = onChange(modelFields);
-            values = result?.programs ?? values;
-          }
-          setPrograms(values);
-          setCurrentProgramsValue("");
-        }}
-        currentFieldValue={currentProgramsValue}
-        label={"Programs"}
-        items={programs}
-        hasError={errors?.programs?.hasError}
-        errorMessage={errors?.programs?.errorMessage}
-        setFieldValue={setCurrentProgramsValue}
-        inputFieldRef={programsRef}
-        defaultFieldValue={""}
-      >
-        <TextField
-          label="Programs"
-          isRequired={false}
-          isReadOnly={false}
-          value={currentProgramsValue}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.programs?.hasError) {
-              runValidationTasks("programs", value);
-            }
-            setCurrentProgramsValue(value);
-          }}
-          onBlur={() => runValidationTasks("programs", currentProgramsValue)}
-          errorMessage={errors.programs?.errorMessage}
-          hasError={errors.programs?.hasError}
-          ref={programsRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "programs")}
-        ></TextField>
-      </ArrayField>
-      <ArrayField
-        onChange={async (items) => {
-          let values = items;
-          if (onChange) {
-            const modelFields = {
-              name,
-              photo,
-              location,
-              price,
               weather,
-              description,
-              address,
-              website,
-              phone,
-              email,
-              type,
-              accreditation,
-              ranking,
-              programs,
               departments: values,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             values = result?.departments ?? values;
@@ -1065,14 +1163,15 @@ export default function UniItemCreateForm(props) {
         items={departments}
         hasError={errors?.departments?.hasError}
         errorMessage={errors?.departments?.errorMessage}
+        getBadgeText={getDisplayValue.departments}
         setFieldValue={setCurrentDepartmentsValue}
         inputFieldRef={departmentsRef}
         defaultFieldValue={""}
       >
-        <TextField
+        <SelectField
           label="Departments"
-          isRequired={false}
-          isReadOnly={false}
+          placeholder="Please select an option"
+          isDisabled={false}
           value={currentDepartmentsValue}
           onChange={(e) => {
             let { value } = e.target;
@@ -1089,18 +1188,168 @@ export default function UniItemCreateForm(props) {
           ref={departmentsRef}
           labelHidden={true}
           {...getOverrideProps(overrides, "departments")}
-        ></TextField>
+        >
+          <option
+            children="Biology"
+            value="BIOLOGY"
+            {...getOverrideProps(overrides, "departmentsoption0")}
+          ></option>
+          <option
+            children="Computer science"
+            value="COMPUTER_SCIENCE"
+            {...getOverrideProps(overrides, "departmentsoption1")}
+          ></option>
+          <option
+            children="Chemistry"
+            value="CHEMISTRY"
+            {...getOverrideProps(overrides, "departmentsoption2")}
+          ></option>
+          <option
+            children="Physics"
+            value="PHYSICS"
+            {...getOverrideProps(overrides, "departmentsoption3")}
+          ></option>
+          <option
+            children="Mathematics"
+            value="MATHEMATICS"
+            {...getOverrideProps(overrides, "departmentsoption4")}
+          ></option>
+          <option
+            children="Psychology"
+            value="PSYCHOLOGY"
+            {...getOverrideProps(overrides, "departmentsoption5")}
+          ></option>
+          <option
+            children="English"
+            value="ENGLISH"
+            {...getOverrideProps(overrides, "departmentsoption6")}
+          ></option>
+          <option
+            children="Economics"
+            value="ECONOMICS"
+            {...getOverrideProps(overrides, "departmentsoption7")}
+          ></option>
+          <option
+            children="History"
+            value="HISTORY"
+            {...getOverrideProps(overrides, "departmentsoption8")}
+          ></option>
+          <option
+            children="Political science"
+            value="POLITICAL_SCIENCE"
+            {...getOverrideProps(overrides, "departmentsoption9")}
+          ></option>
+          <option
+            children="Sociology"
+            value="SOCIOLOGY"
+            {...getOverrideProps(overrides, "departmentsoption10")}
+          ></option>
+          <option
+            children="Anthropology"
+            value="ANTHROPOLOGY"
+            {...getOverrideProps(overrides, "departmentsoption11")}
+          ></option>
+          <option
+            children="Business administration"
+            value="BUSINESS_ADMINISTRATION"
+            {...getOverrideProps(overrides, "departmentsoption12")}
+          ></option>
+          <option
+            children="Education"
+            value="EDUCATION"
+            {...getOverrideProps(overrides, "departmentsoption13")}
+          ></option>
+          <option
+            children="Engineering"
+            value="ENGINEERING"
+            {...getOverrideProps(overrides, "departmentsoption14")}
+          ></option>
+          <option
+            children="Fine arts"
+            value="FINE_ARTS"
+            {...getOverrideProps(overrides, "departmentsoption15")}
+          ></option>
+          <option
+            children="Music"
+            value="MUSIC"
+            {...getOverrideProps(overrides, "departmentsoption16")}
+          ></option>
+          <option
+            children="Architecture"
+            value="ARCHITECTURE"
+            {...getOverrideProps(overrides, "departmentsoption17")}
+          ></option>
+          <option
+            children="Health sciences"
+            value="HEALTH_SCIENCES"
+            {...getOverrideProps(overrides, "departmentsoption18")}
+          ></option>
+          <option
+            children="Linguistics"
+            value="LINGUISTICS"
+            {...getOverrideProps(overrides, "departmentsoption19")}
+          ></option>
+          <option
+            children="Communication"
+            value="COMMUNICATION"
+            {...getOverrideProps(overrides, "departmentsoption20")}
+          ></option>
+          <option
+            children="Social work"
+            value="SOCIAL_WORK"
+            {...getOverrideProps(overrides, "departmentsoption21")}
+          ></option>
+          <option
+            children="Public health"
+            value="PUBLIC_HEALTH"
+            {...getOverrideProps(overrides, "departmentsoption22")}
+          ></option>
+          <option
+            children="International relations"
+            value="INTERNATIONAL_RELATIONS"
+            {...getOverrideProps(overrides, "departmentsoption23")}
+          ></option>
+          <option
+            children="Cultural studies"
+            value="CULTURAL_STUDIES"
+            {...getOverrideProps(overrides, "departmentsoption24")}
+          ></option>
+          <option
+            children="Religious studies"
+            value="RELIGIOUS_STUDIES"
+            {...getOverrideProps(overrides, "departmentsoption25")}
+          ></option>
+          <option
+            children="Film studies"
+            value="FILM_STUDIES"
+            {...getOverrideProps(overrides, "departmentsoption26")}
+          ></option>
+          <option
+            children="Philosophy"
+            value="PHILOSOPHY"
+            {...getOverrideProps(overrides, "departmentsoption27")}
+          ></option>
+        </SelectField>
       </ArrayField>
-      <ArrayField
-        onChange={async (items) => {
-          let values = items;
+      <TextField
+        label="Price"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={price}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -1108,52 +1357,31 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements: values,
+              price: value,
               enrollment,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
-            values = result?.requirements ?? values;
+            value = result?.price ?? value;
           }
-          setRequirements(values);
-          setCurrentRequirementsValue("");
+          if (errors.price?.hasError) {
+            runValidationTasks("price", value);
+          }
+          setPrice(value);
         }}
-        currentFieldValue={currentRequirementsValue}
-        label={"Requirements"}
-        items={requirements}
-        hasError={errors?.requirements?.hasError}
-        errorMessage={errors?.requirements?.errorMessage}
-        setFieldValue={setCurrentRequirementsValue}
-        inputFieldRef={requirementsRef}
-        defaultFieldValue={""}
-      >
-        <TextField
-          label="Requirements"
-          isRequired={false}
-          isReadOnly={false}
-          value={currentRequirementsValue}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.requirements?.hasError) {
-              runValidationTasks("requirements", value);
-            }
-            setCurrentRequirementsValue(value);
-          }}
-          onBlur={() =>
-            runValidationTasks("requirements", currentRequirementsValue)
-          }
-          errorMessage={errors.requirements?.errorMessage}
-          hasError={errors.requirements?.hasError}
-          ref={requirementsRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "requirements")}
-        ></TextField>
-      </ArrayField>
+        onBlur={() => runValidationTasks("price", price)}
+        errorMessage={errors.price?.errorMessage}
+        hasError={errors.price?.hasError}
+        {...getOverrideProps(overrides, "price")}
+      ></TextField>
       <TextField
         label="Enrollment"
         isRequired={false}
@@ -1167,11 +1395,12 @@ export default function UniItemCreateForm(props) {
             : parseInt(e.target.value);
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -1179,14 +1408,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment: value,
               scholarships,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             value = result?.enrollment ?? value;
@@ -1206,11 +1438,12 @@ export default function UniItemCreateForm(props) {
           let values = items;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -1218,14 +1451,17 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships: values,
-              facilities,
+              requirements,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             values = result?.scholarships ?? values;
@@ -1269,11 +1505,12 @@ export default function UniItemCreateForm(props) {
           let values = items;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -1281,14 +1518,135 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
-              facilities: values,
+              requirements: values,
               stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
+            };
+            const result = onChange(modelFields);
+            values = result?.requirements ?? values;
+          }
+          setRequirements(values);
+          setCurrentRequirementsValue("");
+        }}
+        currentFieldValue={currentRequirementsValue}
+        label={"Requirements"}
+        items={requirements}
+        hasError={errors?.requirements?.hasError}
+        errorMessage={errors?.requirements?.errorMessage}
+        setFieldValue={setCurrentRequirementsValue}
+        inputFieldRef={requirementsRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Requirements"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentRequirementsValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.requirements?.hasError) {
+              runValidationTasks("requirements", value);
+            }
+            setCurrentRequirementsValue(value);
+          }}
+          onBlur={() =>
+            runValidationTasks("requirements", currentRequirementsValue)
+          }
+          errorMessage={errors.requirements?.errorMessage}
+          hasError={errors.requirements?.hasError}
+          ref={requirementsRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "requirements")}
+        ></TextField>
+      </ArrayField>
+      <TextField
+        label="Stuff"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={stuff}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region,
+              city,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff: value,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
+            };
+            const result = onChange(modelFields);
+            value = result?.stuff ?? value;
+          }
+          if (errors.stuff?.hasError) {
+            runValidationTasks("stuff", value);
+          }
+          setStuff(value);
+        }}
+        onBlur={() => runValidationTasks("stuff", stuff)}
+        errorMessage={errors.stuff?.errorMessage}
+        hasError={errors.stuff?.hasError}
+        {...getOverrideProps(overrides, "stuff")}
+      ></TextField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region,
+              city,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              facilities: values,
+              programs,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
             values = result?.facilities ?? values;
@@ -1327,24 +1685,17 @@ export default function UniItemCreateForm(props) {
           {...getOverrideProps(overrides, "facilities")}
         ></TextField>
       </ArrayField>
-      <TextField
-        label="Stuff"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={stuff}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
           if (onChange) {
             const modelFields = {
+              ranking,
               name,
+              region,
+              city,
+              country,
               photo,
-              location,
-              price,
-              weather,
               description,
               address,
               website,
@@ -1352,27 +1703,154 @@ export default function UniItemCreateForm(props) {
               email,
               type,
               accreditation,
-              ranking,
-              programs,
+              weather,
               departments,
-              requirements,
+              price,
               enrollment,
               scholarships,
+              requirements,
+              stuff,
               facilities,
-              stuff: value,
+              programs: values,
+              acceptance_rate,
+              graduation_rate,
             };
             const result = onChange(modelFields);
-            value = result?.stuff ?? value;
+            values = result?.programs ?? values;
           }
-          if (errors.stuff?.hasError) {
-            runValidationTasks("stuff", value);
-          }
-          setStuff(value);
+          setPrograms(values);
+          setCurrentProgramsValue("");
         }}
-        onBlur={() => runValidationTasks("stuff", stuff)}
-        errorMessage={errors.stuff?.errorMessage}
-        hasError={errors.stuff?.hasError}
-        {...getOverrideProps(overrides, "stuff")}
+        currentFieldValue={currentProgramsValue}
+        label={"Programs"}
+        items={programs}
+        hasError={errors?.programs?.hasError}
+        errorMessage={errors?.programs?.errorMessage}
+        setFieldValue={setCurrentProgramsValue}
+        inputFieldRef={programsRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Programs"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentProgramsValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.programs?.hasError) {
+              runValidationTasks("programs", value);
+            }
+            setCurrentProgramsValue(value);
+          }}
+          onBlur={() => runValidationTasks("programs", currentProgramsValue)}
+          errorMessage={errors.programs?.errorMessage}
+          hasError={errors.programs?.hasError}
+          ref={programsRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "programs")}
+        ></TextField>
+      </ArrayField>
+      <TextField
+        label="Acceptance rate"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={acceptance_rate}
+        onChange={(e) => {
+          let value = isNaN(parseFloat(e.target.value))
+            ? e.target.value
+            : parseFloat(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region,
+              city,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              facilities,
+              programs,
+              acceptance_rate: value,
+              graduation_rate,
+            };
+            const result = onChange(modelFields);
+            value = result?.acceptance_rate ?? value;
+          }
+          if (errors.acceptance_rate?.hasError) {
+            runValidationTasks("acceptance_rate", value);
+          }
+          setAcceptance_rate(value);
+        }}
+        onBlur={() => runValidationTasks("acceptance_rate", acceptance_rate)}
+        errorMessage={errors.acceptance_rate?.errorMessage}
+        hasError={errors.acceptance_rate?.hasError}
+        {...getOverrideProps(overrides, "acceptance_rate")}
+      ></TextField>
+      <TextField
+        label="Graduation rate"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={graduation_rate}
+        onChange={(e) => {
+          let value = isNaN(parseFloat(e.target.value))
+            ? e.target.value
+            : parseFloat(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region,
+              city,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.graduation_rate ?? value;
+          }
+          if (errors.graduation_rate?.hasError) {
+            runValidationTasks("graduation_rate", value);
+          }
+          setGraduation_rate(value);
+        }}
+        onBlur={() => runValidationTasks("graduation_rate", graduation_rate)}
+        errorMessage={errors.graduation_rate?.errorMessage}
+        hasError={errors.graduation_rate?.hasError}
+        {...getOverrideProps(overrides, "graduation_rate")}
       ></TextField>
       <Flex
         justifyContent="space-between"

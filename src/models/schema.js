@@ -1,5 +1,167 @@
 export const schema = {
     "models": {
+        "Point": {
+            "name": "Point",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userSub": {
+                    "name": "userSub",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "points": {
+                    "name": "points",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Points",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "RecommendUni": {
+            "name": "RecommendUni",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "weather": {
+                    "name": "weather",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "region": {
+                    "name": "region",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Region"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "country": {
+                    "name": "country",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "degree": {
+                    "name": "degree",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "interest": {
+                    "name": "interest",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userSub": {
+                    "name": "userSub",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "RecommendUnis",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "FavoriteUni": {
             "name": "FavoriteUni",
             "fields": {
@@ -407,8 +569,36 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "ranking": {
+                    "name": "ranking",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "name": {
                     "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "region": {
+                    "name": "region",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "city": {
+                    "name": "city",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "country": {
+                    "name": "country",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -418,27 +608,6 @@ export const schema = {
                     "name": "photo",
                     "isArray": false,
                     "type": "AWSURL",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "location": {
-                    "name": "location",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "price": {
-                    "name": "price",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "weather": {
-                    "name": "weather",
-                    "isArray": false,
-                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -491,36 +660,29 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "ranking": {
-                    "name": "ranking",
+                "weather": {
+                    "name": "weather",
                     "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "programs": {
-                    "name": "programs",
-                    "isArray": true,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "departments": {
                     "name": "departments",
                     "isArray": true,
-                    "type": "String",
+                    "type": {
+                        "enum": "Departments"
+                    },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true
                 },
-                "requirements": {
-                    "name": "requirements",
-                    "isArray": true,
-                    "type": "String",
+                "price": {
+                    "name": "price",
+                    "isArray": false,
+                    "type": "Int",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "enrollment": {
                     "name": "enrollment",
@@ -537,8 +699,8 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
-                "facilities": {
-                    "name": "facilities",
+                "requirements": {
+                    "name": "requirements",
                     "isArray": true,
                     "type": "String",
                     "isRequired": false,
@@ -549,6 +711,36 @@ export const schema = {
                     "name": "stuff",
                     "isArray": false,
                     "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "facilities": {
+                    "name": "facilities",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "programs": {
+                    "name": "programs",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "acceptance_rate": {
+                    "name": "acceptance_rate",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "graduation_rate": {
+                    "name": "graduation_rate",
+                    "isArray": false,
+                    "type": "Float",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -693,8 +885,53 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "Departments": {
+            "name": "Departments",
+            "values": [
+                "BIOLOGY",
+                "COMPUTER_SCIENCE",
+                "CHEMISTRY",
+                "PHYSICS",
+                "MATHEMATICS",
+                "PSYCHOLOGY",
+                "ENGLISH",
+                "ECONOMICS",
+                "HISTORY",
+                "POLITICAL_SCIENCE",
+                "SOCIOLOGY",
+                "ANTHROPOLOGY",
+                "BUSINESS_ADMINISTRATION",
+                "EDUCATION",
+                "ENGINEERING",
+                "FINE_ARTS",
+                "MUSIC",
+                "ARCHITECTURE",
+                "HEALTH_SCIENCES",
+                "LINGUISTICS",
+                "COMMUNICATION",
+                "SOCIAL_WORK",
+                "PUBLIC_HEALTH",
+                "INTERNATIONAL_RELATIONS",
+                "CULTURAL_STUDIES",
+                "RELIGIOUS_STUDIES",
+                "FILM_STUDIES",
+                "PHILOSOPHY"
+            ]
+        },
+        "Region": {
+            "name": "Region",
+            "values": [
+                "EUROPE",
+                "ASIA",
+                "AFRICA",
+                "OCEANIA",
+                "SOUTHAMERICA",
+                "NORTHAMERICA"
+            ]
+        }
+    },
     "nonModels": {},
     "codegenVersion": "3.4.2",
-    "version": "7b91fce8f6495b85101631aa53a45f4d"
+    "version": "cbf40118ddf5e47d12a71b107d127ed3"
 };

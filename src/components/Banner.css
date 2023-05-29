@@ -10,7 +10,7 @@
 .banner:before {
     
     background: transparent;
-    background: linear-gradient(180deg,rgba(0,0,0,.5),transparent);
+    background: linear-gradient(180deg,rgba(0,0,0,.6),transparent);
     bottom: 0;
     content: "";
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$color-1",endColorstr="$color-2",GradientType=1);

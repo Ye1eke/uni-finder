@@ -6,12 +6,12 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, Heading, TextField } from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { ContactUs } from "../models";
+import { Point } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function ContactUsCreateForm(props) {
+export default function PointCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -23,24 +23,20 @@ export default function ContactUsCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    Name: "",
-    Email: "",
-    Text: "",
+    userSub: "",
+    points: "",
   };
-  const [Name, setName] = React.useState(initialValues.Name);
-  const [Email, setEmail] = React.useState(initialValues.Email);
-  const [Text, setText] = React.useState(initialValues.Text);
+  const [userSub, setUserSub] = React.useState(initialValues.userSub);
+  const [points, setPoints] = React.useState(initialValues.points);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setName(initialValues.Name);
-    setEmail(initialValues.Email);
-    setText(initialValues.Text);
+    setUserSub(initialValues.userSub);
+    setPoints(initialValues.points);
     setErrors({});
   };
   const validations = {
-    Name: [],
-    Email: [{ type: "Required" }, { type: "Email" }],
-    Text: [{ type: "Required" }],
+    userSub: [],
+    points: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -68,9 +64,8 @@ export default function ContactUsCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          Name,
-          Email,
-          Text,
+          userSub,
+          points,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -100,7 +95,7 @@ export default function ContactUsCreateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(new ContactUs(modelFields));
+          await DataStore.save(new Point(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -113,90 +108,62 @@ export default function ContactUsCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "ContactUsCreateForm")}
+      {...getOverrideProps(overrides, "PointCreateForm")}
       {...rest}
     >
-      <Heading
-        children="Contact Us (:"
-        {...getOverrideProps(overrides, "SectionalElement0")}
-      ></Heading>
       <TextField
-        label="Name"
+        label="User sub"
         isRequired={false}
         isReadOnly={false}
-        value={Name}
+        value={userSub}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              Name: value,
-              Email,
-              Text,
+              userSub: value,
+              points,
             };
             const result = onChange(modelFields);
-            value = result?.Name ?? value;
+            value = result?.userSub ?? value;
           }
-          if (errors.Name?.hasError) {
-            runValidationTasks("Name", value);
+          if (errors.userSub?.hasError) {
+            runValidationTasks("userSub", value);
           }
-          setName(value);
+          setUserSub(value);
         }}
-        onBlur={() => runValidationTasks("Name", Name)}
-        errorMessage={errors.Name?.errorMessage}
-        hasError={errors.Name?.hasError}
-        {...getOverrideProps(overrides, "Name")}
+        onBlur={() => runValidationTasks("userSub", userSub)}
+        errorMessage={errors.userSub?.errorMessage}
+        hasError={errors.userSub?.hasError}
+        {...getOverrideProps(overrides, "userSub")}
       ></TextField>
       <TextField
-        label="Email"
-        isRequired={true}
+        label="Points"
+        isRequired={false}
         isReadOnly={false}
-        value={Email}
+        type="number"
+        step="any"
+        value={points}
         onChange={(e) => {
-          let { value } = e.target;
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
           if (onChange) {
             const modelFields = {
-              Name,
-              Email: value,
-              Text,
+              userSub,
+              points: value,
             };
             const result = onChange(modelFields);
-            value = result?.Email ?? value;
+            value = result?.points ?? value;
           }
-          if (errors.Email?.hasError) {
-            runValidationTasks("Email", value);
+          if (errors.points?.hasError) {
+            runValidationTasks("points", value);
           }
-          setEmail(value);
+          setPoints(value);
         }}
-        onBlur={() => runValidationTasks("Email", Email)}
-        errorMessage={errors.Email?.errorMessage}
-        hasError={errors.Email?.hasError}
-        {...getOverrideProps(overrides, "Email")}
-      ></TextField>
-      <TextField
-        label="What is your question?"
-        isRequired={true}
-        isReadOnly={false}
-        value={Text}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              Name,
-              Email,
-              Text: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.Text ?? value;
-          }
-          if (errors.Text?.hasError) {
-            runValidationTasks("Text", value);
-          }
-          setText(value);
-        }}
-        onBlur={() => runValidationTasks("Text", Text)}
-        errorMessage={errors.Text?.errorMessage}
-        hasError={errors.Text?.hasError}
-        {...getOverrideProps(overrides, "Text")}
+        onBlur={() => runValidationTasks("points", points)}
+        errorMessage={errors.points?.errorMessage}
+        hasError={errors.points?.hasError}
+        {...getOverrideProps(overrides, "points")}
       ></TextField>
       <Flex
         justifyContent="space-between"

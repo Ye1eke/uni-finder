@@ -4,7 +4,6 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-export { default as ProductCard } from "./ProductCard";
 export { default as SocialPost } from "./SocialPost";
 export { default as ContactUs } from "./ContactUs";
 export { default as MyIcon } from "./MyIcon";
@@ -13,9 +12,12 @@ export { default as SocialPostCollection } from "./SocialPostCollection";
 export { default as UnisCardCollection } from "./UnisCardCollection";
 export { default as ProductDetail } from "./ProductDetail";
 export { default as ActionCard } from "./ActionCard";
-export { default as ProfileCard } from "./ProfileCard";
 export { default as studioTheme } from "./studioTheme";
 export { default as ContactUsCreateForm } from "./ContactUsCreateForm";
+export { default as RecUni } from "./RecUni";
+export { default as PointCreateForm } from "./PointCreateForm";
+export { default as PointUpdateForm } from "./PointUpdateForm";
+export { default as RecommendUniUpdateForm } from "./RecommendUniUpdateForm";
 export { default as FavoriteUniCreateForm } from "./FavoriteUniCreateForm";
 export { default as FavoriteUniUpdateForm } from "./FavoriteUniUpdateForm";
 export { default as ContactUsUpdateForm } from "./ContactUsUpdateForm";

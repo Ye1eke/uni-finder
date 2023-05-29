@@ -15,7 +15,7 @@ export declare type Features4x1OverridesProps = {
     "Why choose us? \uD83E\uDD14"?: PrimitiveOverrideProps<TextProps>;
     "We help students to find postgraduate programs that align with their career goals and academic achievements and to enhance their university search experience."?: PrimitiveOverrideProps<TextProps>;
     "Frame 140"?: PrimitiveOverrideProps<FlexProps>;
-    "What sets us apart? \uD83D\uDC9B"?: PrimitiveOverrideProps<TextProps>;
+    "What sets us apart? \uD83C\uDF4D"?: PrimitiveOverrideProps<TextProps>;
     "Our unique algorithm matches students with postgraduate programs based on their preferences and qualifications, ensuring personalized recommendations."?: PrimitiveOverrideProps<TextProps>;
     "Frame 141"?: PrimitiveOverrideProps<FlexProps>;
     "What will you get? \uD83D\uDC23"?: PrimitiveOverrideProps<TextProps>;

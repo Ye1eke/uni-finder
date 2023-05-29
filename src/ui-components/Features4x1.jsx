@@ -134,8 +134,8 @@ export default function Features4x1(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="What sets us apart? 💛"
-            {...getOverrideProps(overrides, "What sets us apart? \uD83D\uDC9B")}
+            children="What sets us apart? 🍍"
+            {...getOverrideProps(overrides, "What sets us apart? \uD83C\uDF4D")}
           ></Text>
           <Text
             fontFamily="Inter"

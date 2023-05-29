@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { UniItem } from "../models";
 export declare type ValidationResponse = {
@@ -14,11 +14,12 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type UniItemUpdateFormInputValues = {
+    ranking?: number;
     name?: string;
+    region?: string;
+    city?: string;
+    country?: string;
     photo?: string;
-    location?: string;
-    price?: number;
-    weather?: string;
     description?: string;
     address?: string;
     website?: string;
@@ -26,21 +27,25 @@ export declare type UniItemUpdateFormInputValues = {
     email?: string;
     type?: string;
     accreditation?: string;
-    ranking?: number;
-    programs?: string[];
+    weather?: string;
     departments?: string[];
-    requirements?: string[];
+    price?: number;
     enrollment?: number;
     scholarships?: string[];
-    facilities?: string[];
+    requirements?: string[];
     stuff?: number;
+    facilities?: string[];
+    programs?: string[];
+    acceptance_rate?: number;
+    graduation_rate?: number;
 };
 export declare type UniItemUpdateFormValidationValues = {
+    ranking?: ValidationFunction<number>;
     name?: ValidationFunction<string>;
+    region?: ValidationFunction<string>;
+    city?: ValidationFunction<string>;
+    country?: ValidationFunction<string>;
     photo?: ValidationFunction<string>;
-    location?: ValidationFunction<string>;
-    price?: ValidationFunction<number>;
-    weather?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
     address?: ValidationFunction<string>;
     website?: ValidationFunction<string>;
@@ -48,23 +53,27 @@ export declare type UniItemUpdateFormValidationValues = {
     email?: ValidationFunction<string>;
     type?: ValidationFunction<string>;
     accreditation?: ValidationFunction<string>;
-    ranking?: ValidationFunction<number>;
-    programs?: ValidationFunction<string>;
+    weather?: ValidationFunction<string>;
     departments?: ValidationFunction<string>;
-    requirements?: ValidationFunction<string>;
+    price?: ValidationFunction<number>;
     enrollment?: ValidationFunction<number>;
     scholarships?: ValidationFunction<string>;
-    facilities?: ValidationFunction<string>;
+    requirements?: ValidationFunction<string>;
     stuff?: ValidationFunction<number>;
+    facilities?: ValidationFunction<string>;
+    programs?: ValidationFunction<string>;
+    acceptance_rate?: ValidationFunction<number>;
+    graduation_rate?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type UniItemUpdateFormOverridesProps = {
     UniItemUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    ranking?: PrimitiveOverrideProps<TextFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
+    region?: PrimitiveOverrideProps<TextFieldProps>;
+    city?: PrimitiveOverrideProps<TextFieldProps>;
+    country?: PrimitiveOverrideProps<TextFieldProps>;
     photo?: PrimitiveOverrideProps<TextFieldProps>;
-    location?: PrimitiveOverrideProps<TextFieldProps>;
-    price?: PrimitiveOverrideProps<TextFieldProps>;
-    weather?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
     address?: PrimitiveOverrideProps<TextFieldProps>;
     website?: PrimitiveOverrideProps<TextFieldProps>;
@@ -72,14 +81,17 @@ export declare type UniItemUpdateFormOverridesProps = {
     email?: PrimitiveOverrideProps<TextFieldProps>;
     type?: PrimitiveOverrideProps<TextFieldProps>;
     accreditation?: PrimitiveOverrideProps<TextFieldProps>;
-    ranking?: PrimitiveOverrideProps<TextFieldProps>;
-    programs?: PrimitiveOverrideProps<TextFieldProps>;
-    departments?: PrimitiveOverrideProps<TextFieldProps>;
-    requirements?: PrimitiveOverrideProps<TextFieldProps>;
+    weather?: PrimitiveOverrideProps<TextFieldProps>;
+    departments?: PrimitiveOverrideProps<SelectFieldProps>;
+    price?: PrimitiveOverrideProps<TextFieldProps>;
     enrollment?: PrimitiveOverrideProps<TextFieldProps>;
     scholarships?: PrimitiveOverrideProps<TextFieldProps>;
-    facilities?: PrimitiveOverrideProps<TextFieldProps>;
+    requirements?: PrimitiveOverrideProps<TextFieldProps>;
     stuff?: PrimitiveOverrideProps<TextFieldProps>;
+    facilities?: PrimitiveOverrideProps<TextFieldProps>;
+    programs?: PrimitiveOverrideProps<TextFieldProps>;
+    acceptance_rate?: PrimitiveOverrideProps<TextFieldProps>;
+    graduation_rate?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type UniItemUpdateFormProps = React.PropsWithChildren<{
     overrides?: UniItemUpdateFormOverridesProps | undefined | null;

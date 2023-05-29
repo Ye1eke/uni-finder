@@ -3,7 +3,7 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { DataStore } from 'aws-amplify';
-import { UniItem, FavoriteUni, Point, BadgeUser, BadgeUserBadge, Badge } from '../models';
+import { UniItem, FavoriteUni, Point } from '../models';
 import { Auth } from 'aws-amplify';
 import './UniAbout.css'
 function UniAbout({ user }) {
@@ -12,7 +12,9 @@ function UniAbout({ user }) {
     const [favorites, setFavorites] = useState([]);
     const [points, setPoints] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    const [animationValue, setAnimationValue] = useState(0);
+    const animationDuration = 1000; // Animation duration in milliseconds
+    const animationValue = 50;
+    let existingFavorite = null;
 
     useEffect(()=> {
         async function queryUni(id) {
@@ -52,7 +54,7 @@ function UniAbout({ user }) {
     }, [user.attributes.sub]);
     const handleAddToFavorites = async () => {
       try {
-         const existingFavorite = favorites.find(favorite => favorite.uniId === id);
+         existingFavorite = favorites.find(favorite => favorite.uniId === id);
         if (existingFavorite) {
           await DataStore.delete(FavoriteUni, existingFavorite.id);
           const updatedFavorites = favorites.filter(favorite => favorite.id !== existingFavorite.id);
@@ -60,7 +62,7 @@ function UniAbout({ user }) {
           // Deduct 50 points
           const updatedPoints = points - 50;
           setPoints(updatedPoints);
-          setAnimationValue(-50);
+          setIsAnimating(true);
           // Update the Point model with the deducted points
           const userPoints = await DataStore.query(Point, c => c.userSub.eq(user.attributes.sub));
           if (userPoints.length > 0) {
@@ -93,7 +95,7 @@ function UniAbout({ user }) {
 
         await DataStore.save(updatedPoints);
         setPoints(newPoints);
-        
+        setIsAnimating(true);
         console.log('Points updated successfully.');
       } else {
         // Create a new Point model if it doesn't exist for the user
@@ -106,39 +108,13 @@ function UniAbout({ user }) {
         setPoints(newPoints);
         console.log('Points created and updated successfully.');
         
-        
-      
-    }
-    setAnimationValue(50);
-    // Check if the user has already been awarded the "FirstUni" badge
-    const userBadges = await DataStore.query(BadgeUser, c => c.userEmail.eq(user.attributes.email));
-    if (!userBadges || !userBadges.some(badgeUser => badgeUser.badges.some(b => b.name === 'FirstUni'))) {
-      // Award the "FirstUni" badge to the user
-      const badge = await DataStore.query(Badge, c => c.name.eq('FirstUni'));
-      if (badge) {
-        const userBadge = userBadges ? userBadges[0] : null;
-        const updatedUserBadges = userBadge
-          ? BadgeUser.copyOf(userBadge, updated => {
-              updated.badges.push(badge[0]);
-            })
-          : new BadgeUser({
-              userEmail: user.attributes.email,
-              badgeID: badge[0].id,
-            });
-
-        await DataStore.save(updatedUserBadges);
-        console.log('Badge awarded successfully.');
-      }
     }
   }
-  setIsAnimating(true);
       } catch (error) {
         console.log('Error adding to favorites:', error);
       }
     };
-    const handleAnimationComplete = () => {
-      setIsAnimating(false);
-    };
+  
     const isFavorite = favorites.some(favorite => favorite.uniId === id);
 
     if (!uni) {
@@ -155,106 +131,44 @@ function UniAbout({ user }) {
 
 
         <div className='container'>
-          <div className='banner__details'>
-            <div className='banner__wrap__uni'>
+
+            <div className='banner__wrap'>
             <h1>{uni.name}</h1>
-            <p>{uni.region + ' ' + uni.country + ' ' + uni.city}</p>
-            <p>{'#'+uni.ranking}</p>
+            <p></p>
+
             
-            {!isFavorite ? (      
+            {!isFavorite ? (
+              <div>    
+                <div className={`animation-container ${isAnimating ? 'animation-active' : ''}`}>
+        <div className="animation">{existingFavorite ? `-${animationValue}` : `+${animationValue}`}</div>
+      </div>           
                 <button className="banner__button" onClick={handleAddToFavorites}>
                 <img id='heart' src='/images/heart.svg' alt='' /> Add to Favorites
               </button>
+              </div>
             ) : (
-                
+              <div> 
+                <div className={`animation-container ${isAnimating ? 'animation-active' : ''}`}>
+        <div className="animation">{existingFavorite ? `-${animationValue}` : `+${animationValue}`}</div>
+      </div>
               <button className="banner__button" onClick={handleAddToFavorites}>
                 <img id='heart' src='/images/heart-filled.svg' alt='' /> 
                 Added to Favorites
                 </button>
-            )}
-            <div className='animation-container'>
-              {isAnimating && (
-                <div className='animation' onAnimationEnd={handleAnimationComplete}>
-                  {animationValue > 0 ? `+${animationValue}` : animationValue}
                 </div>
-              )}
-            </div>
+            )}
             {/* <Link to=''><a className="banner__button" target="_self" rel="" href="#">
                 <img id='heart' src='/images/heart.svg' alt=''/>Add to Favorites</a></Link>     */}
             </div>
-
-            <div className='banner__right'>
-                <div className='banner__right__box'>
-                  <h1>Requirements:</h1>
-                  <ul className='banner__right__list'>
-                  {uni.requirements.map((requirement, index) => (
-                    <li key={index}>{requirement}</li>
-                  ))}
-                  </ul>
-                </div>
-            </div>
-
-          </div>
-
-
         </div>
-
     </div>
       <div className='container'>
-        <div className='uni__info'>
         <div className='uni__text'>
-          <h3>Overview</h3>
-          <p>{uni.description}</p>
+          {uni.description}
+        </div>
+        {console.log(uni)}
 
-          <h3>Scholarships</h3>
-          <ul className='banner__right__list'>
-            {uni.scholarships.map((scholarship, index) => (
-              <li key={index}>{scholarship}</li>
-            ))}
-          </ul>
-
-          <div className='dep__prog'>
-            <div>
-              <h3>Departments</h3>
-              <ul className='banner__right__list'>
-                {uni.departments.map((department, index) => (
-                  <li key={index}>{department}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3>Programs</h3>
-              <ul className='banner__right__list'>
-                {uni.programs.map((program, index) => (
-                  <li key={index}>{program}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <h3>Accreditation</h3>
-          <p>{uni.accreditation}</p>
-          
-        </div>
-        <div>
-        <div className='uni__side'>
-          <p>Tuition fee: {uni.price + "$"}</p>
-          <p>Type: {uni.type}</p>
-          <p>Total Students: {uni.enrollment}</p>
-          <p>Total staff: {uni.stuff}</p>
-          
-        </div>
-
-        <div className='uni__side__second'>
-          <h3>Contacts</h3>
-          <a href={'mailto:'+uni.email}><p>Email: {uni.email}</p></a>
-          <a href={'tel:'+uni.phone}><p>Phone: {uni.phone}</p></a>
-          <p>Address: {uni.address}</p>
-          <Link to={`${uni.website}`}><p>Website: {uni.website.replace(/(^\w+:|^)\/\//, '')}</p></Link>
-          
-        </div>
-        </div>
-        </div>
+        
       </div>
     </div>
   )

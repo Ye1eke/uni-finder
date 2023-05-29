@@ -2,9 +2,115 @@ import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
 
+export enum Departments {
+  BIOLOGY = "BIOLOGY",
+  COMPUTER_SCIENCE = "COMPUTER_SCIENCE",
+  CHEMISTRY = "CHEMISTRY",
+  PHYSICS = "PHYSICS",
+  MATHEMATICS = "MATHEMATICS",
+  PSYCHOLOGY = "PSYCHOLOGY",
+  ENGLISH = "ENGLISH",
+  ECONOMICS = "ECONOMICS",
+  HISTORY = "HISTORY",
+  POLITICAL_SCIENCE = "POLITICAL_SCIENCE",
+  SOCIOLOGY = "SOCIOLOGY",
+  ANTHROPOLOGY = "ANTHROPOLOGY",
+  BUSINESS_ADMINISTRATION = "BUSINESS_ADMINISTRATION",
+  EDUCATION = "EDUCATION",
+  ENGINEERING = "ENGINEERING",
+  FINE_ARTS = "FINE_ARTS",
+  MUSIC = "MUSIC",
+  ARCHITECTURE = "ARCHITECTURE",
+  HEALTH_SCIENCES = "HEALTH_SCIENCES",
+  LINGUISTICS = "LINGUISTICS",
+  COMMUNICATION = "COMMUNICATION",
+  SOCIAL_WORK = "SOCIAL_WORK",
+  PUBLIC_HEALTH = "PUBLIC_HEALTH",
+  INTERNATIONAL_RELATIONS = "INTERNATIONAL_RELATIONS",
+  CULTURAL_STUDIES = "CULTURAL_STUDIES",
+  RELIGIOUS_STUDIES = "RELIGIOUS_STUDIES",
+  FILM_STUDIES = "FILM_STUDIES",
+  PHILOSOPHY = "PHILOSOPHY"
+}
+
+export enum Region {
+  EUROPE = "EUROPE",
+  ASIA = "ASIA",
+  AFRICA = "AFRICA",
+  OCEANIA = "OCEANIA",
+  SOUTHAMERICA = "SOUTHAMERICA",
+  NORTHAMERICA = "NORTHAMERICA"
+}
 
 
 
+type EagerPoint = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Point, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userSub?: string | null;
+  readonly points?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyPoint = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Point, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userSub?: string | null;
+  readonly points?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Point = LazyLoading extends LazyLoadingDisabled ? EagerPoint : LazyPoint
+
+export declare const Point: (new (init: ModelInit<Point>) => Point) & {
+  copyOf(source: Point, mutator: (draft: MutableModel<Point>) => MutableModel<Point> | void): Point;
+}
+
+type EagerRecommendUni = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<RecommendUni, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly weather?: string | null;
+  readonly region?: Region | keyof typeof Region | null;
+  readonly country?: string | null;
+  readonly degree?: string | null;
+  readonly interest?: string | null;
+  readonly userSub?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyRecommendUni = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<RecommendUni, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly weather?: string | null;
+  readonly region?: Region | keyof typeof Region | null;
+  readonly country?: string | null;
+  readonly degree?: string | null;
+  readonly interest?: string | null;
+  readonly userSub?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type RecommendUni = LazyLoading extends LazyLoadingDisabled ? EagerRecommendUni : LazyRecommendUni
+
+export declare const RecommendUni: (new (init: ModelInit<RecommendUni>) => RecommendUni) & {
+  copyOf(source: RecommendUni, mutator: (draft: MutableModel<RecommendUni>) => MutableModel<RecommendUni> | void): RecommendUni;
+}
 
 type EagerFavoriteUni = {
   readonly [__modelMeta__]: {
@@ -176,11 +282,12 @@ type EagerUniItem = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly ranking?: number | null;
   readonly name?: string | null;
+  readonly region?: string | null;
+  readonly city?: string | null;
+  readonly country?: string | null;
   readonly photo?: string | null;
-  readonly location?: string | null;
-  readonly price?: number | null;
-  readonly weather?: string | null;
   readonly description?: string | null;
   readonly address?: string | null;
   readonly website?: string | null;
@@ -188,14 +295,17 @@ type EagerUniItem = {
   readonly email?: string | null;
   readonly type?: string | null;
   readonly accreditation?: string | null;
-  readonly ranking?: number | null;
-  readonly programs?: (string | null)[] | null;
-  readonly departments?: (string | null)[] | null;
-  readonly requirements?: (string | null)[] | null;
+  readonly weather?: string | null;
+  readonly departments?: (Departments | null)[] | keyof typeof Departments | null;
+  readonly price?: number | null;
   readonly enrollment?: number | null;
   readonly scholarships?: (string | null)[] | null;
-  readonly facilities?: (string | null)[] | null;
+  readonly requirements?: (string | null)[] | null;
   readonly stuff?: number | null;
+  readonly facilities?: (string | null)[] | null;
+  readonly programs?: (string | null)[] | null;
+  readonly acceptance_rate?: number | null;
+  readonly graduation_rate?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -206,11 +316,12 @@ type LazyUniItem = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly ranking?: number | null;
   readonly name?: string | null;
+  readonly region?: string | null;
+  readonly city?: string | null;
+  readonly country?: string | null;
   readonly photo?: string | null;
-  readonly location?: string | null;
-  readonly price?: number | null;
-  readonly weather?: string | null;
   readonly description?: string | null;
   readonly address?: string | null;
   readonly website?: string | null;
@@ -218,14 +329,17 @@ type LazyUniItem = {
   readonly email?: string | null;
   readonly type?: string | null;
   readonly accreditation?: string | null;
-  readonly ranking?: number | null;
-  readonly programs?: (string | null)[] | null;
-  readonly departments?: (string | null)[] | null;
-  readonly requirements?: (string | null)[] | null;
+  readonly weather?: string | null;
+  readonly departments?: (Departments | null)[] | keyof typeof Departments | null;
+  readonly price?: number | null;
   readonly enrollment?: number | null;
   readonly scholarships?: (string | null)[] | null;
-  readonly facilities?: (string | null)[] | null;
+  readonly requirements?: (string | null)[] | null;
   readonly stuff?: number | null;
+  readonly facilities?: (string | null)[] | null;
+  readonly programs?: (string | null)[] | null;
+  readonly acceptance_rate?: number | null;
+  readonly graduation_rate?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

@@ -14,7 +14,6 @@ import {
   Grid,
   Icon,
   ScrollView,
-  SelectField,
   Text,
   TextField,
   useTheme,
@@ -303,41 +302,6 @@ export default function UniItemCreateForm(props) {
   const facilitiesRef = React.createRef();
   const [currentProgramsValue, setCurrentProgramsValue] = React.useState("");
   const programsRef = React.createRef();
-  const getDisplayValue = {
-    departments: (r) => {
-      const enumDisplayValueMap = {
-        BIOLOGY: "Biology",
-        COMPUTER_SCIENCE: "Computer science",
-        CHEMISTRY: "Chemistry",
-        PHYSICS: "Physics",
-        MATHEMATICS: "Mathematics",
-        PSYCHOLOGY: "Psychology",
-        ENGLISH: "English",
-        ECONOMICS: "Economics",
-        HISTORY: "History",
-        POLITICAL_SCIENCE: "Political science",
-        SOCIOLOGY: "Sociology",
-        ANTHROPOLOGY: "Anthropology",
-        BUSINESS_ADMINISTRATION: "Business administration",
-        EDUCATION: "Education",
-        ENGINEERING: "Engineering",
-        FINE_ARTS: "Fine arts",
-        MUSIC: "Music",
-        ARCHITECTURE: "Architecture",
-        HEALTH_SCIENCES: "Health sciences",
-        LINGUISTICS: "Linguistics",
-        COMMUNICATION: "Communication",
-        SOCIAL_WORK: "Social work",
-        PUBLIC_HEALTH: "Public health",
-        INTERNATIONAL_RELATIONS: "International relations",
-        CULTURAL_STUDIES: "Cultural studies",
-        RELIGIOUS_STUDIES: "Religious studies",
-        FILM_STUDIES: "Film studies",
-        PHILOSOPHY: "Philosophy",
-      };
-      return enumDisplayValueMap[r];
-    },
-  };
   const validations = {
     ranking: [],
     name: [],
@@ -1163,15 +1127,14 @@ export default function UniItemCreateForm(props) {
         items={departments}
         hasError={errors?.departments?.hasError}
         errorMessage={errors?.departments?.errorMessage}
-        getBadgeText={getDisplayValue.departments}
         setFieldValue={setCurrentDepartmentsValue}
         inputFieldRef={departmentsRef}
         defaultFieldValue={""}
       >
-        <SelectField
+        <TextField
           label="Departments"
-          placeholder="Please select an option"
-          isDisabled={false}
+          isRequired={false}
+          isReadOnly={false}
           value={currentDepartmentsValue}
           onChange={(e) => {
             let { value } = e.target;
@@ -1188,148 +1151,7 @@ export default function UniItemCreateForm(props) {
           ref={departmentsRef}
           labelHidden={true}
           {...getOverrideProps(overrides, "departments")}
-        >
-          <option
-            children="Biology"
-            value="BIOLOGY"
-            {...getOverrideProps(overrides, "departmentsoption0")}
-          ></option>
-          <option
-            children="Computer science"
-            value="COMPUTER_SCIENCE"
-            {...getOverrideProps(overrides, "departmentsoption1")}
-          ></option>
-          <option
-            children="Chemistry"
-            value="CHEMISTRY"
-            {...getOverrideProps(overrides, "departmentsoption2")}
-          ></option>
-          <option
-            children="Physics"
-            value="PHYSICS"
-            {...getOverrideProps(overrides, "departmentsoption3")}
-          ></option>
-          <option
-            children="Mathematics"
-            value="MATHEMATICS"
-            {...getOverrideProps(overrides, "departmentsoption4")}
-          ></option>
-          <option
-            children="Psychology"
-            value="PSYCHOLOGY"
-            {...getOverrideProps(overrides, "departmentsoption5")}
-          ></option>
-          <option
-            children="English"
-            value="ENGLISH"
-            {...getOverrideProps(overrides, "departmentsoption6")}
-          ></option>
-          <option
-            children="Economics"
-            value="ECONOMICS"
-            {...getOverrideProps(overrides, "departmentsoption7")}
-          ></option>
-          <option
-            children="History"
-            value="HISTORY"
-            {...getOverrideProps(overrides, "departmentsoption8")}
-          ></option>
-          <option
-            children="Political science"
-            value="POLITICAL_SCIENCE"
-            {...getOverrideProps(overrides, "departmentsoption9")}
-          ></option>
-          <option
-            children="Sociology"
-            value="SOCIOLOGY"
-            {...getOverrideProps(overrides, "departmentsoption10")}
-          ></option>
-          <option
-            children="Anthropology"
-            value="ANTHROPOLOGY"
-            {...getOverrideProps(overrides, "departmentsoption11")}
-          ></option>
-          <option
-            children="Business administration"
-            value="BUSINESS_ADMINISTRATION"
-            {...getOverrideProps(overrides, "departmentsoption12")}
-          ></option>
-          <option
-            children="Education"
-            value="EDUCATION"
-            {...getOverrideProps(overrides, "departmentsoption13")}
-          ></option>
-          <option
-            children="Engineering"
-            value="ENGINEERING"
-            {...getOverrideProps(overrides, "departmentsoption14")}
-          ></option>
-          <option
-            children="Fine arts"
-            value="FINE_ARTS"
-            {...getOverrideProps(overrides, "departmentsoption15")}
-          ></option>
-          <option
-            children="Music"
-            value="MUSIC"
-            {...getOverrideProps(overrides, "departmentsoption16")}
-          ></option>
-          <option
-            children="Architecture"
-            value="ARCHITECTURE"
-            {...getOverrideProps(overrides, "departmentsoption17")}
-          ></option>
-          <option
-            children="Health sciences"
-            value="HEALTH_SCIENCES"
-            {...getOverrideProps(overrides, "departmentsoption18")}
-          ></option>
-          <option
-            children="Linguistics"
-            value="LINGUISTICS"
-            {...getOverrideProps(overrides, "departmentsoption19")}
-          ></option>
-          <option
-            children="Communication"
-            value="COMMUNICATION"
-            {...getOverrideProps(overrides, "departmentsoption20")}
-          ></option>
-          <option
-            children="Social work"
-            value="SOCIAL_WORK"
-            {...getOverrideProps(overrides, "departmentsoption21")}
-          ></option>
-          <option
-            children="Public health"
-            value="PUBLIC_HEALTH"
-            {...getOverrideProps(overrides, "departmentsoption22")}
-          ></option>
-          <option
-            children="International relations"
-            value="INTERNATIONAL_RELATIONS"
-            {...getOverrideProps(overrides, "departmentsoption23")}
-          ></option>
-          <option
-            children="Cultural studies"
-            value="CULTURAL_STUDIES"
-            {...getOverrideProps(overrides, "departmentsoption24")}
-          ></option>
-          <option
-            children="Religious studies"
-            value="RELIGIOUS_STUDIES"
-            {...getOverrideProps(overrides, "departmentsoption25")}
-          ></option>
-          <option
-            children="Film studies"
-            value="FILM_STUDIES"
-            {...getOverrideProps(overrides, "departmentsoption26")}
-          ></option>
-          <option
-            children="Philosophy"
-            value="PHILOSOPHY"
-            {...getOverrideProps(overrides, "departmentsoption27")}
-          ></option>
-        </SelectField>
+        ></TextField>
       </ArrayField>
       <TextField
         label="Price"

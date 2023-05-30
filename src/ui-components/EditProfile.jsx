@@ -7,16 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Button,
-  Divider,
-  Flex,
-  Icon,
-  Image,
-  Text,
-  TextField,
-  View,
-} from "@aws-amplify/ui-react";
+import { Divider, Flex, Icon, Image, Text, View } from "@aws-amplify/ui-react";
 export default function EditProfile(props) {
   const { overrides, ...rest } = props;
   return (
@@ -57,7 +48,7 @@ export default function EditProfile(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Edit Profile29766913")}
+          {...getOverrideProps(overrides, "Edit Profile36722716")}
         >
           <View
             width="24px"
@@ -114,7 +105,7 @@ export default function EditProfile(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Edit Profile"
-            {...getOverrideProps(overrides, "Edit Profile29766916")}
+            {...getOverrideProps(overrides, "Edit Profile36722719")}
           ></Text>
         </Flex>
         <Divider
@@ -124,7 +115,7 @@ export default function EditProfile(props) {
           alignSelf="stretch"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider29766917")}
+          {...getOverrideProps(overrides, "Divider36722720")}
         ></Divider>
         <Flex
           gap="16px"
@@ -189,65 +180,37 @@ export default function EditProfile(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Forms")}
         >
-          <TextField
+          <Flex
             width="unset"
             height="unset"
-            label="Name"
-            placeholder="John Doe"
-            shrink="0"
-            alignSelf="stretch"
-            size="default"
-            isDisabled={false}
-            labelHidden={false}
-            variation="default"
-            {...getOverrideProps(overrides, "TextField29766922")}
-          ></TextField>
-          <TextField
+            {...getOverrideProps(overrides, "TextField36722725")}
+          ></Flex>
+          <Flex
             width="unset"
             height="unset"
-            label="Location"
-            placeholder="Seattle, WA"
-            shrink="0"
-            alignSelf="stretch"
-            size="default"
-            isDisabled={false}
-            labelHidden={false}
-            variation="default"
-            {...getOverrideProps(overrides, "TextField29766923")}
-          ></TextField>
-          <TextField
+            {...getOverrideProps(overrides, "TextField36732753")}
+          ></Flex>
+          <Flex
             width="unset"
             height="unset"
-            label="Email"
-            placeholder="john.doe@awsamplify.com"
-            shrink="0"
-            alignSelf="stretch"
-            size="default"
-            isDisabled={false}
-            labelHidden={false}
-            variation="default"
-            {...getOverrideProps(overrides, "TextField29766924")}
-          ></TextField>
+            {...getOverrideProps(overrides, "TextField36722726")}
+          ></Flex>
+          <Flex
+            width="unset"
+            height="unset"
+            {...getOverrideProps(overrides, "TextField36722727")}
+          ></Flex>
         </Flex>
-        <Divider
+        <View
           width="unset"
           height="1px"
-          shrink="0"
-          alignSelf="stretch"
-          size="small"
-          orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider29766925")}
-        ></Divider>
-        <Button
+          {...getOverrideProps(overrides, "Divider36722728")}
+        ></View>
+        <Flex
           width="unset"
           height="unset"
-          shrink="0"
-          size="default"
-          isDisabled={false}
-          variation="primary"
-          children="Save"
           {...getOverrideProps(overrides, "Button")}
-        ></Button>
+        ></Flex>
       </Flex>
     </Flex>
   );

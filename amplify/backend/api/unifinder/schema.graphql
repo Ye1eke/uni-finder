@@ -107,7 +107,7 @@ type UniItem @model @auth(rules: [{allow: public}]) {
   type: String
   accreditation: String
   weather: String
-  departments: [Departments]
+  departments: [String]
   price: Int
   enrollment: Int
   scholarships: [String]

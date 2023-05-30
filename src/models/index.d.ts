@@ -296,7 +296,7 @@ type EagerUniItem = {
   readonly type?: string | null;
   readonly accreditation?: string | null;
   readonly weather?: string | null;
-  readonly departments?: (Departments | null)[] | keyof typeof Departments | null;
+  readonly departments?: (string | null)[] | null;
   readonly price?: number | null;
   readonly enrollment?: number | null;
   readonly scholarships?: (string | null)[] | null;
@@ -330,7 +330,7 @@ type LazyUniItem = {
   readonly type?: string | null;
   readonly accreditation?: string | null;
   readonly weather?: string | null;
-  readonly departments?: (Departments | null)[] | keyof typeof Departments | null;
+  readonly departments?: (string | null)[] | null;
   readonly price?: number | null;
   readonly enrollment?: number | null;
   readonly scholarships?: (string | null)[] | null;

@@ -670,9 +670,7 @@ export const schema = {
                 "departments": {
                     "name": "departments",
                     "isArray": true,
-                    "type": {
-                        "enum": "Departments"
-                    },
+                    "type": "String",
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true
@@ -933,5 +931,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.2",
-    "version": "cbf40118ddf5e47d12a71b107d127ed3"
+    "version": "270fdd4f6c32cd7b32962ec0443dab0c"
 };

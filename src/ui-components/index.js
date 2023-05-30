@@ -9,6 +9,7 @@ export { default as ContactUs } from "./ContactUs";
 export { default as MyIcon } from "./MyIcon";
 export { default as Features4x1 } from "./Features4x1";
 export { default as SocialPostCollection } from "./SocialPostCollection";
+export { default as EditProfile } from "./EditProfile";
 export { default as UnisCardCollection } from "./UnisCardCollection";
 export { default as ProductDetail } from "./ProductDetail";
 export { default as ActionCard } from "./ActionCard";

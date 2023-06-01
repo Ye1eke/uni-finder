@@ -22,7 +22,7 @@ export default function ActionCard(props) {
       gap="0"
       direction="column"
       width="320px"
-      height="unset"
+      height="450px"
       justifyContent="center"
       alignItems="flex-start"
       position="relative"
@@ -33,21 +33,24 @@ export default function ActionCard(props) {
     >
       <Image
         width="unset"
-        height="279px"
+        height="unset"
         display="block"
         gap="unset"
         alignItems="unset"
         justifyContent="unset"
-        shrink="0"
+        grow="1"
+        shrink="1"
+        basis="0"
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
         objectFit="cover"
         src={uniItem?.photo}
+        loading="lazy"
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
-        gap="16px"
+        gap="8px"
         direction="column"
         width="unset"
         height="unset"
@@ -56,11 +59,11 @@ export default function ActionCard(props) {
         shrink="0"
         alignSelf="stretch"
         position="relative"
-        padding="16px 16px 16px 16px"
+        padding="16px 16px 20px 16px"
         {...getOverrideProps(overrides, "Card Area")}
       >
         <Flex
-          gap="8px"
+          gap="20px"
           direction="column"
           width="unset"
           height="unset"
@@ -70,12 +73,48 @@ export default function ActionCard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Main Text")}
+          {...getOverrideProps(overrides, "Main Text29766754")}
         >
           <Text
             fontFamily="Inter"
             fontSize="16px"
             fontWeight="700"
+            color="rgba(13,26,38,1)"
+            lineHeight="20px"
+            textAlign="left"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="40px"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            alignSelf="stretch"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children={uniItem?.name}
+            {...getOverrideProps(overrides, "Uni name")}
+          ></Text>
+        </Flex>
+        <Flex
+          gap="20px"
+          direction="column"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Main Text36852479")}
+        >
+          <Text
+            fontFamily="Inter"
+            fontSize="16px"
+            fontWeight="400"
             color="rgba(13,26,38,1)"
             lineHeight="20px"
             textAlign="left"
@@ -91,8 +130,8 @@ export default function ActionCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={uniItem?.name}
-            {...getOverrideProps(overrides, "Uni name")}
+            children={`${"#"}${uniItem?.ranking}`}
+            {...getOverrideProps(overrides, "Ranking")}
           ></Text>
         </Flex>
         <Button
@@ -100,6 +139,7 @@ export default function ActionCard(props) {
           height="unset"
           shrink="0"
           alignSelf="stretch"
+          backgroundColor="rgba(252,222,103,1)"
           size="large"
           isDisabled={false}
           variation="primary"

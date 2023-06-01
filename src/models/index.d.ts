@@ -2,37 +2,6 @@ import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
 
-export enum Departments {
-  BIOLOGY = "BIOLOGY",
-  COMPUTER_SCIENCE = "COMPUTER_SCIENCE",
-  CHEMISTRY = "CHEMISTRY",
-  PHYSICS = "PHYSICS",
-  MATHEMATICS = "MATHEMATICS",
-  PSYCHOLOGY = "PSYCHOLOGY",
-  ENGLISH = "ENGLISH",
-  ECONOMICS = "ECONOMICS",
-  HISTORY = "HISTORY",
-  POLITICAL_SCIENCE = "POLITICAL_SCIENCE",
-  SOCIOLOGY = "SOCIOLOGY",
-  ANTHROPOLOGY = "ANTHROPOLOGY",
-  BUSINESS_ADMINISTRATION = "BUSINESS_ADMINISTRATION",
-  EDUCATION = "EDUCATION",
-  ENGINEERING = "ENGINEERING",
-  FINE_ARTS = "FINE_ARTS",
-  MUSIC = "MUSIC",
-  ARCHITECTURE = "ARCHITECTURE",
-  HEALTH_SCIENCES = "HEALTH_SCIENCES",
-  LINGUISTICS = "LINGUISTICS",
-  COMMUNICATION = "COMMUNICATION",
-  SOCIAL_WORK = "SOCIAL_WORK",
-  PUBLIC_HEALTH = "PUBLIC_HEALTH",
-  INTERNATIONAL_RELATIONS = "INTERNATIONAL_RELATIONS",
-  CULTURAL_STUDIES = "CULTURAL_STUDIES",
-  RELIGIOUS_STUDIES = "RELIGIOUS_STUDIES",
-  FILM_STUDIES = "FILM_STUDIES",
-  PHILOSOPHY = "PHILOSOPHY"
-}
-
 export enum Region {
   EUROPE = "EUROPE",
   ASIA = "ASIA",
@@ -44,6 +13,72 @@ export enum Region {
 
 
 
+type EagerUserActivity = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<UserActivity, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userSub?: string | null;
+  readonly answeredQ?: (string | null)[] | null;
+  readonly Questions?: (UserActivityQuestion | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyUserActivity = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<UserActivity, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userSub?: string | null;
+  readonly answeredQ?: (string | null)[] | null;
+  readonly Questions: AsyncCollection<UserActivityQuestion>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type UserActivity = LazyLoading extends LazyLoadingDisabled ? EagerUserActivity : LazyUserActivity
+
+export declare const UserActivity: (new (init: ModelInit<UserActivity>) => UserActivity) & {
+  copyOf(source: UserActivity, mutator: (draft: MutableModel<UserActivity>) => MutableModel<UserActivity> | void): UserActivity;
+}
+
+type EagerQuestion = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Question, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly question?: string | null;
+  readonly wrongAnswers?: (string | null)[] | null;
+  readonly users?: (UserActivityQuestion | null)[] | null;
+  readonly correctAnswer?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyQuestion = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Question, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly question?: string | null;
+  readonly wrongAnswers?: (string | null)[] | null;
+  readonly users: AsyncCollection<UserActivityQuestion>;
+  readonly correctAnswer?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Question = LazyLoading extends LazyLoadingDisabled ? EagerQuestion : LazyQuestion
+
+export declare const Question: (new (init: ModelInit<Question>) => Question) & {
+  copyOf(source: Question, mutator: (draft: MutableModel<Question>) => MutableModel<Question> | void): Question;
+}
+
 type EagerPoint = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Point, 'id'>;
@@ -52,6 +87,7 @@ type EagerPoint = {
   readonly id: string;
   readonly userSub?: string | null;
   readonly points?: number | null;
+  readonly username?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -64,6 +100,7 @@ type LazyPoint = {
   readonly id: string;
   readonly userSub?: string | null;
   readonly points?: number | null;
+  readonly username?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -306,6 +343,7 @@ type EagerUniItem = {
   readonly programs?: (string | null)[] | null;
   readonly acceptance_rate?: number | null;
   readonly graduation_rate?: number | null;
+  readonly isBolashakPartner?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -340,6 +378,7 @@ type LazyUniItem = {
   readonly programs?: (string | null)[] | null;
   readonly acceptance_rate?: number | null;
   readonly graduation_rate?: number | null;
+  readonly isBolashakPartner?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -348,6 +387,40 @@ export declare type UniItem = LazyLoading extends LazyLoadingDisabled ? EagerUni
 
 export declare const UniItem: (new (init: ModelInit<UniItem>) => UniItem) & {
   copyOf(source: UniItem, mutator: (draft: MutableModel<UniItem>) => MutableModel<UniItem> | void): UniItem;
+}
+
+type EagerUserActivityQuestion = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<UserActivityQuestion, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userActivityId?: string | null;
+  readonly questionId?: string | null;
+  readonly userActivity: UserActivity;
+  readonly question: Question;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyUserActivityQuestion = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<UserActivityQuestion, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userActivityId?: string | null;
+  readonly questionId?: string | null;
+  readonly userActivity: AsyncItem<UserActivity>;
+  readonly question: AsyncItem<Question>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type UserActivityQuestion = LazyLoading extends LazyLoadingDisabled ? EagerUserActivityQuestion : LazyUserActivityQuestion
+
+export declare const UserActivityQuestion: (new (init: ModelInit<UserActivityQuestion>) => UserActivityQuestion) & {
+  copyOf(source: UserActivityQuestion, mutator: (draft: MutableModel<UserActivityQuestion>) => MutableModel<UserActivityQuestion> | void): UserActivityQuestion;
 }
 
 type EagerBadgeUserBadge = {

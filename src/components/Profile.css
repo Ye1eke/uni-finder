@@ -132,7 +132,6 @@ p.typewriter {
   display: block;
   width: 100%;
   color: #000;
-  padding: 20px;
 }
 .banner__details {
   display: flex;
@@ -141,4 +140,18 @@ p.typewriter {
 
 #btn__set {
   margin-right: 10px;
+}
+
+#banner__prof {
+  min-height: 600px;
+}
+
+#btn_hidy {
+  position: absolute;
+  z-index: 11;
+  top: 0;
+  margin-top: 20px;
+}
+
+.acc__btn {
 }

@@ -14,6 +14,7 @@ import {
   Grid,
   Icon,
   ScrollView,
+  SwitchField,
   Text,
   TextField,
   useTheme,
@@ -216,6 +217,7 @@ export default function UniItemCreateForm(props) {
     programs: [],
     acceptance_rate: "",
     graduation_rate: "",
+    isBolashakPartner: false,
   };
   const [ranking, setRanking] = React.useState(initialValues.ranking);
   const [name, setName] = React.useState(initialValues.name);
@@ -255,6 +257,9 @@ export default function UniItemCreateForm(props) {
   const [graduation_rate, setGraduation_rate] = React.useState(
     initialValues.graduation_rate
   );
+  const [isBolashakPartner, setIsBolashakPartner] = React.useState(
+    initialValues.isBolashakPartner
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setRanking(initialValues.ranking);
@@ -286,6 +291,7 @@ export default function UniItemCreateForm(props) {
     setCurrentProgramsValue("");
     setAcceptance_rate(initialValues.acceptance_rate);
     setGraduation_rate(initialValues.graduation_rate);
+    setIsBolashakPartner(initialValues.isBolashakPartner);
     setErrors({});
   };
   const [currentDepartmentsValue, setCurrentDepartmentsValue] =
@@ -327,6 +333,7 @@ export default function UniItemCreateForm(props) {
     programs: [],
     acceptance_rate: [],
     graduation_rate: [],
+    isBolashakPartner: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -378,6 +385,7 @@ export default function UniItemCreateForm(props) {
           programs,
           acceptance_rate,
           graduation_rate,
+          isBolashakPartner,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -460,6 +468,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.ranking ?? value;
@@ -507,6 +516,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -554,6 +564,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.region ?? value;
@@ -601,6 +612,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -648,6 +660,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.country ?? value;
@@ -695,6 +708,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.photo ?? value;
@@ -742,6 +756,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -789,6 +804,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.address ?? value;
@@ -836,6 +852,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.website ?? value;
@@ -884,6 +901,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
@@ -931,6 +949,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -978,6 +997,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.type ?? value;
@@ -1025,6 +1045,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.accreditation ?? value;
@@ -1072,6 +1093,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.weather ?? value;
@@ -1115,6 +1137,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             values = result?.departments ?? values;
@@ -1190,6 +1213,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.price ?? value;
@@ -1241,6 +1265,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.enrollment ?? value;
@@ -1284,6 +1309,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             values = result?.scholarships ?? values;
@@ -1351,6 +1377,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             values = result?.requirements ?? values;
@@ -1426,6 +1453,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.stuff ?? value;
@@ -1469,6 +1497,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             values = result?.facilities ?? values;
@@ -1536,6 +1565,7 @@ export default function UniItemCreateForm(props) {
               programs: values,
               acceptance_rate,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             values = result?.programs ?? values;
@@ -1609,6 +1639,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate: value,
               graduation_rate,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.acceptance_rate ?? value;
@@ -1660,6 +1691,7 @@ export default function UniItemCreateForm(props) {
               programs,
               acceptance_rate,
               graduation_rate: value,
+              isBolashakPartner,
             };
             const result = onChange(modelFields);
             value = result?.graduation_rate ?? value;
@@ -1674,6 +1706,56 @@ export default function UniItemCreateForm(props) {
         hasError={errors.graduation_rate?.hasError}
         {...getOverrideProps(overrides, "graduation_rate")}
       ></TextField>
+      <SwitchField
+        label="Is bolashak partner"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={isBolashakPartner}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region,
+              city,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              facilities,
+              programs,
+              acceptance_rate,
+              graduation_rate,
+              isBolashakPartner: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.isBolashakPartner ?? value;
+          }
+          if (errors.isBolashakPartner?.hasError) {
+            runValidationTasks("isBolashakPartner", value);
+          }
+          setIsBolashakPartner(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("isBolashakPartner", isBolashakPartner)
+        }
+        errorMessage={errors.isBolashakPartner?.errorMessage}
+        hasError={errors.isBolashakPartner?.hasError}
+        {...getOverrideProps(overrides, "isBolashakPartner")}
+      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

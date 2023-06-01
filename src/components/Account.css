@@ -5,6 +5,15 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     color: #fff;
     padding: 20px;
+
+
+
+    position: absolute;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
   }
   
   .account-edit__header {
@@ -51,6 +60,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
   }
   
   .account-edit__profile-image input {
@@ -91,3 +101,59 @@
   .account-edit__save:hover {
     background-color: #fbd73e;
   }
+
+  .account-edit__profile-image-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #202225;
+    overflow: hidden;
+  }
+  
+  .account-edit__profile-image-frame span {
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .account-edit__profile-image-frame img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .account-edit__profile-image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .account-edit__profile-image-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .account-edit__profile-image-remove:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  

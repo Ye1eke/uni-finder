@@ -7,11 +7,11 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Unis from './components/Unis';
 import UniAbout from './components/UniAbout';
-// import { createBrowserRouter, BrowserRouter  as Router, RouterProvider } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './components/Profile';
 import ArticleItem from './components/ArticleItem';
 import Article from './components/Article';
+import Leaderboard from './components/Leaderboard';
 
 Auth.configure(awsconfig);
 
@@ -30,6 +30,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/article/:id" element={<ArticleItem />}/> 
           <Route path="/article/" element={<Article />}/> 
+          <Route path="/profile/leaderboard" element={<Leaderboard />}/>
         </Routes>
         <Footer />
       </div>

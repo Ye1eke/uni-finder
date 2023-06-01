@@ -26,9 +26,11 @@ export default function PointUpdateForm(props) {
   const initialValues = {
     userSub: "",
     points: "",
+    username: "",
   };
   const [userSub, setUserSub] = React.useState(initialValues.userSub);
   const [points, setPoints] = React.useState(initialValues.points);
+  const [username, setUsername] = React.useState(initialValues.username);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = pointRecord
@@ -36,6 +38,7 @@ export default function PointUpdateForm(props) {
       : initialValues;
     setUserSub(cleanValues.userSub);
     setPoints(cleanValues.points);
+    setUsername(cleanValues.username);
     setErrors({});
   };
   const [pointRecord, setPointRecord] = React.useState(pointModelProp);
@@ -52,6 +55,7 @@ export default function PointUpdateForm(props) {
   const validations = {
     userSub: [],
     points: [],
+    username: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -81,6 +85,7 @@ export default function PointUpdateForm(props) {
         let modelFields = {
           userSub,
           points,
+          username,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -138,6 +143,7 @@ export default function PointUpdateForm(props) {
             const modelFields = {
               userSub: value,
               points,
+              username,
             };
             const result = onChange(modelFields);
             value = result?.userSub ?? value;
@@ -167,6 +173,7 @@ export default function PointUpdateForm(props) {
             const modelFields = {
               userSub,
               points: value,
+              username,
             };
             const result = onChange(modelFields);
             value = result?.points ?? value;
@@ -180,6 +187,32 @@ export default function PointUpdateForm(props) {
         errorMessage={errors.points?.errorMessage}
         hasError={errors.points?.hasError}
         {...getOverrideProps(overrides, "points")}
+      ></TextField>
+      <TextField
+        label="Username"
+        isRequired={false}
+        isReadOnly={false}
+        value={username}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              userSub,
+              points,
+              username: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.username ?? value;
+          }
+          if (errors.username?.hasError) {
+            runValidationTasks("username", value);
+          }
+          setUsername(value);
+        }}
+        onBlur={() => runValidationTasks("username", username)}
+        errorMessage={errors.username?.errorMessage}
+        hasError={errors.username?.hasError}
+        {...getOverrideProps(overrides, "username")}
       ></TextField>
       <Flex
         justifyContent="space-between"

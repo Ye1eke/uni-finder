@@ -6,6 +6,8 @@ import { DataStore } from 'aws-amplify';
 import { UniItem, FavoriteUni, Point, BadgeUser, BadgeUserBadge, Badge } from '../models';
 import { Auth } from 'aws-amplify';
 import './UniAbout.css'
+import Quiz from './Quiz';
+import QuestionComponent from './QuestionComponent';
 function UniAbout({ user }) {
     const { id } = useParams();
     const [uni, setUni] = useState(null);
@@ -53,6 +55,7 @@ function UniAbout({ user }) {
     const handleAddToFavorites = async () => {
       try {
          const existingFavorite = favorites.find(favorite => favorite.uniId === id);
+         
         if (existingFavorite) {
           await DataStore.delete(FavoriteUni, existingFavorite.id);
           const updatedFavorites = favorites.filter(favorite => favorite.id !== existingFavorite.id);
@@ -61,11 +64,15 @@ function UniAbout({ user }) {
           const updatedPoints = points - 50;
           setPoints(updatedPoints);
           setAnimationValue(-50);
+          const userAttributes = await Auth.currentAuthenticatedUser();
+          const { attributes } = userAttributes;
           // Update the Point model with the deducted points
           const userPoints = await DataStore.query(Point, c => c.userSub.eq(user.attributes.sub));
           if (userPoints.length > 0) {
             const updatedUserPoints = Point.copyOf(userPoints[0], updated => {
               updated.points = updatedPoints;
+              updated.username = attributes['custom:username'];
+              
             });
             await DataStore.save(updatedUserPoints);
             console.log('Points deducted successfully.');
@@ -142,6 +149,7 @@ function UniAbout({ user }) {
     const isFavorite = favorites.some(favorite => favorite.uniId === id);
 
     if (!uni) {
+      
         return <div>loading</div>
     }
     
@@ -158,7 +166,7 @@ function UniAbout({ user }) {
           <div className='banner__details'>
             <div className='banner__wrap__uni'>
             <h1>{uni.name}</h1>
-            <p>{uni.region + ' ' + uni.country + ' ' + uni.city}</p>
+            <p>{uni.region + ' - ' + uni.country + ' - ' + uni.city}</p>
             <p>{'#'+uni.ranking}</p>
             
             {!isFavorite ? (      
@@ -235,6 +243,10 @@ function UniAbout({ user }) {
           <h3>Accreditation</h3>
           <p>{uni.accreditation}</p>
           
+          <div>
+            <Quiz/>
+          </div>
+
         </div>
         <div>
         <div className='uni__side'>

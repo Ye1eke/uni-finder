@@ -1,5 +1,178 @@
 export const schema = {
     "models": {
+        "UserActivity": {
+            "name": "UserActivity",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userSub": {
+                    "name": "userSub",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "answeredQ": {
+                    "name": "answeredQ",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "Questions": {
+                    "name": "Questions",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserActivityQuestion"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "userActivity"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserActivities",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Question": {
+            "name": "Question",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "question": {
+                    "name": "question",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "wrongAnswers": {
+                    "name": "wrongAnswers",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "users": {
+                    "name": "users",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserActivityQuestion"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "question"
+                        ]
+                    }
+                },
+                "correctAnswer": {
+                    "name": "correctAnswer",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Questions",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Point": {
             "name": "Point",
             "fields": {
@@ -21,6 +194,13 @@ export const schema = {
                     "name": "points",
                     "isArray": false,
                     "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -742,6 +922,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "isBolashakPartner": {
+                    "name": "isBolashakPartner",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -779,6 +966,104 @@ export const schema = {
                                     "read"
                                 ]
                             }
+                        ]
+                    }
+                }
+            ]
+        },
+        "UserActivityQuestion": {
+            "name": "UserActivityQuestion",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userActivityId": {
+                    "name": "userActivityId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "questionId": {
+                    "name": "questionId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userActivity": {
+                    "name": "userActivity",
+                    "isArray": false,
+                    "type": {
+                        "model": "UserActivity"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "userActivityId"
+                        ]
+                    }
+                },
+                "question": {
+                    "name": "question",
+                    "isArray": false,
+                    "type": {
+                        "model": "Question"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "questionId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserActivityQuestions",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUserActivity",
+                        "fields": [
+                            "userActivityId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byQuestion",
+                        "fields": [
+                            "questionId"
                         ]
                     }
                 }
@@ -884,39 +1169,6 @@ export const schema = {
         }
     },
     "enums": {
-        "Departments": {
-            "name": "Departments",
-            "values": [
-                "BIOLOGY",
-                "COMPUTER_SCIENCE",
-                "CHEMISTRY",
-                "PHYSICS",
-                "MATHEMATICS",
-                "PSYCHOLOGY",
-                "ENGLISH",
-                "ECONOMICS",
-                "HISTORY",
-                "POLITICAL_SCIENCE",
-                "SOCIOLOGY",
-                "ANTHROPOLOGY",
-                "BUSINESS_ADMINISTRATION",
-                "EDUCATION",
-                "ENGINEERING",
-                "FINE_ARTS",
-                "MUSIC",
-                "ARCHITECTURE",
-                "HEALTH_SCIENCES",
-                "LINGUISTICS",
-                "COMMUNICATION",
-                "SOCIAL_WORK",
-                "PUBLIC_HEALTH",
-                "INTERNATIONAL_RELATIONS",
-                "CULTURAL_STUDIES",
-                "RELIGIOUS_STUDIES",
-                "FILM_STUDIES",
-                "PHILOSOPHY"
-            ]
-        },
         "Region": {
             "name": "Region",
             "values": [
@@ -931,5 +1183,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.2",
-    "version": "270fdd4f6c32cd7b32962ec0443dab0c"
+    "version": "2bd7d4e1e72860c92792de44f20789e6"
 };

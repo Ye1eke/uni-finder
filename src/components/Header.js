@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Header.css'
 import { Link } from "react-router-dom";
 import {useAuthenticator } from '@aws-amplify/ui-react';
 
 function Header() {
     const { signOut } = useAuthenticator((context)=> [context.signOut]);
-  return (
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+    return (
     
     <div className='header'>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -19,21 +28,22 @@ function Header() {
                 {/* <a href='#'>About</a> */}
                 <Link to='/article'>Articles</Link>
                 <Link to='/uni'>Universities</Link>
+                <div className="header__dropdown" onMouseEnter={handleDropdownToggle} onMouseLeave={closeDropdown}>
                 <Link to='/profile'>Profile</Link>
-                {/* <span class="material-symbols-outlined">
-                search
-                </span> */}
+                    {isDropdownOpen && (
+                    <div className="dropdown-content">
+                      {/* Add dropdown content here */}
+                      <Link to="/profile/leaderboard">Leaderboard</Link>
+                    </div>
+                  )}
+                </div>
             </div>
-
-            {/* <div className='header__btns'>
-                <button className='btn log-in'>Sign in</button>
-                <button className='btn sign-up'>Create an account</button>
-            </div> */}
         
             <div className='header__btns'>
               
                 <button className='btn' onClick={signOut}>Sign out</button>
             </div>
+            
         </div>
       </div>
       

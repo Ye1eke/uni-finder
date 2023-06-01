@@ -1,38 +1,23 @@
-enum Departments {
-  BIOLOGY
-  COMPUTER_SCIENCE
-  CHEMISTRY
-  PHYSICS
-  MATHEMATICS
-  PSYCHOLOGY
-  ENGLISH
-  ECONOMICS
-  HISTORY
-  POLITICAL_SCIENCE
-  SOCIOLOGY
-  ANTHROPOLOGY
-  BUSINESS_ADMINISTRATION
-  EDUCATION
-  ENGINEERING
-  FINE_ARTS
-  MUSIC
-  ARCHITECTURE
-  HEALTH_SCIENCES
-  LINGUISTICS
-  COMMUNICATION
-  SOCIAL_WORK
-  PUBLIC_HEALTH
-  INTERNATIONAL_RELATIONS
-  CULTURAL_STUDIES
-  RELIGIOUS_STUDIES
-  FILM_STUDIES
-  PHILOSOPHY
+type UserActivity @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userSub: String
+  answeredQ: [String]
+  Questions: [Question] @manyToMany(relationName: "UserActivityQuestion")
+}
+
+type Question @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  question: String
+  wrongAnswers: [String]
+  users: [UserActivity] @manyToMany(relationName: "UserActivityQuestion")
+  correctAnswer: String
 }
 
 type Point @model @auth(rules: [{allow: public}]) {
   id: ID!
   userSub: String
   points: Int
+  username: String
 }
 
 enum Region {
@@ -117,5 +102,6 @@ type UniItem @model @auth(rules: [{allow: public}]) {
   programs: [String]
   acceptance_rate: Float
   graduation_rate: Float
+  isBolashakPartner: Boolean
 }
  

@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { UniItem } from "../models";
 export declare type ValidationResponse = {
@@ -38,6 +38,7 @@ export declare type UniItemUpdateFormInputValues = {
     programs?: string[];
     acceptance_rate?: number;
     graduation_rate?: number;
+    isBolashakPartner?: boolean;
 };
 export declare type UniItemUpdateFormValidationValues = {
     ranking?: ValidationFunction<number>;
@@ -64,6 +65,7 @@ export declare type UniItemUpdateFormValidationValues = {
     programs?: ValidationFunction<string>;
     acceptance_rate?: ValidationFunction<number>;
     graduation_rate?: ValidationFunction<number>;
+    isBolashakPartner?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type UniItemUpdateFormOverridesProps = {
@@ -92,6 +94,7 @@ export declare type UniItemUpdateFormOverridesProps = {
     programs?: PrimitiveOverrideProps<TextFieldProps>;
     acceptance_rate?: PrimitiveOverrideProps<TextFieldProps>;
     graduation_rate?: PrimitiveOverrideProps<TextFieldProps>;
+    isBolashakPartner?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type UniItemUpdateFormProps = React.PropsWithChildren<{
     overrides?: UniItemUpdateFormOverridesProps | undefined | null;

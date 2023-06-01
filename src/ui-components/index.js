@@ -5,17 +5,19 @@
  **************************************************************************/
 
 export { default as SocialPost } from "./SocialPost";
-export { default as ContactUs } from "./ContactUs";
 export { default as MyIcon } from "./MyIcon";
 export { default as Features4x1 } from "./Features4x1";
 export { default as SocialPostCollection } from "./SocialPostCollection";
-export { default as EditProfile } from "./EditProfile";
 export { default as UnisCardCollection } from "./UnisCardCollection";
 export { default as ProductDetail } from "./ProductDetail";
 export { default as ActionCard } from "./ActionCard";
 export { default as studioTheme } from "./studioTheme";
 export { default as ContactUsCreateForm } from "./ContactUsCreateForm";
 export { default as RecUni } from "./RecUni";
+export { default as UserActivityCreateForm } from "./UserActivityCreateForm";
+export { default as UserActivityUpdateForm } from "./UserActivityUpdateForm";
+export { default as QuestionCreateForm } from "./QuestionCreateForm";
+export { default as QuestionUpdateForm } from "./QuestionUpdateForm";
 export { default as PointCreateForm } from "./PointCreateForm";
 export { default as PointUpdateForm } from "./PointUpdateForm";
 export { default as RecommendUniUpdateForm } from "./RecommendUniUpdateForm";

@@ -5,40 +5,28 @@
     padding-top: 26px;
     position: relative;
     z-index: 13;
-}
-
-
-
-.header__wrapper {
+  }
+  
+  .header__wrapper {
     display: flex;
     align-items: center!important;
     justify-content: space-between;
-    
-}
-
-#header_logo {
+  }
+  
+  #header_logo {
     width: 150px;
-}
-
-.header__nav {
+  }
+  
+  .header__nav {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
     margin-bottom: 0;
     padding-left: 0;
-    
-}
-
-.header__nav > a {
-    /* color: #fff;
-    font-size: 16px;
-    letter-spacing: 2.29px;
-    line-height: 46px;
-    
-    position: relative;
-    text-transform: uppercase;
-    text-decoration: none; */
-
+  }
+  
+  .header__nav > a,
+  .header__dropdown > a {
     color: #f6f4e6;
     text-decoration: none;
     font-size: 1.2em;
@@ -47,33 +35,64 @@
     margin-right: 34px;
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
-}
-
-.header__nav > a:hover {
- color: #fcde67;
-}
-
+  }
   
-
-
-.material-symbols-outlined {
+  .header__nav > a:hover,
+  .header__dropdown > a:hover {
+    color: #fcde67;
+  }
+  
+  .header__dropdown {
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #030e12;
+    min-width: 160px;
+    border-radius: 4px;
+    padding: 8px 0;
+    z-index: 1;
+  }
+  
+  .header__dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content > a {
+    color: #f6f4e6;
+    text-decoration: none;
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: block;
+    padding: 8px 16px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .dropdown-content > a:hover {
+    color: #fcde67;
+  }
+  
+  .material-symbols-outlined {
     display: flex!important;
     align-items: center;
     cursor: pointer;
     color: #fff;
     font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 48
-}
-
-.header__btns {
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48;
+  }
+  
+  .header__btns {
     padding-left: 8px;
     padding-right: 8px;
-}
-
-.btn {
+  }
+  
+  .btn {
     background-color: #fcde67;
     color: #030e12;
     border-radius: 40px;
@@ -93,16 +112,15 @@
     vertical-align: middle;
     cursor: pointer;
     font-family: inherit;
-}
-
-.btn:hover {
+  }
+  
+  .btn:hover {
     background-color: #030e12;
     color: #fcde67;
-}
-
-.log-in {
+  }
+  
+  .log-in {
     left: -10px;
     position: relative;
-    
-
-}
+  }
+  

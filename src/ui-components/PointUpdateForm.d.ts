@@ -16,16 +16,19 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type PointUpdateFormInputValues = {
     userSub?: string;
     points?: number;
+    username?: string;
 };
 export declare type PointUpdateFormValidationValues = {
     userSub?: ValidationFunction<string>;
     points?: ValidationFunction<number>;
+    username?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type PointUpdateFormOverridesProps = {
     PointUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     userSub?: PrimitiveOverrideProps<TextFieldProps>;
     points?: PrimitiveOverrideProps<TextFieldProps>;
+    username?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type PointUpdateFormProps = React.PropsWithChildren<{
     overrides?: PointUpdateFormOverridesProps | undefined | null;

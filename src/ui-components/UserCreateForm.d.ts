@@ -12,31 +12,28 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type PointCreateFormInputValues = {
+export declare type UserCreateFormInputValues = {
     userSub?: string;
-    points?: number;
-    username?: string;
+    answeredQ?: string[];
 };
-export declare type PointCreateFormValidationValues = {
+export declare type UserCreateFormValidationValues = {
     userSub?: ValidationFunction<string>;
-    points?: ValidationFunction<number>;
-    username?: ValidationFunction<string>;
+    answeredQ?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type PointCreateFormOverridesProps = {
-    PointCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type UserCreateFormOverridesProps = {
+    UserCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     userSub?: PrimitiveOverrideProps<TextFieldProps>;
-    points?: PrimitiveOverrideProps<TextFieldProps>;
-    username?: PrimitiveOverrideProps<TextFieldProps>;
+    answeredQ?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type PointCreateFormProps = React.PropsWithChildren<{
-    overrides?: PointCreateFormOverridesProps | undefined | null;
+export declare type UserCreateFormProps = React.PropsWithChildren<{
+    overrides?: UserCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: PointCreateFormInputValues) => PointCreateFormInputValues;
-    onSuccess?: (fields: PointCreateFormInputValues) => void;
-    onError?: (fields: PointCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: PointCreateFormInputValues) => PointCreateFormInputValues;
-    onValidate?: PointCreateFormValidationValues;
+    onSubmit?: (fields: UserCreateFormInputValues) => UserCreateFormInputValues;
+    onSuccess?: (fields: UserCreateFormInputValues) => void;
+    onError?: (fields: UserCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: UserCreateFormInputValues) => UserCreateFormInputValues;
+    onValidate?: UserCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function PointCreateForm(props: PointCreateFormProps): React.ReactElement;
+export default function UserCreateForm(props: UserCreateFormProps): React.ReactElement;

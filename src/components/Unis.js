@@ -363,6 +363,7 @@ function Unis() {
                       value={minTuitionFee !== null ? minTuitionFee : 0}
                       onChange={handleMinTuitionFeeInput}
                     />
+                    
                     <div className='tuition__numb'>
                       <input
                         type='text'
@@ -387,7 +388,7 @@ function Unis() {
               </div>
             </div>
           </div>
-          <div className='container'>
+          <div className='container'> 
           <UnisCardCollection items={items}
             searchNoResultsFound={
               <Flex justifyContent="center">

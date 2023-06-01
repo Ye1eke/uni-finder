@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Profile.css';
 import Account from './Account';
+import Badges from './Badges';
 
 
 function SampleNextArrow(props) {
@@ -60,9 +61,6 @@ function Profile({ user}) {
   const [favorites, setFavorites] = useState([]);
   const [favoriteUniversities, setFavoriteUniversities] = useState([]);
   const slidesToShow = Math.min(3, favoriteUniversities.length);
-  const [points, setPoints] = useState(0);
-  const [showAnimation, setShowAnimation] = useState(false);
-  const [animationNumber, setAnimationNumber] = useState(0);
   const [recommendedUniversities, setRecommendedUniversities] = useState([]);
   const [showAccount, setShowAccount] = useState(false);
 
@@ -85,7 +83,6 @@ function Profile({ user}) {
   useEffect(() => {
     fetchUsername();
     fetchFavorites();
-    fetchPoints();
   }, []);
   
   
@@ -181,64 +178,15 @@ function Profile({ user}) {
       await Auth.updateUserAttributes(Auth.user, { 'custom:username': newUsername });
       
       setUsername(newUsername);
+      // Update the username in the Point model
+        const updatedPoint = await DataStore.query(Point, c => c.userSub.eq(user.attributes.sub));
+        if (updatedPoint.length > 0) {
+          const point = updatedPoint[0];
+          point.username = newUsername;
+          await DataStore.save(point);
+        }
     } catch (error) {
       console.log('Error updating username:', error);
-    }
-  };
-
-  
-  const fetchPoints = async () => {
-    try {
-      // Query the Point models associated with the current user's sub
-      const userPoints = await DataStore.query(Point, (c) =>
-        c.userSub.eq(user.attributes.sub)
-      );
-  
-      if (userPoints.length > 0) {
-        setPoints(userPoints[0].points); // Assuming only one Point model per user
-      }
-    } catch (error) {
-      console.log('Error fetching points:', error);
-    }
-  };
-
-
-  const handleUpdatePoints = async () => {
-    const newPoints = points + 10; // Example: Increase points by 10
-  
-    try {
-      // Query the Point model associated with the current user's sub
-      const userPoints = await DataStore.query(Point, (c) =>
-        c.userSub.eq(user.attributes.sub)
-      );
-  
-      if (userPoints.length > 0) {
-        const updatedPoints = Point.copyOf(userPoints[0], (updated) => {
-          updated.points = newPoints;
-        });
-  
-        await DataStore.save(updatedPoints);
-        setPoints(newPoints);
-        console.log('Points updated successfully.');
-      } else {
-        // Create a new Point model if it doesn't exist for the user
-        const newPoint = new Point({
-          userSub: user.attributes.sub,
-          points: newPoints,
-        });
-  
-        await DataStore.save(newPoint);
-        setPoints(newPoints);
-        console.log('Points created and updated successfully.');
-      }
-      setAnimationNumber(10); // Set the number to be displayed in the animation
-      setShowAnimation(true); // Show the animation
-  
-      setTimeout(() => {
-        setShowAnimation(false); // Hide the animation after a certain duration
-      }, 2000);
-    } catch (error) {
-      console.log('Error updating points:', error);
     }
   };
 
@@ -248,7 +196,7 @@ function Profile({ user}) {
 
   return (
     <div className="profile">
-      <div className='banner'>
+      <div id='banner__prof' className='banner'>
         <div  className='banner__image'>
             <img src={'images/banner2.jpg'} alt='banner'/>
 
@@ -257,6 +205,7 @@ function Profile({ user}) {
 
         <div className='container'>
           <div className='banner__details'>
+          
             <div className='banner__wrap'>
             <h1>{user.attributes['custom:username'] ? `Hi, ${user.attributes['custom:username']}` : 'Hi,...'} </h1>
             {!user.attributes['custom:username'] && (
@@ -265,31 +214,27 @@ function Profile({ user}) {
             </button>
             
           )}
+          
           <button className="btn" onClick={handleToggleAccount}>
+              
             {showAccount ? "Hide Account" : "Show Account"}
+            {showAccount && <div className='acc__btn'><Account /><button id="btn_hidy" className="btn" onClick={handleToggleAccount}>
+              Hide Account
+            </button></div>}
             </button>
-            <p>Your score: {points}</p>
-            <div className="animation-container">
-              {showAnimation && <div className="animation">+{animationNumber}</div>}
-            </div>
-              <button className="banner__button" onClick={handleUpdatePoints}>
-                Click me to get points
-              </button> 
+            
+            
 
             </div>
 
             <div className='banner__right'>
+              <Badges/>
             
-            {showAccount && <Account />}
             </div>
             </div>
         </div>
     </div>
-      {/* <Banner img="images/banner2.jpg" title={`Hi, ${user.attributes['custom:username']}`} subTitle="" /> */}
-      <div className="container">
-        {/* <button className="btn" onClick={handleUsernameChange} style={{ margin: "50px 0px" }}>
-          Change Username
-        </button> */}
+     <div className="container">
 
         <div className='favorites__container'>
           <h1>Your Favorite Universities</h1>

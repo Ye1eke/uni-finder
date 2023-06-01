@@ -2,37 +2,6 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
-const Departments = {
-  "BIOLOGY": "BIOLOGY",
-  "COMPUTER_SCIENCE": "COMPUTER_SCIENCE",
-  "CHEMISTRY": "CHEMISTRY",
-  "PHYSICS": "PHYSICS",
-  "MATHEMATICS": "MATHEMATICS",
-  "PSYCHOLOGY": "PSYCHOLOGY",
-  "ENGLISH": "ENGLISH",
-  "ECONOMICS": "ECONOMICS",
-  "HISTORY": "HISTORY",
-  "POLITICAL_SCIENCE": "POLITICAL_SCIENCE",
-  "SOCIOLOGY": "SOCIOLOGY",
-  "ANTHROPOLOGY": "ANTHROPOLOGY",
-  "BUSINESS_ADMINISTRATION": "BUSINESS_ADMINISTRATION",
-  "EDUCATION": "EDUCATION",
-  "ENGINEERING": "ENGINEERING",
-  "FINE_ARTS": "FINE_ARTS",
-  "MUSIC": "MUSIC",
-  "ARCHITECTURE": "ARCHITECTURE",
-  "HEALTH_SCIENCES": "HEALTH_SCIENCES",
-  "LINGUISTICS": "LINGUISTICS",
-  "COMMUNICATION": "COMMUNICATION",
-  "SOCIAL_WORK": "SOCIAL_WORK",
-  "PUBLIC_HEALTH": "PUBLIC_HEALTH",
-  "INTERNATIONAL_RELATIONS": "INTERNATIONAL_RELATIONS",
-  "CULTURAL_STUDIES": "CULTURAL_STUDIES",
-  "RELIGIOUS_STUDIES": "RELIGIOUS_STUDIES",
-  "FILM_STUDIES": "FILM_STUDIES",
-  "PHILOSOPHY": "PHILOSOPHY"
-};
-
 const Region = {
   "EUROPE": "EUROPE",
   "ASIA": "ASIA",
@@ -42,9 +11,11 @@ const Region = {
   "NORTHAMERICA": "NORTHAMERICA"
 };
 
-const { Point, RecommendUni, FavoriteUni, ContactUs, Article, BadgeUser, Badge, UniItem, BadgeUserBadge } = initSchema(schema);
+const { UserActivity, Question, Point, RecommendUni, FavoriteUni, ContactUs, Article, BadgeUser, Badge, UniItem, UserActivityQuestion, BadgeUserBadge } = initSchema(schema);
 
 export {
+  UserActivity,
+  Question,
   Point,
   RecommendUni,
   FavoriteUni,
@@ -53,7 +24,7 @@ export {
   BadgeUser,
   Badge,
   UniItem,
+  UserActivityQuestion,
   BadgeUserBadge,
-  Departments,
   Region
 };

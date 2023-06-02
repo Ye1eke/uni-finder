@@ -3,16 +3,15 @@ import { useState } from 'react';
 import './Account.css'
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth, DataStore } from 'aws-amplify';
-import { Storage } from 'aws-amplify';
-import { v4 as uuidv4 } from 'uuid';
 import { Point } from '../models';
+
 function Account({ user }) {
   const [username, setUsername] = useState('');
   const [fullName, setFullName] = useState('');
   const [location, setLocation] = useState('');
   const [email, setEmail] = useState('');
-  const [profileImage, setProfileImage] = useState('');
-  const [previewImage, setPreviewImage] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -21,9 +20,7 @@ function Account({ user }) {
         setUsername(userInfo.attributes['custom:username']);
         setFullName(userInfo.attributes['custom:name']);
         setLocation(userInfo.attributes['custom:location']);
-        
         setEmail(userInfo.attributes.email);
-        
           
       } catch (error) {
         console.log('Error fetching user data:', error);
@@ -44,108 +41,54 @@ function Account({ user }) {
     setLocation(e.target.value);
   };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-  
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    setProfileImage(file);
-
-    // Create a URL for previewing the image
-    const imageUrl = URL.createObjectURL(file);
-    setPreviewImage(imageUrl);
-  };
-
-  const handleImageRemove = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      const imageUrl = user.attributes['custom:image'];
-      
-      if (imageUrl) {
-        const key = imageUrl.split('/').pop(); // Extract the S3 key from the image URL
-        await Storage.remove(key); // Remove the image from S3
-        await Auth.updateUserAttributes(user, { 'custom:image': '' }); // Clear the image attribute in the user's profile
-        console.log('Image removed successfully');
-      }
-      
-      setProfileImage('');
-      setPreviewImage('');
-    } catch (error) {
-      console.log('Error removing image:', error);
-    }
-    setProfileImage('');
-  setPreviewImage('');
-  };
-
   const handleSave = async () => {
-    // Handle save logic here
-    // For example, update the user's account information using Amplify API
-
-    // Assuming you have already set up the necessary Amplify API configurations
-
+    setIsSaving(true);
+  
     try {
       const user = await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, { 'custom:location': location });
-      console.log('User attribute "location" updated successfully');
-    } catch (error) {
-      console.log('Error updating user attribute:', error);
-    }
-
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, { 'custom:name': fullName });
-      console.log('User attribute "fullname" updated successfully');
-    } catch (error) {
-      console.log('Error updating user attribute:', error);
-    }
-
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, { 'custom:username': username });
-      // Update the username in the Point model
-      console.log(user)
-        const updatedPoint = await DataStore.query(Point, c => c.userSub.eq(user.attributes.sub));
-        const userAttributes = await Auth.currentAuthenticatedUser();
-          const { attributes } = userAttributes;
+  
+      const updateAttributesPromise = Auth.updateUserAttributes(user, {
+        'custom:location': location,
+        'custom:name': fullName,
+        'custom:username': username,
+      });
+  
+      const updatePointPromise = DataStore.query(Point, (c) =>
+        c.userSub.eq(user.attributes.sub)
+      ).then(async (updatedPoint) => {
         if (updatedPoint.length > 0) {
-          const updatedUserPoints = Point.copyOf(updatedPoint[0], updated => {
-              
-              updated.username = attributes['custom:username'];
-              
-            });
-            await DataStore.save(updatedUserPoints);
-            console.log('Points username added');
+          const updatedUserPoints = Point.copyOf(updatedPoint[0], (updated) => {
+            updated.username = username;
+          });
+          return DataStore.save(updatedUserPoints);
         }
-          console.log('User attribute "username" updated successfully');
-        } catch (error) {
-          console.log('Error updating user attribute:', error);
-        }
-
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      const key = generateKey(profileImage.name);
-      
-      await Storage.put(key, profileImage);
-      const imageUrl = await Storage.get(key.toString());
-      console.log(imageUrl) // Retrieve the URL of the uploaded image from S3
-      await Auth.updateUserAttributes(user, { 'custom:image': imageUrl });
-      console.log('User attribute "custom:image" updated successfully');
+      });
+  
+      await Promise.all([updateAttributesPromise, updatePointPromise]);
+  
+      console.log('User attributes and points updated successfully');
+      setShowNotification(true);
     } catch (error) {
       console.log('Error updating user attribute:', error);
     }
-    
+  
+    setIsSaving(false);
+  
+    setTimeout(() => {
+      setShowNotification(false);
+      closeComponent();
+    }, 0);
   };
 
-  const generateKey = (fileName) => {
-    const extension = fileName.split('.').pop(); // Extract the file extension
-    const randomString = uuidv4().split('-').pop(); // Generate a random string using uuidv4 and extract the last part
-    const truncatedFileName = fileName.substring(0, 10); // Truncate the original file name to 10 characters
-    return `${truncatedFileName}-${randomString}.${extension}`; // Combine the truncated file name, random string, and extension
+  const closeComponent = () => {
+    const accountEditComponent = document.querySelector('.account-edit');
+    if (accountEditComponent) {
+      accountEditComponent.style.display = 'none';
+    }
   };
   return (
     <div className="account-edit">
+      
       <div className="account-edit__header">
         <h2>Edit Account</h2>
       </div>
@@ -178,9 +121,12 @@ function Account({ user }) {
         </div>
       </div>
       <div className="account-edit__footer">
-        <button className="account-edit__save" onClick={handleSave}>
-          Save
+        <button className="account-edit__save" onClick={handleSave} disabled={isSaving}>
+          {isSaving ? 'Saving...' : 'Save'}
         </button>
+        {showNotification && (
+        <div id="notification">Successfully saved!</div>
+      )}
       </div>
     </div>
   )

@@ -6,19 +6,19 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { UniItem } from "../models";
+import { Article } from "../models";
 import {
   getOverrideProps,
   useDataStoreBinding,
 } from "@aws-amplify/ui-react/internal";
-import ActionCard from "./ActionCard";
+import SocialPost from "./SocialPost";
 import { Collection } from "@aws-amplify/ui-react";
-export default function UnisCardCollection(props) {
+export default function SocialPostCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const [items, setItems] = React.useState(undefined);
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
-    model: UniItem,
+    model: Article,
   }).items;
   React.useEffect(() => {
     if (itemsProp !== undefined) {
@@ -30,28 +30,23 @@ export default function UnisCardCollection(props) {
   return (
     <Collection
       type="grid"
-      isSearchable="true"
       isPaginated={true}
       searchPlaceholder="Search..."
-      itemsPerPage={9}
-      templateColumns={['1fr', '1fr', '1fr 1fr 1fr']}
+      templateColumns={['1fr', '1fr', '1fr']}
+      gap={['16px', '16px', '24px']}
       autoFlow="row"
       alignItems="stretch"
       justifyContent="stretch"
       items={items || []}
-      {...getOverrideProps(overrides, "UnisCardCollection")}
+      {...getOverrideProps(overrides, "SocialPostCollection")}
       {...rest}
-      
     >
       {(item, index) => (
-        <ActionCard
-          uniItem={item}
-          height="auto"
-          width="auto"
-          margin="10px 10px 0 10px"
+        <SocialPost
+          article={item}
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}
-        ></ActionCard>
+        ></SocialPost>
       )}
     </Collection>
   );

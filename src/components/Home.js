@@ -7,13 +7,15 @@ import {  Features4x1, SocialPostCollection  } from '../ui-components';
 
 function Home() {
   return (
-    <div className=''>
-      
+    <div className='home__box'>
       <Banner img='images/banner.jpg' title='Discover Your Dream University Program' subTitle='Yeddies is a comprehensive online platform that helps students find the perfect university program that suits their interests, goals, and aspirations.'/>
-      <Features4x1 className='feature'/>
+      <div className='container'>
+        <div className='feature__wrapper'>
+          <Features4x1 className='feature'/>
+        </div>
       <SocialPostCollection isPaginated itemsPerPage={1} className='feature'/>
-      <Contact /> 
-
+      <Contact />
+      </div> 
     </div>
   )
 }

@@ -402,3 +402,55 @@ label span {
   
   transition: transform 0.4s ease;
 }
+.uni__sidebar__button {
+  background-color:unset;
+  outline: none;
+  border: none;
+  display: none;
+}
+
+.uni__sidebar__button > img {
+  max-width: 50px;
+}
+@media (max-width: 768px) {
+  .uni__two {
+    display: block;
+  }
+  .uni__filter {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  .uni__sidebar__button {
+    display: flex;
+  }
+  .uni__filter__container {
+    display: block;
+    margin-bottom: 10px;
+    
+  }
+
+  .filter__title button {
+    width: 100%;
+    text-align: left;
+  }
+
+  .filter__title button span {
+    display: inline-block;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  
+
+  .filter__info {
+    display: block;
+    margin-top: 10px;
+  }
+  .uni__wrap > .sidebar {
+    margin-left: 20px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+  }
+}

@@ -339,10 +339,7 @@ type EagerUniItem = {
   readonly scholarships?: (string | null)[] | null;
   readonly requirements?: (string | null)[] | null;
   readonly stuff?: number | null;
-  readonly facilities?: (string | null)[] | null;
-  readonly programs?: (string | null)[] | null;
   readonly acceptance_rate?: number | null;
-  readonly graduation_rate?: number | null;
   readonly isBolashakPartner?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -374,10 +371,7 @@ type LazyUniItem = {
   readonly scholarships?: (string | null)[] | null;
   readonly requirements?: (string | null)[] | null;
   readonly stuff?: number | null;
-  readonly facilities?: (string | null)[] | null;
-  readonly programs?: (string | null)[] | null;
   readonly acceptance_rate?: number | null;
-  readonly graduation_rate?: number | null;
   readonly isBolashakPartner?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

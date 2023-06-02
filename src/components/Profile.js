@@ -77,7 +77,33 @@ function Profile({ user}) {
     slidesToShow: slidesToShow,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
   };
 
   useEffect(() => {
@@ -122,7 +148,7 @@ function Profile({ user}) {
           const cityScore = calculateSimilarity(university.city, favoriteUniversities.map(fav => fav.city));
           const countryScore = calculateSimilarity(university.country, favoriteUniversities.map(fav => fav.country));
           const typeScore = calculateSimilarity(university.type, favoriteUniversities.map(fav => fav.type));
-          
+          // bolashak, departments, price, acceptance rate, 
           const rankingScore = calculateIntegerSimilarity(university.ranking, favoriteUniversities.map(fav => fav.ranking), totalUniversities);
           // Calculate overall similarity score by considering individual scores and their weights
           
@@ -190,15 +216,11 @@ function Profile({ user}) {
     }
   };
 
-  const handleToggleAccount = () => {
-    setShowAccount(!showAccount);
-  };
-
   return (
     <div className="profile">
       <div id='banner__prof' className='banner'>
         <div  className='banner__image'>
-            <img src={'images/banner2.jpg'} alt='banner'/>
+            <img src={'images/yellowgray.jpg'} alt='banner'/>
 
         </div>
 
@@ -208,22 +230,18 @@ function Profile({ user}) {
           
             <div className='banner__wrap'>
             <h1>{user.attributes['custom:username'] ? `Hi, ${user.attributes['custom:username']}` : 'Hi,...'} </h1>
-            {!user.attributes['custom:username'] && (
+            {/* {!user.attributes['custom:username'] && (
             <button id='btn__set' className="btn" onClick={handleUsernameChange}>
               Set Username
             </button>
             
-          )}
-          
-          <button className="btn" onClick={handleToggleAccount}>
-              
-            {showAccount ? "Hide Account" : "Show Account"}
-            {showAccount && <div className='acc__btn'><Account /><button id="btn_hidy" className="btn" onClick={handleToggleAccount}>
-              Hide Account
-            </button></div>}
-            </button>
-            
-            
+          )} */}
+          <div>
+          <button className="btn btn-primary" onClick={() => setShowAccount(!showAccount)}>
+            Show Account
+          </button>
+  {showAccount && <div className='acc__btn'><Account /></div>}
+</div>
 
             </div>
 
@@ -240,9 +258,9 @@ function Profile({ user}) {
           <h1>Your Favorite Universities</h1>
           {favoriteUniversities.length > 0 ? (
             <Slider {...sliderSettings} className='favorites__slider'>
-            {favoriteUniversities.map(favoriteUni  => (
+            {favoriteUniversities.map((favoriteUni, index)  => (
               
-              <div key={favoriteUni.id} className='slider-item'>
+              <div key={index} className='slider-item'>
                 <Link to={'/uni/'+favoriteUni.id}>
                 <img src={favoriteUni.photo} alt={favoriteUni.name} />
                 <p>{favoriteUni.name}</p>
@@ -261,9 +279,9 @@ function Profile({ user}) {
 
             {recommendedUniversities.length > 0 ? (
             <div>
-              {recommendedUniversities.map((uni) => (
+              {recommendedUniversities.map((uni, index) => (
                 <Link to={`/uni/${uni.id}`}>
-                  <div key={uni.id} className="rec__uni__item">
+                  <div key={index} className="rec__uni__item">
                     
                       <img src={uni.photo} alt={uni.name} />
                       <p>{uni.name}</p>

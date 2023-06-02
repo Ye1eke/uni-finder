@@ -98,10 +98,7 @@ type UniItem @model @auth(rules: [{allow: public}]) {
   scholarships: [String]
   requirements: [String]
   stuff: Int
-  facilities: [String]
-  programs: [String]
   acceptance_rate: Float
-  graduation_rate: Float
   isBolashakPartner: Boolean
 }
  

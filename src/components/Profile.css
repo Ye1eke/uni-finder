@@ -1,6 +1,4 @@
-.badge > img {
-    max-width: 100px;
-}
+
 
 /* UniAbout.css */
 .favorites__slider {
@@ -151,7 +149,61 @@ p.typewriter {
   z-index: 11;
   top: 0;
   margin-top: 20px;
+  left: 30%;
 }
 
 .acc__btn {
+}
+
+@media (max-width: 768px) {
+  
+
+  #banner__prof {
+    min-height: 300px;
+  }
+  .btn-primary {
+    display: none;
+  }
+  .banner__wrap {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .banner__details {
+    display: block;
+    padding-bottom: 20px;
+  }
+
+  #btn_hidy {
+    display: none;
+  }
+
+
+  .favorites__slider {
+    margin-bottom: 20px;
+  }
+
+  .slider-item {
+    margin: 0 5px;
+  }
+
+  .slider-item img {
+    width: 100%;
+    height: auto;
+  }
+
+  .rec__uni__item {
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .rec__uni__item > img {
+    width: 100%;
+    height: auto;
+  }
+
+  .rec__uni__item > p {
+    padding-left: 0;
+  }
 }

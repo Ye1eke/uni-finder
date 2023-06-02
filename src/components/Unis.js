@@ -12,7 +12,7 @@ import {
 } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from '@aws-amplify/ui-react';
 
-function Filter({ title, info, handleFilterChange }) {
+function Filter({ title, info }) {
   const [isRotated, setIsRotated] = useState(false);
 
   const handleButtonClick = () => {
@@ -44,13 +44,15 @@ function Unis() {
   }).items;
 
   const [locations, setLocations] = useState([]);
-  const [tuitionFeeRange, setTuitionFeeRange] = useState([0, 50000]);
   const [sortBy, setSortBy] = useState('');
   const [minTuitionFee, setMinTuitionFee] = useState('');
   const [maxTuitionFee, setMaxTuitionFee] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
-  
+  const [isBolashakPartner, setIsBolashakPartner] = useState(false);
+  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
   const countriesData = [
     { id: '1', name: 'Argentina', region: 'South America' },
     { id: '2', name: 'Armenia', region: 'Europe' },
@@ -174,6 +176,19 @@ function Unis() {
         selectedCountry.includes(item.country)
       );
     }
+    // Apply Bolashak filter
+    if (isBolashakPartner) {
+      filteredItems = filteredItems.filter((item) =>
+        item.isBolashakPartner === true
+      );
+    }
+
+// Apply type filter
+if (selectedTypes.length > 0) {
+  filteredItems = filteredItems.filter((item) =>
+    selectedTypes.includes(item.type)
+  );
+}
 
     // Apply tuition fee filter
     if (minTuitionFee !== '') {
@@ -194,7 +209,28 @@ function Unis() {
     }
     let sortedItems = [...filteredItems];
     setItems(sortedItems);
-  }, [selectedCountry, locations, minTuitionFee, maxTuitionFee, sortBy, itemsDataStore]);
+  }, [selectedCountry, locations, isBolashakPartner, selectedTypes, minTuitionFee, maxTuitionFee, sortBy, itemsDataStore]);
+  useEffect(() => {
+    // Filter countries based on selected region
+    const filtered = selectedRegion
+      ? countriesData.filter((country) => country.region === selectedRegion)
+      : countriesData;
+
+      console.log(filtered)
+    setFilteredCountries(filtered);
+  }, [selectedRegion]);
+
+  const handleTypeChange = (e) => {
+    const { value, checked } = e.target;
+  
+    setSelectedTypes((prevSelectedTypes) => {
+      if (checked) {
+        return [...prevSelectedTypes, value];
+      } else {
+        return prevSelectedTypes.filter((type) => type !== value);
+      }
+    });
+  };
 
   const handleLocationChange = (e) => {
     const { id, checked } = e.target;
@@ -230,7 +266,9 @@ function Unis() {
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
   };
-
+  const handleOpenClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="unis">
       <Banner
@@ -244,6 +282,9 @@ function Unis() {
         <div className="uni__two">
           <div className="uni__wrap">
             <div className="sidebar container">
+              {/* <button className='uni__sidebar__button' onClick={handleOpenClick}><img src='/images/tridots.png' alt='tridots'/>
+              </button> */}
+              
               <div className="uni__filter">
                 <div className="sort__container">
                   <label htmlFor="sort-select">Sort by:</label>
@@ -278,6 +319,15 @@ function Unis() {
                           onChange={handleLocationChange}
                         />
                         <label>Asia</label>
+                      </div>
+
+                      <div className="checkbox__container">
+                        <input
+                          id="Middle East"
+                          type="checkbox"
+                          onChange={handleLocationChange}
+                        />
+                        <label>Middle East</label>
                       </div>
                       <div className="checkbox__container">
                         <input
@@ -320,26 +370,64 @@ function Unis() {
                   info={
                     <div >
                   <select
-                    id='sort-select'
+                    id="sort-select"
                     value={selectedCountry}
                     onChange={handleCountryChange}
                   >
-                    <option value=''>All</option>
-                    {countriesData
-                      .filter((country) =>
-                        selectedRegion
-                          ? country.region === selectedRegion
-                          : true
-                      )
-                      .map((country) => (
-                        <option key={country.id} value={country.name}>
-                          {country.name}
-                        </option>
-                      ))}
+                    <option value="">All</option>
+                    {filteredCountries.map((country) => (
+                      <option key={country.id} value={country.name}>
+                        {country.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
                   }
                 />
+                <Filter
+                  title="Bolashak Partner"
+                  info={
+                    <div>
+                      <div className="checkbox__container">
+                        <input
+                          id="bolashakPartner"
+                          type="checkbox"
+                          onChange={() => setIsBolashakPartner(!isBolashakPartner)}
+                        />
+                        <label>Partnered with Bolashak</label>
+                      </div>
+                    </div>
+                  }
+                />
+<Filter
+  title="Type"
+  info={
+    <div>
+        <div className='checkbox__container'>
+        
+          <input
+            type="checkbox"
+            value="public"
+            checked={selectedTypes.includes("public")}
+            onChange={handleTypeChange}
+          />
+         <label> Public
+        </label>
+        </div>
+        <div className='checkbox__container'>
+        
+          <input
+            type="checkbox"
+            value="private"
+            checked={selectedTypes.includes("private")}
+            onChange={handleTypeChange}
+          />
+          <label>Private
+        </label>
+        </div>
+    </div>
+  }
+/>
 
                 <Filter
                   title="Tuition Fee"

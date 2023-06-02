@@ -892,31 +892,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "facilities": {
-                    "name": "facilities",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "programs": {
-                    "name": "programs",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
                 "acceptance_rate": {
                     "name": "acceptance_rate",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "graduation_rate": {
-                    "name": "graduation_rate",
                     "isArray": false,
                     "type": "Float",
                     "isRequired": false,
@@ -1183,5 +1160,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.2",
-    "version": "2bd7d4e1e72860c92792de44f20789e6"
+    "version": "bb266c820b7b73285565ad055f658586"
 };

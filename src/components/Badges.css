@@ -9,9 +9,69 @@
     margin: auto;
 }
 
-.score__bar > p {
-    text-align: center;
-    color: #fff;
-    font-size: 16px;
-
+.badge__item {
+    display: flex;
+    justify-content: center;
 }
+.badge__container {
+  position: relative;
+  display: inline-block;
+}
+.badge__image {
+    width: 100px;
+    height: 100px;
+}
+
+.badge__description {
+    width: 200px;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .badge__container:hover .badge__description {
+    opacity: 1;
+    visibility: visible;
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .badge__description {
+    animation: fade-in 0.3s;
+  }
+  .score__bar {
+    display: flex;
+    margin: auto;
+    width: fit-content;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .score__text {
+    font-size: 24px;
+    color: #ff5e5e;
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+  }
+  .score__span {
+    color: #000;
+    font-weight: 500;
+  }

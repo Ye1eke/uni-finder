@@ -214,10 +214,7 @@ export default function UniItemUpdateForm(props) {
     scholarships: [],
     requirements: [],
     stuff: "",
-    facilities: [],
-    programs: [],
     acceptance_rate: "",
-    graduation_rate: "",
     isBolashakPartner: false,
   };
   const [ranking, setRanking] = React.useState(initialValues.ranking);
@@ -250,13 +247,8 @@ export default function UniItemUpdateForm(props) {
     initialValues.requirements
   );
   const [stuff, setStuff] = React.useState(initialValues.stuff);
-  const [facilities, setFacilities] = React.useState(initialValues.facilities);
-  const [programs, setPrograms] = React.useState(initialValues.programs);
   const [acceptance_rate, setAcceptance_rate] = React.useState(
     initialValues.acceptance_rate
-  );
-  const [graduation_rate, setGraduation_rate] = React.useState(
-    initialValues.graduation_rate
   );
   const [isBolashakPartner, setIsBolashakPartner] = React.useState(
     initialValues.isBolashakPartner
@@ -289,12 +281,7 @@ export default function UniItemUpdateForm(props) {
     setRequirements(cleanValues.requirements ?? []);
     setCurrentRequirementsValue("");
     setStuff(cleanValues.stuff);
-    setFacilities(cleanValues.facilities ?? []);
-    setCurrentFacilitiesValue("");
-    setPrograms(cleanValues.programs ?? []);
-    setCurrentProgramsValue("");
     setAcceptance_rate(cleanValues.acceptance_rate);
-    setGraduation_rate(cleanValues.graduation_rate);
     setIsBolashakPartner(cleanValues.isBolashakPartner);
     setErrors({});
   };
@@ -318,11 +305,6 @@ export default function UniItemUpdateForm(props) {
   const [currentRequirementsValue, setCurrentRequirementsValue] =
     React.useState("");
   const requirementsRef = React.createRef();
-  const [currentFacilitiesValue, setCurrentFacilitiesValue] =
-    React.useState("");
-  const facilitiesRef = React.createRef();
-  const [currentProgramsValue, setCurrentProgramsValue] = React.useState("");
-  const programsRef = React.createRef();
   const validations = {
     ranking: [],
     name: [],
@@ -344,10 +326,7 @@ export default function UniItemUpdateForm(props) {
     scholarships: [],
     requirements: [],
     stuff: [],
-    facilities: [],
-    programs: [],
     acceptance_rate: [],
-    graduation_rate: [],
     isBolashakPartner: [],
   };
   const runValidationTasks = async (
@@ -396,10 +375,7 @@ export default function UniItemUpdateForm(props) {
           scholarships,
           requirements,
           stuff,
-          facilities,
-          programs,
           acceptance_rate,
-          graduation_rate,
           isBolashakPartner,
         };
         const validationResponses = await Promise.all(
@@ -480,10 +456,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -528,10 +501,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -576,10 +546,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -624,10 +591,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -672,10 +636,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -720,10 +681,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -768,10 +726,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -816,10 +771,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -864,10 +816,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -913,10 +862,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -961,10 +907,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1009,10 +952,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1057,10 +997,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1105,10 +1042,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1149,10 +1083,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1225,10 +1156,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1277,10 +1205,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1321,10 +1246,7 @@ export default function UniItemUpdateForm(props) {
               scholarships: values,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1389,10 +1311,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements: values,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1465,10 +1384,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff: value,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1484,140 +1400,6 @@ export default function UniItemUpdateForm(props) {
         hasError={errors.stuff?.hasError}
         {...getOverrideProps(overrides, "stuff")}
       ></TextField>
-      <ArrayField
-        onChange={async (items) => {
-          let values = items;
-          if (onChange) {
-            const modelFields = {
-              ranking,
-              name,
-              region,
-              city,
-              country,
-              photo,
-              description,
-              address,
-              website,
-              phone,
-              email,
-              type,
-              accreditation,
-              weather,
-              departments,
-              price,
-              enrollment,
-              scholarships,
-              requirements,
-              stuff,
-              facilities: values,
-              programs,
-              acceptance_rate,
-              graduation_rate,
-              isBolashakPartner,
-            };
-            const result = onChange(modelFields);
-            values = result?.facilities ?? values;
-          }
-          setFacilities(values);
-          setCurrentFacilitiesValue("");
-        }}
-        currentFieldValue={currentFacilitiesValue}
-        label={"Facilities"}
-        items={facilities}
-        hasError={errors?.facilities?.hasError}
-        errorMessage={errors?.facilities?.errorMessage}
-        setFieldValue={setCurrentFacilitiesValue}
-        inputFieldRef={facilitiesRef}
-        defaultFieldValue={""}
-      >
-        <TextField
-          label="Facilities"
-          isRequired={false}
-          isReadOnly={false}
-          value={currentFacilitiesValue}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.facilities?.hasError) {
-              runValidationTasks("facilities", value);
-            }
-            setCurrentFacilitiesValue(value);
-          }}
-          onBlur={() =>
-            runValidationTasks("facilities", currentFacilitiesValue)
-          }
-          errorMessage={errors.facilities?.errorMessage}
-          hasError={errors.facilities?.hasError}
-          ref={facilitiesRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "facilities")}
-        ></TextField>
-      </ArrayField>
-      <ArrayField
-        onChange={async (items) => {
-          let values = items;
-          if (onChange) {
-            const modelFields = {
-              ranking,
-              name,
-              region,
-              city,
-              country,
-              photo,
-              description,
-              address,
-              website,
-              phone,
-              email,
-              type,
-              accreditation,
-              weather,
-              departments,
-              price,
-              enrollment,
-              scholarships,
-              requirements,
-              stuff,
-              facilities,
-              programs: values,
-              acceptance_rate,
-              graduation_rate,
-              isBolashakPartner,
-            };
-            const result = onChange(modelFields);
-            values = result?.programs ?? values;
-          }
-          setPrograms(values);
-          setCurrentProgramsValue("");
-        }}
-        currentFieldValue={currentProgramsValue}
-        label={"Programs"}
-        items={programs}
-        hasError={errors?.programs?.hasError}
-        errorMessage={errors?.programs?.errorMessage}
-        setFieldValue={setCurrentProgramsValue}
-        inputFieldRef={programsRef}
-        defaultFieldValue={""}
-      >
-        <TextField
-          label="Programs"
-          isRequired={false}
-          isReadOnly={false}
-          value={currentProgramsValue}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.programs?.hasError) {
-              runValidationTasks("programs", value);
-            }
-            setCurrentProgramsValue(value);
-          }}
-          onBlur={() => runValidationTasks("programs", currentProgramsValue)}
-          errorMessage={errors.programs?.errorMessage}
-          hasError={errors.programs?.hasError}
-          ref={programsRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "programs")}
-        ></TextField>
-      </ArrayField>
       <TextField
         label="Acceptance rate"
         isRequired={false}
@@ -1651,10 +1433,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate: value,
-              graduation_rate,
               isBolashakPartner,
             };
             const result = onChange(modelFields);
@@ -1669,58 +1448,6 @@ export default function UniItemUpdateForm(props) {
         errorMessage={errors.acceptance_rate?.errorMessage}
         hasError={errors.acceptance_rate?.hasError}
         {...getOverrideProps(overrides, "acceptance_rate")}
-      ></TextField>
-      <TextField
-        label="Graduation rate"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={graduation_rate}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              ranking,
-              name,
-              region,
-              city,
-              country,
-              photo,
-              description,
-              address,
-              website,
-              phone,
-              email,
-              type,
-              accreditation,
-              weather,
-              departments,
-              price,
-              enrollment,
-              scholarships,
-              requirements,
-              stuff,
-              facilities,
-              programs,
-              acceptance_rate,
-              graduation_rate: value,
-              isBolashakPartner,
-            };
-            const result = onChange(modelFields);
-            value = result?.graduation_rate ?? value;
-          }
-          if (errors.graduation_rate?.hasError) {
-            runValidationTasks("graduation_rate", value);
-          }
-          setGraduation_rate(value);
-        }}
-        onBlur={() => runValidationTasks("graduation_rate", graduation_rate)}
-        errorMessage={errors.graduation_rate?.errorMessage}
-        hasError={errors.graduation_rate?.hasError}
-        {...getOverrideProps(overrides, "graduation_rate")}
       ></TextField>
       <SwitchField
         label="Is bolashak partner"
@@ -1751,10 +1478,7 @@ export default function UniItemUpdateForm(props) {
               scholarships,
               requirements,
               stuff,
-              facilities,
-              programs,
               acceptance_rate,
-              graduation_rate,
               isBolashakPartner: value,
             };
             const result = onChange(modelFields);

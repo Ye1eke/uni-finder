@@ -147,7 +147,7 @@ function UniAbout({ user }) {
       setIsAnimating(false);
     };
     const isFavorite = favorites.some(favorite => favorite.uniId === id);
-
+    const isBolashakPartner = uni?.isBolashakPartner || false;
     if (!uni) {
       
         return <div>loading</div>
@@ -165,6 +165,7 @@ function UniAbout({ user }) {
         <div className='container'>
           <div className='banner__details'>
             <div className='banner__wrap__uni'>
+            {isBolashakPartner && <span id='bolashak__text'>{'🌟'}This university is partnered with Bolashak</span>}
             <h1>{uni.name}</h1>
             <p>{uni.region + ' - ' + uni.country + ' - ' + uni.city}</p>
             <p>{'#'+uni.ranking}</p>
@@ -180,6 +181,10 @@ function UniAbout({ user }) {
                 Added to Favorites
                 </button>
             )}
+
+            
+
+
             <div className='animation-container'>
               {isAnimating && (
                 <div className='animation' onAnimationEnd={handleAnimationComplete}>
@@ -230,14 +235,6 @@ function UniAbout({ user }) {
                 ))}
               </ul>
             </div>
-            <div>
-              <h3>Programs</h3>
-              <ul className='banner__right__list'>
-                {uni.programs.map((program, index) => (
-                  <li key={index}>{program}</li>
-                ))}
-              </ul>
-            </div>
           </div>
 
           <h3>Accreditation</h3>
@@ -253,8 +250,8 @@ function UniAbout({ user }) {
           <p>Tuition fee: {uni.price + "$"}</p>
           <p>Type: {uni.type}</p>
           <p>Total Students: {uni.enrollment}</p>
-          <p>Total staff: {uni.stuff}</p>
-          
+          <p>Total Staff: {uni.stuff}</p>
+          <p>Acceptance Rate: {uni.acceptance_rate * 100}%</p>
         </div>
 
         <div className='uni__side__second'>
@@ -262,7 +259,7 @@ function UniAbout({ user }) {
           <a href={'mailto:'+uni.email}><p>Email: {uni.email}</p></a>
           <a href={'tel:'+uni.phone}><p>Phone: {uni.phone}</p></a>
           <p>Address: {uni.address}</p>
-          <Link to={`${uni.website}`}><p>Website: {uni.website.replace(/(^\w+:|^)\/\//, '')}</p></Link>
+          <Link to={`${uni.website}`}><p>Website: {uni.website.replace(/(^\w+:|^)\/\//, '').replace('www.', '').replace('/', '')}</p></Link>
           
         </div>
         </div>

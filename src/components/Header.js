@@ -1,55 +1,58 @@
-import React, { useState } from 'react'
-import './Header.css'
-import { Link } from "react-router-dom";
-import {useAuthenticator } from '@aws-amplify/ui-react';
+import React, { useState } from 'react';
+import './Header.css';
+import { Link } from 'react-router-dom';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 function Header() {
-    const { signOut } = useAuthenticator((context)=> [context.signOut]);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { signOut } = useAuthenticator((context) => [context.signOut]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
-    return (
-    
+  return (
     <div className='header'>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-      {/* <img/> */}
       <div className='container'>
         <div className='header__wrapper'>
+          <Link to='/'><img id='header_logo' src={require('./logo-no-background.png')} alt='1'/></Link>
+          <div className='header__nav'>
+            <Link to='/article'>Articles</Link>
+            <Link to='/uni'>Universities</Link>
+            <Link to='/profile'>Profile</Link>
+            <Link to="/profile/leaderboard">Leaderboard</Link>
+          </div>
+          {dropdownOpen && (
+        <div className='dropdown-overlay'>
+          <div className='dropdown-content'>
+            <button className='collapse-btn' onClick={toggleDropdown}> Close ✖</button>
+             <div className='space'></div>
+            <Link to='/article'>Articles</Link>
+            <Link to='/uni'>Universities</Link>
+            <Link to='/profile'>Profile</Link>
+            <Link to="/profile/leaderboard">Leaderboard</Link>
             
-            <Link to='/'><img id='header_logo' src={require('./logo-no-background.png')} alt='1'/></Link>
-            
-            <div className='header__nav'>
-                {/* <a href='#'>About</a> */}
-                <Link to='/article'>Articles</Link>
-                <Link to='/uni'>Universities</Link>
-                <div className="header__dropdown" onMouseEnter={handleDropdownToggle} onMouseLeave={closeDropdown}>
-                <Link to='/profile'>Profile</Link>
-                    {isDropdownOpen && (
-                    <div className="dropdown-content">
-                      {/* Add dropdown content here */}
-                      <Link to="/profile/leaderboard">Leaderboard</Link>
-                    </div>
-                  )}
-                </div>
-            </div>
-        
             <div className='header__btns'>
-              
-                <button className='btn' onClick={signOut}>Sign out</button>
+              <button className='btn' onClick={signOut}>Sign out</button>
             </div>
-            
+          </div>
+          
+        </div>
+      )}
+      <div className={`header__dropdown ${dropdownOpen ? 'open' : ''}`}>
+        <button className='dropdown-btn' onClick={toggleDropdown}>
+          <img className='dropdown__image' src='/images/tridots.png' alt='tridots'/>
+        </button>
+      </div>
+          <div id='sign__desktop' className='header__btns'>
+            <button className='btn' onClick={signOut}>Sign out</button>
+          </div>
         </div>
       </div>
       
-      
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

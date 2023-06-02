@@ -6,14 +6,18 @@
     padding-top: 220px;
     position: relative;
     z-index: 1;
-}
-.banner:before {
-    
+  }
+  
+  .banner:before {
     background: transparent;
-    background: linear-gradient(180deg,rgba(0,0,0,.6),transparent);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent);
     bottom: 0;
-    content: "";
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$color-1",endColorstr="$color-2",GradientType=1);
+    content: '';
+    filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr="$color-1",
+      endColorstr="$color-2",
+      GradientType=1
+    );
     height: 100%;
     left: 0;
     position: absolute;
@@ -21,10 +25,9 @@
     top: 0;
     width: 100%;
     z-index: 1;
+  }
   
-}
-
-.banner__image > img{
+  .banner__image > img {
     bottom: 0;
     height: 100%;
     left: 0;
@@ -36,49 +39,76 @@
     top: 0;
     width: 100%;
     object-fit: cover;
-}
-
-.banner__wrap {
+  }
+  
+  .banner__wrap {
     padding-left: 15px;
     padding-right: 15px;
     position: relative;
     width: 100%;
     z-index: 1;
-    
-}
-
-.banner__wrap > h1 {
+  }
+  
+  .banner__wrap > h1 {
     color: #fff;
     font-size: 90px;
     line-height: 85px;
     margin-bottom: 44px;
     padding-bottom: 0;
-    text-shadow: 0 2px 9px rgba(0,0,0,.18);
-}
-
-.banner__wrap > p {
+    text-shadow: 0 2px 9px rgba(0, 0, 0, 0.18);
+  }
+  
+  .banner__wrap > p {
     color: #fff;
     font-size: 24px;
     line-height: 34px;
     margin-bottom: 53px;
     max-width: 600px;
-    text-shadow: 0 2px 14px rgba(0,0,0,.38);
-}
-
-.banner__button {
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.38);
+  }
+  
+  .banner__button {
     background-color: #fff;
     color: #000;
     border-radius: 40px;
     font-size: 16px;
     line-height: 20px;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     padding: 1.03rem 2.08rem;
     text-align: center;
     text-decoration: none;
     font-weight: 600;
     border-color: transparent;
-}
-
-a.banner__button:visited {
+  }
+  
+  a.banner__button:visited {
     color: #000;
-}
+  }
+  
+  /* Media Queries */
+  
+  @media (max-width: 768px) {
+    .banner {
+      min-height: 600px;
+      padding-top: 100px;
+    }
+  
+    .banner__wrap > h1 {
+      font-size: 38px;
+      line-height: 48px;
+      margin-bottom: 30px;
+      padding-top: 10px;
+    }
+  
+    .banner__wrap > p {
+      font-size: 16px;
+      line-height: 28px;
+      margin-bottom: 40px;
+    }
+  
+    .banner__button {
+      padding: 0.8rem 1.6rem;
+      font-size: 14px;
+    }
+  }
+  

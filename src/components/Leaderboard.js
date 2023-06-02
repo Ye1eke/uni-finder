@@ -23,16 +23,20 @@ function Leaderboard() {
           console.log('Error fetching users:', error);
         }
       };
-      
-      console.log(users)
   
-    return (
+    return ( 
       <div className='leaderboard'>
-        <Banner img={'/images/yellowblack.jpg'} title={'Leaderboard'}/>
+        <div id='banner__prof' className='banner'>
+        <div  className='banner__image'>
+            <img src={'/images/yellowblack.jpg'} alt='banner'/>
+
+        </div>
+
+
         <div className='leaderboard__box container'>
-            <h1>Reach the Top!!!{'🏆'}</h1>
+          
+        <h1>Reach the Top!!!{'🏆'}</h1>
             <div className='table__box'>
-            <div class="ribbon"></div>
             <table className="table">
             <thead>
                 <tr className='firsty'>
@@ -52,7 +56,11 @@ function Leaderboard() {
             </tbody>
             </table>
             </div>
+
         </div>
+    </div>
+        {/* <Banner img={'/images/yellowblack.jpg'} title={'Leaderboard'}/> */}
+        
       </div>
     );
   }

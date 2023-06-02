@@ -34,10 +34,7 @@ export declare type UniItemUpdateFormInputValues = {
     scholarships?: string[];
     requirements?: string[];
     stuff?: number;
-    facilities?: string[];
-    programs?: string[];
     acceptance_rate?: number;
-    graduation_rate?: number;
     isBolashakPartner?: boolean;
 };
 export declare type UniItemUpdateFormValidationValues = {
@@ -61,10 +58,7 @@ export declare type UniItemUpdateFormValidationValues = {
     scholarships?: ValidationFunction<string>;
     requirements?: ValidationFunction<string>;
     stuff?: ValidationFunction<number>;
-    facilities?: ValidationFunction<string>;
-    programs?: ValidationFunction<string>;
     acceptance_rate?: ValidationFunction<number>;
-    graduation_rate?: ValidationFunction<number>;
     isBolashakPartner?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -90,10 +84,7 @@ export declare type UniItemUpdateFormOverridesProps = {
     scholarships?: PrimitiveOverrideProps<TextFieldProps>;
     requirements?: PrimitiveOverrideProps<TextFieldProps>;
     stuff?: PrimitiveOverrideProps<TextFieldProps>;
-    facilities?: PrimitiveOverrideProps<TextFieldProps>;
-    programs?: PrimitiveOverrideProps<TextFieldProps>;
     acceptance_rate?: PrimitiveOverrideProps<TextFieldProps>;
-    graduation_rate?: PrimitiveOverrideProps<TextFieldProps>;
     isBolashakPartner?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type UniItemUpdateFormProps = React.PropsWithChildren<{

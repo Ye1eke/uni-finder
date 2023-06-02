@@ -5,17 +5,16 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     color: #fff;
     padding: 20px;
-
-
-
     position: absolute;
-  top: 0;
-  left: 0;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
   }
-  
+
+
+
   .account-edit__header {
     display: flex;
     justify-content: space-between;
@@ -96,6 +95,8 @@
     color: #000;
     font-weight: bold;
     cursor: pointer;
+    display: flex;
+    margin: auto;
   }
   
   .account-edit__save:hover {
@@ -156,4 +157,17 @@
     background-color: rgba(0, 0, 0, 0.8);
   }
   
-  
+  .account-edit__footer {
+    display: block;
+  }
+
+  #notification {
+    padding: 5px 20px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    display: flex;
+    width: fit-content;
+    margin: auto;
+  }

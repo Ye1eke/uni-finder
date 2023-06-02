@@ -28,11 +28,12 @@ export default function SocialPostCollection(props) {
     setItems(itemsDataStore);
   }, [itemsProp, itemsDataStore]);
   return (
-    <Collection
+    <Collection 
       type="grid"
       isPaginated={true}
       searchPlaceholder="Search..."
-      templateColumns="1fr 1fr 1fr"
+      templateColumns={['1fr', '1fr', '1fr']}
+      gap={['16px', '16px', '24px']}
       autoFlow="row"
       alignItems="stretch"
       justifyContent="stretch"

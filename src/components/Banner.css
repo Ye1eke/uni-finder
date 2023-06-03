@@ -89,8 +89,10 @@
   
   @media (max-width: 768px) {
     .banner {
-      min-height: 600px;
+      min-height: auto;
       padding-top: 100px;
+      height: fit-content!important;
+      padding-bottom: 50px;
     }
   
     .banner__wrap > h1 {

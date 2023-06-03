@@ -15,8 +15,11 @@ export declare type ActionCardOverridesProps = {
     "Card Area"?: PrimitiveOverrideProps<FlexProps>;
     "Main Text29766754"?: PrimitiveOverrideProps<FlexProps>;
     "Uni name"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 409"?: PrimitiveOverrideProps<FlexProps>;
     "Main Text36852479"?: PrimitiveOverrideProps<FlexProps>;
-    Ranking?: PrimitiveOverrideProps<TextProps>;
+    Ranking36852480?: PrimitiveOverrideProps<TextProps>;
+    "Main Text37192484"?: PrimitiveOverrideProps<FlexProps>;
+    Ranking37192485?: PrimitiveOverrideProps<TextProps>;
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type ActionCardProps = React.PropsWithChildren<Partial<FlexProps> & {

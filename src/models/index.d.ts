@@ -13,6 +13,78 @@ export enum Region {
 
 
 
+type EagerReply = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Reply, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly text?: string | null;
+  readonly commentID: string;
+  readonly username?: string | null;
+  readonly date?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyReply = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Reply, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly text?: string | null;
+  readonly commentID: string;
+  readonly username?: string | null;
+  readonly date?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Reply = LazyLoading extends LazyLoadingDisabled ? EagerReply : LazyReply
+
+export declare const Reply: (new (init: ModelInit<Reply>) => Reply) & {
+  copyOf(source: Reply, mutator: (draft: MutableModel<Reply>) => MutableModel<Reply> | void): Reply;
+}
+
+type EagerComment = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Comment, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly text?: string | null;
+  readonly username?: string | null;
+  readonly articleID: string;
+  readonly Replies?: (Reply | null)[] | null;
+  readonly replies?: (string | null)[] | null;
+  readonly date?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyComment = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Comment, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly text?: string | null;
+  readonly username?: string | null;
+  readonly articleID: string;
+  readonly Replies: AsyncCollection<Reply>;
+  readonly replies?: (string | null)[] | null;
+  readonly date?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Comment = LazyLoading extends LazyLoadingDisabled ? EagerComment : LazyComment
+
+export declare const Comment: (new (init: ModelInit<Comment>) => Comment) & {
+  copyOf(source: Comment, mutator: (draft: MutableModel<Comment>) => MutableModel<Comment> | void): Comment;
+}
+
 type EagerUserActivity = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<UserActivity, 'id'>;
@@ -222,6 +294,7 @@ type EagerArticle = {
   readonly date?: string | null;
   readonly author?: string | null;
   readonly image?: string | null;
+  readonly Comments?: (Comment | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -237,6 +310,7 @@ type LazyArticle = {
   readonly date?: string | null;
   readonly author?: string | null;
   readonly image?: string | null;
+  readonly Comments: AsyncCollection<Comment>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

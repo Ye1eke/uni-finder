@@ -35,6 +35,16 @@ function SamplePrevArrow(props) {
 
 // Function to calculate similarity score between two fields using Levenshtein distance
 function calculateSimilarity(field1, field2) {
+  if (typeof field1 === 'boolean' && typeof field2 === 'boolean') {
+    return field1 === field2 ? 1 : 0;
+  }
+
+  if (Array.isArray(field1) && Array.isArray(field2)) {
+    const intersection = field2.filter(value => field1.includes(value));
+    const similarity = intersection.length / field2.length;
+    return similarity;
+  }
+  
   const intersection = field2.filter(value => value === field1);
   const similarity = intersection.length / field2.length;
   // console.log('intersection: ' + intersection + '\n' + 'similarity' + similarity)
@@ -54,6 +64,17 @@ const calculateIntegerSimilarity = (field1, field2, totalUniversities) => {
   return similarity;
 };
 
+const calculateFloatSimilarity = (field1, field2) => {
+  const maxDifference = 1; // Maximum difference between float values
+
+  const diffArray = field2.map(value => Math.abs(field1 - value));
+
+  const minDiff = Math.min(...diffArray);
+
+  const similarity = 1 - minDiff / maxDifference;
+  return similarity;
+};
+
 
 function Profile({ user}) {
   const { id } = useParams();
@@ -69,7 +90,9 @@ function Profile({ user}) {
   const countryWeight = 0.5;
   const typeWeight = 0.4;
   const rankingWeight = 0.4;
-
+  const isBolashakPartnerWeight = 0.3;
+  const departmentsWeight = 0.8;
+  const acceptanceRateWeight = 0.5;
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -150,6 +173,10 @@ function Profile({ user}) {
           const typeScore = calculateSimilarity(university.type, favoriteUniversities.map(fav => fav.type));
           // bolashak, departments, price, acceptance rate, 
           const rankingScore = calculateIntegerSimilarity(university.ranking, favoriteUniversities.map(fav => fav.ranking), totalUniversities);
+          const isBolashakPartnerScore = calculateSimilarity(university.isBolashakPartner, favoriteUniversities.map(fav => fav.isBolashakPartner));
+          const departmentsScore = calculateSimilarity(university.departments, favoriteUniversities.map(fav => fav.departments));
+          const acceptanceRateScore = calculateFloatSimilarity(university.acceptance_rate, favoriteUniversities.map(fav => fav.acceptance_rate));
+
           // Calculate overall similarity score by considering individual scores and their weights
           
           const overallScore = (
@@ -157,7 +184,10 @@ function Profile({ user}) {
             cityScore * cityWeight +
             countryScore * countryWeight + 
             typeScore * typeWeight + 
-            rankingScore * rankingWeight
+            rankingScore * rankingWeight +
+            isBolashakPartnerScore * isBolashakPartnerWeight + 
+            departmentsScore * departmentsWeight +
+            acceptanceRateScore * acceptanceRateWeight
           );
 
           return {

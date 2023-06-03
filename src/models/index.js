@@ -11,9 +11,11 @@ const Region = {
   "NORTHAMERICA": "NORTHAMERICA"
 };
 
-const { UserActivity, Question, Point, RecommendUni, FavoriteUni, ContactUs, Article, BadgeUser, Badge, UniItem, UserActivityQuestion, BadgeUserBadge } = initSchema(schema);
+const { Reply, Comment, UserActivity, Question, Point, RecommendUni, FavoriteUni, ContactUs, Article, BadgeUser, Badge, UniItem, UserActivityQuestion, BadgeUserBadge } = initSchema(schema);
 
 export {
+  Reply,
+  Comment,
   UserActivity,
   Question,
   Point,

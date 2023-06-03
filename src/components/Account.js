@@ -88,7 +88,7 @@ function Account({ user }) {
   };
   return (
     <div className="account-edit">
-      
+      <div className='account__banner'></div>
       <div className="account-edit__header">
         <h2>Edit Account</h2>
       </div>

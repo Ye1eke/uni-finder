@@ -13,6 +13,10 @@ import {
 import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function ActionCard(props) {
   const { uniItem, overrides, ...rest } = props;
+  const actionCardOnClick = useNavigateAction({
+    type: "url",
+    url: `${"/uni/"}${uniItem?.id}`,
+  });
   const buttonOnClick = useNavigateAction({
     type: "url",
     url: `${"/uni/"}${uniItem?.id}`,
@@ -28,6 +32,9 @@ export default function ActionCard(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
+      onClick={() => {
+        actionCardOnClick();
+      }}
       {...getOverrideProps(overrides, "ActionCard")}
       {...rest}
     >
@@ -99,8 +106,8 @@ export default function ActionCard(props) {
           ></Text>
         </Flex>
         <Flex
-          gap="20px"
-          direction="column"
+          gap="8px"
+          direction="row"
           width="unset"
           height="unset"
           justifyContent="flex-start"
@@ -109,30 +116,78 @@ export default function ActionCard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Main Text36852479")}
+          {...getOverrideProps(overrides, "Frame 409")}
         >
-          <Text
-            fontFamily="Inter"
-            fontSize="16px"
-            fontWeight="400"
-            color="rgba(13,26,38,1)"
-            lineHeight="20px"
-            textAlign="left"
-            display="block"
+          <Flex
+            gap="20px"
             direction="column"
-            justifyContent="unset"
-            width="unset"
+            width="139px"
             height="unset"
-            gap="unset"
-            alignItems="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
             shrink="0"
-            alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children={`${"#"}${uniItem?.ranking}`}
-            {...getOverrideProps(overrides, "Ranking")}
-          ></Text>
+            {...getOverrideProps(overrides, "Main Text36852479")}
+          >
+            <Text
+              fontFamily="Inter"
+              fontSize="16px"
+              fontWeight="400"
+              color="rgba(13,26,38,1)"
+              lineHeight="20px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={`${"#"}${uniItem?.ranking}`}
+              {...getOverrideProps(overrides, "Ranking36852480")}
+            ></Text>
+          </Flex>
+          <Flex
+            gap="20px"
+            direction="column"
+            width="139px"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Main Text37192484")}
+          >
+            <Text
+              fontFamily="Inter"
+              fontSize="16px"
+              fontWeight="400"
+              color="rgba(13,26,38,1)"
+              lineHeight="20px"
+              textAlign="right"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={uniItem?.acceptance_rate}
+              {...getOverrideProps(overrides, "Ranking37192485")}
+            ></Text>
+          </Flex>
         </Flex>
         <Button
           width="unset"

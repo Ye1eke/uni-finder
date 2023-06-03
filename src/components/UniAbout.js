@@ -185,13 +185,13 @@ function UniAbout({ user }) {
             
 
 
-            <div className='animation-container'>
+            {/* <div className='animation-container'>
               {isAnimating && (
                 <div className='animation' onAnimationEnd={handleAnimationComplete}>
                   {animationValue > 0 ? `+${animationValue}` : animationValue}
                 </div>
               )}
-            </div>
+            </div> */}
             {/* <Link to=''><a className="banner__button" target="_self" rel="" href="#">
                 <img id='heart' src='/images/heart.svg' alt=''/>Add to Favorites</a></Link>     */}
             </div>
@@ -240,9 +240,7 @@ function UniAbout({ user }) {
           <h3>Accreditation</h3>
           <p>{uni.accreditation}</p>
           
-          <div>
-            <Quiz/>
-          </div>
+          
 
         </div>
         <div>
@@ -264,6 +262,9 @@ function UniAbout({ user }) {
         </div>
         </div>
         </div>
+        <div className='uni__quiz'>
+            <Quiz/>
+          </div>
       </div>
     </div>
   )

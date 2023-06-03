@@ -3,7 +3,7 @@ import Banner from './Banner';
 import Contact from './Contact'
 import '../App.css';
 import './Home.css'
-import {  Features4x1, SocialPostCollection  } from '../ui-components';
+import {  Features4x1, SocialPostCollection  } from '../figma-components';
 
 function Home() {
   return (

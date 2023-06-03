@@ -34,14 +34,13 @@ export default function UnisCardCollection(props) {
       isPaginated={true}
       searchPlaceholder="Search..."
       itemsPerPage={9}
-      templateColumns={['1fr', '1fr', '1fr 1fr 1fr']}
+      templateColumns="1fr 1fr 1fr"
       autoFlow="row"
       alignItems="stretch"
       justifyContent="stretch"
       items={items || []}
       {...getOverrideProps(overrides, "UnisCardCollection")}
       {...rest}
-      
     >
       {(item, index) => (
         <ActionCard

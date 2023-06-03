@@ -12,6 +12,7 @@ import Profile from './components/Profile';
 import ArticleItem from './components/ArticleItem';
 import Article from './components/Article';
 import Leaderboard from './components/Leaderboard';
+import Account from './components/Account';
 
 Auth.configure(awsconfig);
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/article/:id" element={<ArticleItem />}/> 
           <Route path="/article/" element={<Article />}/> 
           <Route path="/profile/leaderboard" element={<Leaderboard />}/>
+          <Route path="/profile/account" element={<Account />}/>
         </Routes>
         <Footer />
       </div>

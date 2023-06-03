@@ -1,3 +1,21 @@
+type Reply @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  text: String
+  commentID: ID! @index(name: "byComment")
+  username: String
+  date: String
+}
+
+type Comment @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  text: String
+  username: String
+  articleID: ID! @index(name: "byArticle")
+  Replies: [Reply] @hasMany(indexName: "byComment", fields: ["id"])
+  replies: [String]
+  date: String
+}
+
 type UserActivity @model @auth(rules: [{allow: public}]) {
   id: ID!
   userSub: String
@@ -59,6 +77,7 @@ type Article @model @auth(rules: [{allow: public}]) {
   date: AWSDate
   author: String
   image: AWSURL
+  Comments: [Comment] @hasMany(indexName: "byArticle", fields: ["id"])
 }
 
 type BadgeUser @model @auth(rules: [{allow: public}]) {

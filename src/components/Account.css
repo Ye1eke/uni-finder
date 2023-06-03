@@ -171,3 +171,13 @@
     width: fit-content;
     margin: auto;
   }
+
+  @media (max-width: 768px) { 
+    .account-edit {
+      position: relative;
+      width: 100%;
+      margin-bottom: 3px;
+      
+    }
+    
+  }

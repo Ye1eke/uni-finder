@@ -101,4 +101,7 @@
     display: none;
   }
 
+  .footer__rights {
+    color: #ffffff;
+  }
 }

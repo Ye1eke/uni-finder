@@ -21,7 +21,11 @@ function ArticleItem() {
       const repliesFromBackend = await DataStore.query(Reply);
       setArticle(articleFromBackend);
       setComments(commentsFromBackend);
-      setReplies(repliesFromBackend);
+      setReplies(
+        repliesFromBackend.filter((reply) =>
+          commentsFromBackend.some((comment) => comment.id === reply.commentID)
+        )
+      );
     }
 
     fetchArticleAndComments();
@@ -49,7 +53,7 @@ function ArticleItem() {
   };
 
   const handleReplySubmit = async (event, commentID) => {
-    window.location.reload()
+    // window.location.reload()
     event.preventDefault();
   
     // Get the current user's username
@@ -66,7 +70,6 @@ function ArticleItem() {
       })
     );
   
-    // Find the parent comment and add the reply to its Replies array
     // Find the parent comment and add the reply to its Replies array
     setComments((prevComments) => {
       const updatedComments = prevComments.map((c) => {

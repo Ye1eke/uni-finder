@@ -38,15 +38,10 @@ export default function ActionCard(props) {
     >
       <Image
         width={['330px', '400px', '100%']}
+        height={"300px"}
         display="block"
-        grow="1"
-        shrink="1"
-        basis="0"
-        position="relative"
-        padding="0px 0px 0px 0px"
         objectFit="cover"
         src={uniItem?.photo}
-        loading="lazy"
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex

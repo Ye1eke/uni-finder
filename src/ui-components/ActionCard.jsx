@@ -23,10 +23,8 @@ export default function ActionCard(props) {
   });
   return (
     <Flex
-      gap="0"
       direction="column"
-      width="320px"
-      height="450px"
+      width="100%"
       justifyContent="center"
       alignItems="flex-start"
       position="relative"
@@ -39,16 +37,11 @@ export default function ActionCard(props) {
       {...rest}
     >
       <Image
-        width="unset"
-        height="unset"
+        width={['330px', '400px', '100%']}
         display="block"
-        gap="unset"
-        alignItems="unset"
-        justifyContent="unset"
         grow="1"
         shrink="1"
         basis="0"
-        alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
         objectFit="cover"
@@ -72,8 +65,7 @@ export default function ActionCard(props) {
         <Flex
           gap="20px"
           direction="column"
-          width="unset"
-          height="unset"
+          width="100%"
           justifyContent="flex-start"
           alignItems="flex-start"
           shrink="0"

@@ -27,7 +27,7 @@ export default function SocialPostCollection(props) {
     }
     setItems(itemsDataStore);
   }, [itemsProp, itemsDataStore]);
-  return (
+  return ( 
     <Collection 
       type="grid"
       isPaginated={true}

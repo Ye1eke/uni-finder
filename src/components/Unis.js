@@ -485,7 +485,7 @@ if (selectedTypes.length > 0) {
                 </Text>
               </Flex>
             }
-            searchPlaceholder="Type to search..." templateColumns={['1fr', '1fr 1fr 1fr', '1fr 1fr 1fr']}
+            searchPlaceholder="Type to search..."
           />
           </div>
         </div>

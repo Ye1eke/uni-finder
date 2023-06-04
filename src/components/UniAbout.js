@@ -1,4 +1,5 @@
 import { withAuthenticator } from '@aws-amplify/ui-react';
+import ReactStars from 'react-rating-stars-component';
 
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
@@ -6,7 +7,7 @@ import { DataStore } from 'aws-amplify';
 import { UniItem, FavoriteUni, Point, BadgeUser, BadgeUserBadge, Badge } from '../models';
 import { Auth } from 'aws-amplify';
 import './UniAbout.css'
-import Quiz from './Quiz';
+import Quiz from './Quiz'; 
 import QuestionComponent from './QuestionComponent';
 function UniAbout({ user }) {
     const { id } = useParams();
@@ -15,11 +16,13 @@ function UniAbout({ user }) {
     const [points, setPoints] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
     const [animationValue, setAnimationValue] = useState(0);
-
+    const [rating, setRating] = useState(0);
+    const [averageRating, setAverageRating] = useState(0);
     useEffect(()=> {
         async function queryUni(id) {
             const uniFromBackend = await DataStore.query(UniItem, id);
             setUni(uniFromBackend);
+            setAverageRating(uniFromBackend.rate);
         }
  
         if (id) {
@@ -138,6 +141,7 @@ function UniAbout({ user }) {
       }
     }
   }
+
   setIsAnimating(true);
       } catch (error) {
         console.log('Error adding to favorites:', error);
@@ -146,12 +150,32 @@ function UniAbout({ user }) {
     const handleAnimationComplete = () => {
       setIsAnimating(false);
     };
+
+    const handleRatingChange = async (newRating) => {
+      try {
+        const newAverageRating = (uni.rate + newRating) / 2;
+    
+        const updatedUni = UniItem.copyOf(uni, (updated) => {
+          updated.rate = newAverageRating;
+        });
+    
+        await DataStore.save(updatedUni);
+    
+        setRating(newRating);
+        setAverageRating(newAverageRating);
+        window.location.reload()
+      } catch (error) {
+        console.log('Error updating rating:', error);
+      }
+    };
+    
     const isFavorite = favorites.some(favorite => favorite.uniId === id);
     const isBolashakPartner = uni?.isBolashakPartner || false;
     if (!uni) {
       
         return <div>loading</div>
     }
+    
     
   return (
     <div className='uni__about'>
@@ -169,7 +193,13 @@ function UniAbout({ user }) {
             <h1>{uni.name}</h1>
             <p>{uni.region + ' - ' + uni.country + ' - ' + uni.city}</p>
             <p>{'#'+uni.ranking}</p>
-            
+            <ReactStars
+              count={5}
+              size={24}
+              activeColor="#ffd700"
+              value={uni.rate}
+              onChange={handleRatingChange}
+            />
             {!isFavorite ? (      
                 <button className="banner__button" onClick={handleAddToFavorites}>
                 <img id='heart' src='/images/heart.svg' alt='' /> Add to Favorites

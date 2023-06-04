@@ -216,6 +216,7 @@ export default function UniItemUpdateForm(props) {
     stuff: "",
     acceptance_rate: "",
     isBolashakPartner: false,
+    rate: "",
   };
   const [ranking, setRanking] = React.useState(initialValues.ranking);
   const [name, setName] = React.useState(initialValues.name);
@@ -253,6 +254,7 @@ export default function UniItemUpdateForm(props) {
   const [isBolashakPartner, setIsBolashakPartner] = React.useState(
     initialValues.isBolashakPartner
   );
+  const [rate, setRate] = React.useState(initialValues.rate);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = uniItemRecord
@@ -283,6 +285,7 @@ export default function UniItemUpdateForm(props) {
     setStuff(cleanValues.stuff);
     setAcceptance_rate(cleanValues.acceptance_rate);
     setIsBolashakPartner(cleanValues.isBolashakPartner);
+    setRate(cleanValues.rate);
     setErrors({});
   };
   const [uniItemRecord, setUniItemRecord] = React.useState(uniItemModelProp);
@@ -328,6 +331,7 @@ export default function UniItemUpdateForm(props) {
     stuff: [],
     acceptance_rate: [],
     isBolashakPartner: [],
+    rate: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -377,6 +381,7 @@ export default function UniItemUpdateForm(props) {
           stuff,
           acceptance_rate,
           isBolashakPartner,
+          rate,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -458,6 +463,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.ranking ?? value;
@@ -503,6 +509,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -548,6 +555,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.region ?? value;
@@ -593,6 +601,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -638,6 +647,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.country ?? value;
@@ -683,6 +693,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.photo ?? value;
@@ -728,6 +739,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -773,6 +785,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.address ?? value;
@@ -818,6 +831,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.website ?? value;
@@ -864,6 +878,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
@@ -909,6 +924,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -954,6 +970,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.type ?? value;
@@ -999,6 +1016,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.accreditation ?? value;
@@ -1044,6 +1062,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.weather ?? value;
@@ -1085,6 +1104,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             values = result?.departments ?? values;
@@ -1158,6 +1178,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.price ?? value;
@@ -1207,6 +1228,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.enrollment ?? value;
@@ -1248,6 +1270,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             values = result?.scholarships ?? values;
@@ -1313,6 +1336,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             values = result?.requirements ?? values;
@@ -1386,6 +1410,7 @@ export default function UniItemUpdateForm(props) {
               stuff: value,
               acceptance_rate,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.stuff ?? value;
@@ -1435,6 +1460,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate: value,
               isBolashakPartner,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.acceptance_rate ?? value;
@@ -1480,6 +1506,7 @@ export default function UniItemUpdateForm(props) {
               stuff,
               acceptance_rate,
               isBolashakPartner: value,
+              rate,
             };
             const result = onChange(modelFields);
             value = result?.isBolashakPartner ?? value;
@@ -1496,6 +1523,56 @@ export default function UniItemUpdateForm(props) {
         hasError={errors.isBolashakPartner?.hasError}
         {...getOverrideProps(overrides, "isBolashakPartner")}
       ></SwitchField>
+      <TextField
+        label="Rate"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={rate}
+        onChange={(e) => {
+          let value = isNaN(parseFloat(e.target.value))
+            ? e.target.value
+            : parseFloat(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              ranking,
+              name,
+              region,
+              city,
+              country,
+              photo,
+              description,
+              address,
+              website,
+              phone,
+              email,
+              type,
+              accreditation,
+              weather,
+              departments,
+              price,
+              enrollment,
+              scholarships,
+              requirements,
+              stuff,
+              acceptance_rate,
+              isBolashakPartner,
+              rate: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.rate ?? value;
+          }
+          if (errors.rate?.hasError) {
+            runValidationTasks("rate", value);
+          }
+          setRate(value);
+        }}
+        onBlur={() => runValidationTasks("rate", rate)}
+        errorMessage={errors.rate?.errorMessage}
+        hasError={errors.rate?.hasError}
+        {...getOverrideProps(overrides, "rate")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

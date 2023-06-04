@@ -10,22 +10,13 @@ function ArticleItem() {
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  const [newReply, setNewReply] = useState('');
-  const [replies, setReplies] = useState([]);
-  const [showReplyForm, setShowReplyForm] = useState({});
   const [currentDate, setCurrentDate] = useState(new Date());
   useEffect(() => {
     async function fetchArticleAndComments() {
       const articleFromBackend = await DataStore.query(Article, id);
       const commentsFromBackend = await DataStore.query(Comment, (c) => c.articleID.eq(id));
-      const repliesFromBackend = await DataStore.query(Reply);
       setArticle(articleFromBackend);
       setComments(commentsFromBackend);
-      setReplies(
-        repliesFromBackend.filter((reply) =>
-          commentsFromBackend.some((comment) => comment.id === reply.commentID)
-        )
-      );
     }
 
     fetchArticleAndComments();
@@ -52,47 +43,6 @@ function ArticleItem() {
     setComments((prevComments) => [...prevComments, newCommentObject]);
   };
 
-  const handleReplySubmit = async (event, commentID) => {
-    // window.location.reload()
-    event.preventDefault();
-  
-    // Get the current user's username
-    const user = await Auth.currentAuthenticatedUser();
-    const username = user.attributes['custom:username'];
-  
-    // Create a new reply associated with the specified comment
-    const reply = await DataStore.save(
-      new Reply({
-        text: newReply,
-        username: username,
-        commentID: commentID,
-        date: currentDate.toISOString().substring(0, 10),
-      })
-    );
-  
-    // Find the parent comment and add the reply to its Replies array
-    setComments((prevComments) => {
-      const updatedComments = prevComments.map((c) => {
-        if (c.id === commentID) {
-          const updatedReplies = replies.filter((reply) => reply.commentID === commentID);
-          return { ...c, Replies: updatedReplies };
-        }
-        return c;
-      });
-      return updatedComments;
-    });
-
-    
-  
-    setNewReply('');
-    
-  };
-  const toggleReplyForm = (commentID) => {
-    setShowReplyForm((prevShowReplyForm) => ({
-      ...prevShowReplyForm,
-      [commentID]: !prevShowReplyForm[commentID]
-    }));
-  };
   if (!article) {
     return <div>loading</div>;
   }
@@ -129,28 +79,6 @@ function ArticleItem() {
             <li key={comment.id}>
               <p className='comment__username'>{comment.username} <span className='comment__date'>{comment.date}</span></p>
               <p>➡{comment.text}</p>
-              <p className='' onClick={() => toggleReplyForm(comment.id)}>Reply</p>
-              {showReplyForm[comment.id] && (
-              <form className='form__comment' onSubmit={(event) => handleReplySubmit(event, comment.id)}>
-                <textarea className='form__comment__input'
-                  placeholder="Write a reply..."
-                  value={newReply}
-                  onChange={(event) => setNewReply(event.target.value)}
-                  required
-                ></textarea>
-                <button className='btn form__comment__btn' type="submit">Submit Reply</button>
-              </form>
-              )}
-              {replies
-      .filter((reply) => reply.commentID === comment.id)
-      .map((reply) => (
-                <div key={reply.id} className="reply">
-                  <p>
-                    - <strong>{reply.username}</strong> <span className='comment__date'>{reply.date}</span>
-                  </p>
-                  <p>{reply.text}</p>
-                </div>
-              ))}
             </li>
           ))}
         </ul>

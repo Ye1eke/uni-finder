@@ -35,6 +35,7 @@ export declare type UniItemCreateFormInputValues = {
     stuff?: number;
     acceptance_rate?: number;
     isBolashakPartner?: boolean;
+    rate?: number;
 };
 export declare type UniItemCreateFormValidationValues = {
     ranking?: ValidationFunction<number>;
@@ -59,6 +60,7 @@ export declare type UniItemCreateFormValidationValues = {
     stuff?: ValidationFunction<number>;
     acceptance_rate?: ValidationFunction<number>;
     isBolashakPartner?: ValidationFunction<boolean>;
+    rate?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type UniItemCreateFormOverridesProps = {
@@ -85,6 +87,7 @@ export declare type UniItemCreateFormOverridesProps = {
     stuff?: PrimitiveOverrideProps<TextFieldProps>;
     acceptance_rate?: PrimitiveOverrideProps<TextFieldProps>;
     isBolashakPartner?: PrimitiveOverrideProps<SwitchFieldProps>;
+    rate?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type UniItemCreateFormProps = React.PropsWithChildren<{
     overrides?: UniItemCreateFormOverridesProps | undefined | null;

@@ -119,5 +119,6 @@ type UniItem @model @auth(rules: [{allow: public}]) {
   stuff: Int
   acceptance_rate: Float
   isBolashakPartner: Boolean
+  rate: Float
 }
  

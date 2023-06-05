@@ -53,6 +53,7 @@ function Unis() {
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
+  const [filteredItems, setFilteredItems] = useState([]);
   const countriesData = [
     { id: '1', name: 'Argentina', region: 'South America' },
     { id: '2', name: 'Armenia', region: 'Europe' },
@@ -209,6 +210,7 @@ if (selectedTypes.length > 0) {
     }
     let sortedItems = [...filteredItems];
     setItems(sortedItems);
+    setFilteredItems(filteredItems);
   }, [selectedCountry, locations, isBolashakPartner, selectedTypes, minTuitionFee, maxTuitionFee, sortBy, itemsDataStore]);
   useEffect(() => {
     // Filter countries based on selected region
@@ -216,7 +218,7 @@ if (selectedTypes.length > 0) {
       ? countriesData.filter((country) => country.region === selectedRegion)
       : countriesData;
 
-      console.log(filtered)
+      
     setFilteredCountries(filtered);
   }, [selectedRegion]);
 
@@ -269,6 +271,17 @@ if (selectedTypes.length > 0) {
   const handleOpenClick = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleReset = () => {
+    setLocations([]);
+    setSelectedCountry('');
+    setIsBolashakPartner(false);
+    setSelectedTypes([]);
+    setMinTuitionFee('');
+    setMaxTuitionFee('');
+    setSortBy('');
+  }
+
   return (
     <div className="unis">
       <Banner
@@ -473,10 +486,12 @@ if (selectedTypes.length > 0) {
                   </div>
                   }
                 />
+
+                <button className='btn' onClick={handleReset}>Reset</button>
               </div>
             </div>
           </div>
-          <div className='container'> 
+          <div className='container uni__coll'> 
           <UnisCardCollection items={items}
             searchNoResultsFound={
               <Flex justifyContent="center">

@@ -248,13 +248,13 @@ function UniAbout({ user }) {
         <div className='uni__text'>
           <h3>Overview</h3>
           <p>{uni.description}</p>
-
-          <h3>Scholarships</h3>
-          <ul className='banner__right__list'>
-            {uni.scholarships.map((scholarship, index) => (
-              <li key={index}>{scholarship}</li>
-            ))}
-          </ul>
+        {uni.scholarship && <div> <h3>Scholarships</h3>
+                  <ul className='banner__right__list'>
+                    {uni.scholarships.map((scholarship, index) => (
+                      <li key={index}>{scholarship}</li>
+                    ))}
+                  </ul></div>}
+          
 
           <div className='dep__prog'>
             <div>
@@ -275,12 +275,15 @@ function UniAbout({ user }) {
         </div>
         <div>
         <div className='uni__side'>
-          <p>Tuition fee: {uni.price + "$"}</p>
-          <p>Type: {uni.type}</p>
-          <p>Total Students: {uni.enrollment}</p>
-          <p>Total Staff: {uni.stuff}</p>
-          <p>Acceptance Rate: {uni.acceptance_rate * 100}%</p>
+          {uni.price && <p>Tuition fee: {uni.price + "$"}</p>}
+          {uni.type && <p>Type: {uni.type}</p>}
+          {uni.enrollment && <p>Total Students: {uni.enrollment}</p>}
+          {uni.staff && <p>Total Staff: {uni.staff}</p>}
+          {uni.acceptance_rate && (
+            <p>Acceptance Rate: {Math.round(uni.acceptance_rate * 100)}%</p>
+          )}
         </div>
+
 
         <div className='uni__side__second'>
           <h3>Contacts</h3>

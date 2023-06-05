@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.amplify-button[data-variation='primary'] {
+  background: #fcde67;
+}
+
+.amplify-button[data-variation='primary']:hover {
+  background: #000;
+  color: #fcde67;
+}

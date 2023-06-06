@@ -154,23 +154,6 @@ function UniAbout({ user }) {
       setIsAnimating(false);
     };
 
-    const handleRatingChange = async (newRating) => {
-      try {
-        const newAverageRating = (uni.rate + newRating) / 2;
-    
-        const updatedUni = UniItem.copyOf(uni, (updated) => {
-          updated.rate = newAverageRating;
-        });
-    
-        await DataStore.save(updatedUni);
-    
-        setRating(newRating);
-        setAverageRating(newAverageRating);
-        window.location.reload()
-      } catch (error) {
-        console.log('Error updating rating:', error);
-      }
-    };
     
     const isFavorite = favorites.some(favorite => favorite.uniId === id);
     const isBolashakPartner = uni?.isBolashakPartner || false;
@@ -207,13 +190,6 @@ function UniAbout({ user }) {
             <h1>{uni.name}</h1>
             <p>{uni.region + ' - ' + uni.country + ' - ' + uni.city}</p>
             <p>{'#'+uni.ranking}</p>
-            <ReactStars
-              count={5}
-              size={24}
-              activeColor="#ffd700"
-              value={uni.rate}
-              onChange={handleRatingChange}
-            />
             {!isFavorite ? (      
                 <button className="banner__button" onClick={handleAddToFavorites}>
                 <img id='heart' src='/images/heart.svg' alt='' /> Add to Favorites

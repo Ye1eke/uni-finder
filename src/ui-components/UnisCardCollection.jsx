@@ -47,7 +47,7 @@ export default function UnisCardCollection(props) {
           uniItem={item}
           height="auto"
           width="auto"
-          margin="10px 0px 0 10px"
+          margin="10px 10px 0 10px"
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}
         ></ActionCard>

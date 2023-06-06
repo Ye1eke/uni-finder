@@ -179,10 +179,11 @@ p.typewriter {
 
   .favorites__slider {
     margin-bottom: 20px;
+    
   }
 
   .slider-item {
-    margin: 0 5px;
+    margin: 0px;
   }
 
   .slider-item img {

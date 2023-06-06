@@ -4,7 +4,7 @@ import ReactStars from 'react-rating-stars-component';
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { DataStore } from 'aws-amplify';
-import { UniItem, FavoriteUni, Point, BadgeUser, BadgeUserBadge, Badge } from '../models';
+import { UniItem, FavoriteUni, Point, BadgeUser, Badge } from '../models';
 import { Auth } from 'aws-amplify';
 import './UniAbout.css'
 import Quiz from './Quiz'; 
@@ -18,6 +18,8 @@ function UniAbout({ user }) {
     const [animationValue, setAnimationValue] = useState(0);
     const [rating, setRating] = useState(0);
     const [averageRating, setAverageRating] = useState(0);
+    const [showBadgeNotification, setShowBadgeNotification] = useState(false); // State for showing the badge notification
+
     useEffect(()=> {
         async function queryUni(id) {
             const uniFromBackend = await DataStore.query(UniItem, id);
@@ -120,26 +122,27 @@ function UniAbout({ user }) {
       
     }
     setAnimationValue(50);
-    // Check if the user has already been awarded the "FirstUni" badge
-    const userBadges = await DataStore.query(BadgeUser, c => c.userEmail.eq(user.attributes.email));
-    if (!userBadges || !userBadges.some(badgeUser => badgeUser.badges.some(b => b.name === 'FirstUni'))) {
-      // Award the "FirstUni" badge to the user
-      const badge = await DataStore.query(Badge, c => c.name.eq('FirstUni'));
-      if (badge) {
-        const userBadge = userBadges ? userBadges[0] : null;
-        const updatedUserBadges = userBadge
-          ? BadgeUser.copyOf(userBadge, updated => {
-              updated.badges.push(badge[0]);
-            })
-          : new BadgeUser({
-              userEmail: user.attributes.email,
-              badgeID: badge[0].id,
-            });
+      // Check if the user already has the "FirstUni" badge
+      const firstUniBadge = await DataStore.query(Badge, c => c.name.eq('FirstUni'));
+      const existingBadge = await DataStore.query(BadgeUser, (c) => c.and(c => [
+        c.userEmail.eq(user.attributes.email),
+        c.badgeID.eq(firstUniBadge[0].id)
+      ]));
+      const isFalse = !!existingBadge && existingBadge.length === 0;
+      if (isFalse) {
+        // Award the "FirstUni" badge to the user
+        console.log('smth')
 
-        await DataStore.save(updatedUserBadges);
-        console.log('Badge awarded successfully.');
+        if (firstUniBadge.length > 0) {
+          await DataStore.save(
+            new BadgeUser({
+              badgeID: firstUniBadge[0].id,
+              userEmail: user.attributes.email,
+            })
+          );
+          setShowBadgeNotification(true);
+        }
       }
-    }
   }
 
   setIsAnimating(true);
@@ -179,6 +182,17 @@ function UniAbout({ user }) {
     
   return (
     <div className='uni__about'>
+      {showBadgeNotification && (
+      <div className="popup-notification">
+          <div className="notification-content">
+            <div className="notification-message">
+              <span>You got a new badge!</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+
       <div className='banner'>
         <div  className='banner__image'>
             <img src={uni.photo} alt='banner'/>

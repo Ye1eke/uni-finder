@@ -243,6 +243,13 @@ export const schema = {
                         ]
                     }
                 },
+                "correct": {
+                    "name": "correct",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -1385,5 +1392,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.2",
-    "version": "b24584b8d0eb7007e875ce7fe9f52ac4"
+    "version": "4f821b84d2125746164a02b0cd7793fe"
 };

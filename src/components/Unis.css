@@ -2,3 +2,7 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.amplify-button[data-variation='primary']:hover {
+    color: #fff; 
+}

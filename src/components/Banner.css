@@ -1,11 +1,12 @@
 .banner {
     background-size: cover;
     margin-top: -165px;
-    min-height: 900px;
+    min-height: 600px;
     overflow: hidden;
     padding-top: 220px;
     position: relative;
     z-index: 1;
+    
   }
   
   .banner:before {
@@ -79,6 +80,7 @@
     text-decoration: none;
     font-weight: 600;
     border-color: transparent;
+    margin-bottom: 25px;
   }
   
   a.banner__button:visited {

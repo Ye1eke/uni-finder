@@ -81,6 +81,30 @@
 .table > .points:first-child {
   width: 10rem;
 }
+
+.pagination-button {
+  border: none;
+  margin: 3px;
+  border-radius: 50%;
+  
+}
+
+.table__foot_pg {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 48%;
+}
+
+.pagination {
+  width: 100%;
+  display: flex;
+  place-items: center;
+}
+
+
+
 @media (max-width: 768px) {
   .table__box {
     overflow-x: auto;
@@ -94,6 +118,10 @@
 
   .table td {
     padding: 0.6rem 1.2rem;
+  }
+  
+  .table__foot_pg {
+    left: 42%;
   }
 }
 

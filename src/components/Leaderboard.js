@@ -31,6 +31,14 @@ function Leaderboard() {
     setCurrentPage(pageNumber);
   };
 
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
@@ -45,24 +53,38 @@ function Leaderboard() {
     ));
   };
 
-  const renderPaginationButtons = () => {
+  const renderPagination = () => {
     const pageNumbers = Math.ceil(users.length / usersPerPage);
+    const isPreviousDisabled = currentPage === 1;
+    const isNextDisabled = currentPage === pageNumbers;
 
     return (
-      <ul className='pagination'>
-        {Array.from({ length: pageNumbers }, (_, i) => i + 1).map((page) => (
-          <li
-            key={page}
-            className={currentPage === page ? 'active' : ''}
-            onClick={() => handlePageChange(page)}
-          >
-            {page}
-          </li>
-        ))}
-      </ul>
+      <tfoot className='table__foot_pg'>
+        
+          <div className='pagination'>
+            <button
+              onClick={handlePreviousPage}
+              disabled={isPreviousDisabled}
+              className={`pagination-button ${isPreviousDisabled ? 'disabled' : ''}`}
+              style={{ backgroundColor: '#ffe066' }}
+            >
+              {'<'}
+            </button>
+            
+            <button
+              onClick={handleNextPage}
+              disabled={isNextDisabled}
+              className={`pagination-button ${isNextDisabled ? 'disabled' : ''}`}
+              style={{ backgroundColor: '#ffe066' }}
+            >
+              {'>'}
+            </button>
+            </div>
+        
+      </tfoot>
     );
   };
-//test
+
   return (
     <div className='leaderboard'>
       <div id='banner__prof' className='banner'>
@@ -81,11 +103,9 @@ function Leaderboard() {
                 </tr>
               </thead>
               <tbody>{renderUsers()}</tbody>
-              <thead>{renderPaginationButtons()}</thead>
+              {renderPagination()}
             </table>
-            
           </div>
-          
         </div>
       </div>
     </div>

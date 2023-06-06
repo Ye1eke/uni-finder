@@ -194,6 +194,43 @@ ul.banner__right__list > li:before {
   margin-bottom: 50px;
 }
 
+
+.popup-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #6fff36dc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  animation: slideIn 0.3s ease-out;
+  z-index: 111;
+}
+
+.notification-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.notification-message {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @media (max-width: 768px) {
   /* Adjustments for smaller screens */
   

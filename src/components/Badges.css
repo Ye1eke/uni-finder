@@ -9,10 +9,21 @@
     margin: auto;
 }
 
-.badge__item {
-    display: flex;
-    justify-content: center;
+.badge__collection {
+  display: flex;
 }
+
+.badge__item {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 10px;
+    /* overflow: hidden;
+    outline: none; */
+    transition: 0.3s ease;
+}
+
 .badge__container {
   position: relative;
   display: inline-block;
@@ -25,7 +36,7 @@
 .badge__description {
     width: 200px;
     position: absolute;
-    bottom: 120%;
+    bottom: 30%;
     left: 50%;
     transform: translateX(-50%);
     background-color: #f9f9f9;
@@ -36,6 +47,7 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s;
+    
   }
 
   .badge__container:hover .badge__description {
@@ -62,6 +74,7 @@
     padding: 10px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 25px;
   }
   
   .score__text {
@@ -75,3 +88,8 @@
     color: #000;
     font-weight: 500;
   }
+
+
+.badges {
+  max-width: 500px;
+} 

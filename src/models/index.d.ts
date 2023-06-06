@@ -94,6 +94,7 @@ type EagerUserActivity = {
   readonly userSub?: string | null;
   readonly answeredQ?: (string | null)[] | null;
   readonly Questions?: (UserActivityQuestion | null)[] | null;
+  readonly correct?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -107,6 +108,7 @@ type LazyUserActivity = {
   readonly userSub?: string | null;
   readonly answeredQ?: (string | null)[] | null;
   readonly Questions: AsyncCollection<UserActivityQuestion>;
+  readonly correct?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

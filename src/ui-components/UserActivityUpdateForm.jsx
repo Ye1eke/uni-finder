@@ -195,9 +195,11 @@ export default function UserActivityUpdateForm(props) {
   const initialValues = {
     userSub: "",
     answeredQ: [],
+    correct: "",
   };
   const [userSub, setUserSub] = React.useState(initialValues.userSub);
   const [answeredQ, setAnsweredQ] = React.useState(initialValues.answeredQ);
+  const [correct, setCorrect] = React.useState(initialValues.correct);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = userActivityRecord
@@ -206,6 +208,7 @@ export default function UserActivityUpdateForm(props) {
     setUserSub(cleanValues.userSub);
     setAnsweredQ(cleanValues.answeredQ ?? []);
     setCurrentAnsweredQValue("");
+    setCorrect(cleanValues.correct);
     setErrors({});
   };
   const [userActivityRecord, setUserActivityRecord] = React.useState(
@@ -226,6 +229,7 @@ export default function UserActivityUpdateForm(props) {
   const validations = {
     userSub: [],
     answeredQ: [],
+    correct: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -255,6 +259,7 @@ export default function UserActivityUpdateForm(props) {
         let modelFields = {
           userSub,
           answeredQ,
+          correct,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -312,6 +317,7 @@ export default function UserActivityUpdateForm(props) {
             const modelFields = {
               userSub: value,
               answeredQ,
+              correct,
             };
             const result = onChange(modelFields);
             value = result?.userSub ?? value;
@@ -333,6 +339,7 @@ export default function UserActivityUpdateForm(props) {
             const modelFields = {
               userSub,
               answeredQ: values,
+              correct,
             };
             const result = onChange(modelFields);
             values = result?.answeredQ ?? values;
@@ -369,6 +376,36 @@ export default function UserActivityUpdateForm(props) {
           {...getOverrideProps(overrides, "answeredQ")}
         ></TextField>
       </ArrayField>
+      <TextField
+        label="Correct"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={correct}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              userSub,
+              answeredQ,
+              correct: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.correct ?? value;
+          }
+          if (errors.correct?.hasError) {
+            runValidationTasks("correct", value);
+          }
+          setCorrect(value);
+        }}
+        onBlur={() => runValidationTasks("correct", correct)}
+        errorMessage={errors.correct?.errorMessage}
+        hasError={errors.correct?.hasError}
+        {...getOverrideProps(overrides, "correct")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

@@ -61,3 +61,28 @@
 .quizz__answer > input {
     display: block!important;
 } 
+
+.popup-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #6fff36dc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  animation: slideIn 0.3s ease-out;
+  z-index: 111;
+}
+
+.notification-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.notification-message {
+  font-size: 14px;
+  font-weight: 500;
+}

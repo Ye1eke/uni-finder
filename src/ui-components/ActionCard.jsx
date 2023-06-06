@@ -23,8 +23,10 @@ export default function ActionCard(props) {
   });
   return (
     <Flex
+      gap="0"
       direction="column"
-      width="100%"
+      width="320px"
+      height="450px"
       justifyContent="center"
       alignItems="flex-start"
       position="relative"
@@ -37,11 +39,12 @@ export default function ActionCard(props) {
       {...rest}
     >
       <Image
-        width={['330px', '400px', '100%']}
-        height={"300px"}
+        width="100%"
+        height="300px"
         display="block"
         objectFit="cover"
         src={uniItem?.photo}
+        loading="lazy"
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
@@ -60,7 +63,8 @@ export default function ActionCard(props) {
         <Flex
           gap="20px"
           direction="column"
-          width="100%"
+          width="unset"
+          height="unset"
           justifyContent="flex-start"
           alignItems="flex-start"
           shrink="0"
@@ -171,7 +175,7 @@ export default function ActionCard(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={uniItem?.acceptance_rate}
+              children={uniItem?.country}
               {...getOverrideProps(overrides, "Ranking37192485")}
             ></Text>
           </Flex>

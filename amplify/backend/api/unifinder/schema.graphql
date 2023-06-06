@@ -21,6 +21,7 @@ type UserActivity @model @auth(rules: [{allow: public}]) {
   userSub: String
   answeredQ: [String]
   Questions: [Question] @manyToMany(relationName: "UserActivityQuestion")
+  correct: Int
 }
 
 type Question @model @auth(rules: [{allow: public}]) {

@@ -9,9 +9,6 @@
   }
   
 
-.slick-slider {
-  display: flex!important;
-}
   .slider-item {
     display: flex;
     align-items: center;
@@ -21,7 +18,7 @@
     overflow: hidden;
     outline: none;
     transition: 0.3s ease;
-  }
+  } 
 
   .slider-item:hover {
     scale: 1.1;
